@@ -4,17 +4,14 @@
       class="flex flex-col gap-1 w-1.5/6 border-r border-slate-300 h-screen"
     >
       <ul>
-        <p class="p-[12.99px] border-b border-slate-300">
+        <p class="p-3.5 ml-1 mb-1 border-b border-slate-300">
           <img src="./svg/logo.svg" alt="" />
         </p>
         <ul class="flex flex-col gap-1 px-4">
-          <li
-            class="transition-all duration-300 py-1.5 px-4 hover:bg-indigo-600 text-[#667085] hover:text-slate-50 rounded-md font-normal"
-          >
+          <li>
             <router-link
+              class="flex items-center gap-2 transition-all duration-300 py-1.5 px-4 hover:bg-indigo-600 text-[#667085] hover:text-slate-50 rounded-md font-normal"
               to="hisobotlar"
-              class="flex items-center gap-2"
-              href=""
             >
               <span>
                 <svg
@@ -40,13 +37,10 @@
               <span>Hisobotlar</span>
             </router-link>
           </li>
-          <li
-            class="transition-all duration-300 hover:bg-indigo-600 text-[#667085] hover:text-slate-50 rounded-md py-1.5 px-4 font-normal"
-          >
+          <li>
             <router-link
               to="mahsulotlar"
-              class="flex items-center gap-2"
-              href=""
+              class="flex items-center gap-2 transition-all duration-300 hover:bg-indigo-600 text-[#667085] hover:text-slate-50 rounded-md py-1.5 px-4 font-normal"
             >
               <span>
                 <svg
@@ -68,13 +62,10 @@
               <span>Mahsulotlar</span>
             </router-link>
           </li>
-          <li
-            class="transition-all duration-300 hover:bg-indigo-600 text-[#667085] hover:text-slate-50 py-1.5 px-4 rounded-md font-normal"
-          >
+          <li>
             <router-link
               to="mijozlar"
-              class="flex items-center gap-2.5"
-              href=""
+              class="flex items-center gap-2.5 transition-all duration-300 hover:bg-indigo-600 text-[#667085] hover:text-slate-50 py-1.5 px-4 rounded-md font-normal"
             >
               <span>
                 <svg
@@ -95,13 +86,10 @@
               <span>Mijozlar</span>
             </router-link>
           </li>
-          <li
-            class="transition-all duration-300 hover:bg-indigo-600 text-[#667085] hover:text-slate-50 rounded-md py-1.5 px-4 font-normal"
-          >
+          <li class="">
             <router-link
               to="foydalanovchilar"
-              class="flex items-center gap-2.5"
-              href=""
+              class="flex items-center gap-2.5 transition-all duration-300 hover:bg-indigo-600 text-[#667085] hover:text-slate-50 rounded-md py-1.5 px-4 font-normal"
             >
               <span>
                 <svg
@@ -119,13 +107,10 @@
               <span>Foydalanuvchilar</span></router-link
             >
           </li>
-          <li
-            class="transition-all duration-300 hover:bg-indigo-600 text-[#667085] hover:text-slate-50 py-1.5 px-4 font-normal rounded-md"
-          >
+          <li>
             <router-link
               to="olchovlar"
-              class="flex items-center gap-2.5"
-              href=""
+              class="flex items-center gap-2.5 transition-all duration-300 hover:bg-indigo-600 text-[#667085] hover:text-slate-50 py-1.5 px-4 font-normal rounded-md"
             >
               <span>
                 <svg
@@ -143,13 +128,10 @@
               <span class="w-[150px]">Standart o'lchovlar </span></router-link
             >
           </li>
-          <li
-            class="transition-all duration-300 hover:bg-indigo-600 text-[#667085] hover:text-slate-50 py-1.5 px-4 rounded-md font-normal"
-          >
+          <li>
             <router-link
               to="valyutalar"
-              class="flex items-center gap-2.5"
-              href=""
+              class="flex items-center gap-2.5 transition-all duration-300 hover:bg-indigo-600 text-[#667085] hover:text-slate-50 py-1.5 px-4 rounded-md font-normal"
             >
               <span>
                 <svg
@@ -167,13 +149,10 @@
               <span>Valyutalar</span></router-link
             >
           </li>
-          <li
-            class="transition-all duration-300 hover:bg-indigo-600 text-[#667085] hover:text-slate-50 py-1.5 px-4 font-normal rounded-md"
-          >
+          <li>
             <router-link
               to="kategoriyalar"
-              class="flex items-center gap-2.5"
-              href=""
+              class="flex items-center gap-2.5 transition-all duration-300 hover:bg-indigo-600 text-[#667085] hover:text-slate-50 py-1.5 px-4 font-normal rounded-md"
             >
               <span>
                 <svg
@@ -191,13 +170,10 @@
               <span>Kategoriyalar</span></router-link
             >
           </li>
-          <li
-            class="transition-all duration-300 hover:bg-indigo-600 text-[#667085] hover:text-slate-50 rounded-md py-1.5 px-4 font-normal"
-          >
+          <li>
             <router-link
               to="taminotchilar"
-              class="flex items-center gap-2.5"
-              href=""
+              class="flex items-center gap-2.5 transition-all duration-300 hover:bg-indigo-600 text-[#667085] hover:text-slate-50 rounded-md py-1.5 px-4 font-normal"
             >
               <span>
                 <svg
@@ -219,13 +195,10 @@
               <span>Taminotchilar</span></router-link
             >
           </li>
-          <li
-            class="transition-all duration-300 hover:bg-indigo-600 text-[#667085] hover:text-slate-50 rounded-md py-1.5 px-4 font-normal"
-          >
+          <li>
             <router-link
               to="omborlar"
-              class="flex items-center gap-2.5"
-              href=""
+              class="flex items-center gap-2.5 transition-all duration-300 hover:bg-indigo-600 text-[#667085] hover:text-slate-50 rounded-md py-1.5 px-4 font-normal"
             >
               <span
                 ><svg
@@ -247,27 +220,18 @@
       </ul>
     </aside>
     <header class="w-5/6">
-      <p
-        class="p-[12.2px] border-b border-slate-300 h-[8%] font-semibold text-xl"
-      >
-        {{ $route.name }}
-      </p>
+      <div>
+        <p class="p-2.5 border-b border-slate-300 h-[8%] font-semibold text-xl">
+          {{ $route.name }}
+        </p>
+      </div>
       <main class="h-[93%] p-4">
         <router-view></router-view>
       </main>
     </header>
   </div>
-
-  <div>
-    <router-link to="login">sabmit</router-link>
-  </div>
 </template>
 
 <script setup lang="ts"></script>
 
-<style scoped>
-.activeLink {
-  color: white;
-  background: #4f46e5;
-}
-</style>
+<style scoped></style>

@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Reports from "@/views/reports.vue";
 const router = createRouter({
-  linkActiveClass:
-    "text-slate-50 bg-indigo-600 rounded-md py-1 px-4  w-[200px] transition-all duration-300 font-normal ",
+  linkActiveClass: " bg-indigo-600  text-slate-50 ",
+
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     { path: "/", redirect: "/hisobotlar" },
@@ -48,7 +48,11 @@ const router = createRouter({
       component: () => import("../views/warehouses.vue"),
     },
 
-    { path: "/login", component: () => import("../views/login.vue") },
+    {
+      path: "/login",
+      name: "Login",
+      component: () => import("../views/login.vue"),
+    },
   ],
 });
 
