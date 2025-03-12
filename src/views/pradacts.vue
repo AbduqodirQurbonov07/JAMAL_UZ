@@ -115,42 +115,198 @@
           <PopoverTrigger
             class="flex items-center gap-2 border border-slate-200 pr-20 px-4 py-2 text-base rounded-xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
           >
-            Button
+            <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 32 32"
+              >
+                <path
+                  fill="currentColor"
+                  d="M16 3C8.832 3 3 8.832 3 16s5.832 13 13 13s13-5.832 13-13S23.168 3 16 3m0 2c6.087 0 11 4.913 11 11s-4.913 11-11 11S5 22.087 5 16S9.913 5 16 5m-1 5v5h-5v2h5v5h2v-5h5v-2h-5v-5z"
+                />
+              </svg>
+            </span>
+            <span> Button</span>
           </PopoverTrigger>
-          <PopoverContent> 
-             <Select class="p-2">
-        <SelectTrigger class="bg-slate-50 border-transparent text-base h-12">
-          <SelectValue placeholder="Omborxona" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            <SelectItem value="Omborxona "> Omborxona </SelectItem>
-            <SelectItem value="Omborxona 1"> Omborxona 1 </SelectItem>
-            <SelectItem value="Omborxona 2"> Omborxona 2 </SelectItem>
-            <SelectItem value="Omborxona 3"> Omborxona 3 </SelectItem>
-          </SelectGroup>
-        </SelectContent>
-      </Select>
+          <PopoverContent class="w-[700px]">
+            <div class="flex flex-col gap-8 p-6">
+              <div class="flex items-center justify-between pb-5 border-b">
+                <p>Inventarizatsiya</p>
+                <button>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="m6.4 18.308l-.708-.708l5.6-5.6l-5.6-5.6l.708-.708l5.6 5.6l5.6-5.6l.708.708l-5.6 5.6l5.6 5.6l-.708.708l-5.6-5.6z"
+                    />
+                  </svg>
+                </button>
+              </div>
+              <ul class="grid grid-cols-2 gap-3">
+                <li class="flex flex-col gap-1.5 mt-2.5 mb-5">
+                  <Label for="size"
+                    >Standart size<span class="text-orange-500"> *</span></Label
+                  >
+                  <Select id="size">
+                    <SelectTrigger class="border border-slate-300">
+                      <SelectValue placeholder="Omborxona" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectItem value="Omborxona "> Omborxona </SelectItem>
+                        <SelectItem value="Omborxona 1">
+                          Omborxona 1
+                        </SelectItem>
+                        <SelectItem value="Omborxona 2">
+                          Omborxona 2
+                        </SelectItem>
+                        <SelectItem value="Omborxona 3">
+                          Omborxona 3
+                        </SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </li>
+                <li class="flex flex-col gap-1.5 mb-5">
+                  <label for="size"
+                    >Boyi<span class="text-orange-500"> *</span></label
+                  >
+                  <input
+                    type="number"
+                    class="border border-slate-300 px-3 py-2 rounded-lg"
+                    placeholder="Bo'yi"
+                  />
+                </li>
+                <li class="flex flex-col gap-1.5 mb-5">
+                  <Label for="size"
+                    >Valyuta<span class="text-orange-500"> *</span></Label
+                  >
+                  <Select id="size">
+                    <SelectTrigger class="border border-slate-300">
+                      <SelectValue placeholder="Omborxona" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectItem value="Omborxona "> Omborxona </SelectItem>
+                        <SelectItem value="Omborxona 1">
+                          Omborxona 1
+                        </SelectItem>
+                        <SelectItem value="Omborxona 2">
+                          Omborxona 2
+                        </SelectItem>
+                        <SelectItem value="Omborxona 3">
+                          Omborxona 3
+                        </SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </li>
+                <li class="flex flex-col gap-1.5 mb-5">
+                  <Label for="size"
+                    >Ombor<span class="text-orange-500"> *</span></Label
+                  >
+                  <Select id="size">
+                    <SelectTrigger class="border border-slate-300">
+                      <SelectValue placeholder="Omborxona" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectItem value="Omborxona "> Omborxona </SelectItem>
+                        <SelectItem value="Omborxona 1">
+                          Omborxona 1
+                        </SelectItem>
+                        <SelectItem value="Omborxona 2">
+                          Omborxona 2
+                        </SelectItem>
+                        <SelectItem value="Omborxona 3">
+                          Omborxona 3
+                        </SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </li>
+                <li class="flex flex-col gap-1.5 mb-5">
+                  <Label for="size"
+                    >Kategoriya<span class="text-orange-500"> *</span></Label
+                  >
+                  <Select id="size">
+                    <SelectTrigger class="border border-slate-300">
+                      <SelectValue placeholder="Omborxona" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectItem value="Omborxona "> Omborxona </SelectItem>
+                        <SelectItem value="Omborxona 1">
+                          Omborxona 1
+                        </SelectItem>
+                        <SelectItem value="Omborxona 2">
+                          Omborxona 2
+                        </SelectItem>
+                        <SelectItem value="Omborxona 3">
+                          Omborxona 3
+                        </SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </li>
+                <li class="flex flex-col gap-1.5 mb-5">
+                  <Label for="size"
+                    >Miqdor<span class="text-orange-500"> *</span></Label
+                  >
+                  <input
+                    type="number"
+                    class="border border-slate-300 px-3 py-2 rounded-lg"
+                    placeholder="Bo'yi"
+                  />
+                </li>
+                <li class="flex flex-col gap-1.5">
+                  <Label for="size">Tan narxi </Label>
+                  <input
+                    type="number"
+                    class="border border-slate-300 px-3 py-2 rounded-lg"
+                    placeholder="Bo'yi"
+                  />
+                </li>
+                <li class="flex flex-col gap-1.5">
+                  <Label for="size">Sotuv narxi </Label>
+                  <input
+                    type="number"
+                    class="border border-slate-300 px-3 py-2 rounded-lg"
+                    placeholder="Bo'yi"
+                  />
+                </li>
+              </ul>
+              <div class="flex flex-col gap-8">
+                <div class="flex items-start flex-col">
+                  <label for="izoh">Izoh</label>
+                  <textarea
+                    class="border p-3 border-slate-300 rounded-xl w-[620px] h-32"
+                    name=""
+                    id="izoh"
+                  ></textarea>
+                </div>
+                <div class="flex items-center justify-end gap-3">
+                  <button
+                    class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300"
+                  >
+                    Yopish
+                  </button>
+                  <button
+                    class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
+                  >
+                    Saqlash
+                  </button>
+                </div>
+              </div>
+            </div>
           </PopoverContent>
         </Popover>
-        <!-- <button
-          class="flex items-center gap-2 border border-slate-200 pr-20 px-4 py-2 text-base rounded-xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
-        >
-          <span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 32 32"
-            >
-              <path
-                fill="currentColor"
-                d="M16 3C8.832 3 3 8.832 3 16s5.832 13 13 13s13-5.832 13-13S23.168 3 16 3m0 2c6.087 0 11 4.913 11 11s-4.913 11-11 11S5 22.087 5 16S9.913 5 16 5m-1 5v5h-5v2h5v5h2v-5h5v-2h-5v-5z"
-              />
-            </svg>
-          </span>
-          <span> Button</span>
-        </button> -->
       </div>
     </div>
     <div class="flex flex-col items-center gap-3">
@@ -201,7 +357,7 @@
             :key="invoice.ombor"
           >
             <TableCell class="border">
-              {{ invoice.tartib }}
+              {{ invoice.id }}
             </TableCell>
             <TableCell class="border">
               {{ invoice.ombor }}
@@ -244,8 +400,54 @@
               </span>
             </TableCell>
             <TableCell class="text-center cursor-pointer">
-              <img src="../svg/dots.svg" alt="" />
-              <!-- {{ invoice.totalAmount }} -->
+              <Popover>
+                <PopoverTrigger>
+                  <img src="../svg/dots.svg" alt="" />
+                </PopoverTrigger>
+                <PopoverContent
+                  class="cursor-pointer flex flex-col rounded-xl w-52"
+                >
+                  <div
+                    class="flex items-center gap-3 py-2.5 hover:bg-slate-100 px-2 rounded-lg"
+                  >
+                    <span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M4.21 20.52a.73.73 0 0 1-.52-.21a.75.75 0 0 1-.22-.6l.31-3.84A.73.73 0 0 1 4 15.4L15.06 4.34a3.2 3.2 0 0 1 2.28-.86a3.3 3.3 0 0 1 2.25.91a3.31 3.31 0 0 1 .11 4.5L8.63 20a.77.77 0 0 1-.46.22l-3.89.35Zm1-4.26L5 19l2.74-.25l10.9-10.92A1.72 1.72 0 0 0 17.31 5a1.6 1.6 0 0 0-1.19.42ZM15.59 4.87"
+                        />
+                      </svg>
+                    </span>
+                    <span>Tahrirlash</span>
+                  </div>
+                  <div
+                    class="flex items-center gap-3 py-2.5 text-red-600 hover:bg-slate-100 px-2 rounded-lg"
+                  >
+                    <span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="1.5"
+                          d="M14 11v6m-4-6v6M6 7v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7M4 7h16M7 7l2-4h6l2 4"
+                        />
+                      </svg> </span
+                    ><span>O'chirish</span>
+                  </div>
+                </PopoverContent>
+              </Popover>
             </TableCell>
           </TableRow>
         </TableBody>
@@ -259,8 +461,8 @@
         :default-page="2"
       >
         <PaginationList v-slot="{ items }" class="flex items-center gap-1">
-          <PaginationFirst />
-          <PaginationPrev />
+          <PaginationFirst class="hover:bg-indigo-600 hover:text-slate-50" />
+          <PaginationPrev class="hover:bg-indigo-600 hover:text-slate-50" />
 
           <template v-for="(item, index) in items">
             <PaginationListItem
@@ -270,7 +472,7 @@
               as-child
             >
               <Button
-                class="w-10 h-10 p-0"
+                class="w-10 h-10 p-0 hover:bg-indigo-600 hover:text-slate-50 rounded-md"
                 :variant="item.value === page ? 'default' : 'outline'"
               >
                 {{ item.value }}
@@ -279,8 +481,8 @@
             <PaginationEllipsis v-else :key="item.type" :index="index" />
           </template>
 
-          <PaginationNext />
-          <PaginationLast />
+          <PaginationNext class="hover:bg-indigo-600 hover:text-slate-50" />
+          <PaginationLast class="hover:bg-indigo-600 hover:text-slate-50" />
         </PaginationList>
       </Pagination>
     </div>
@@ -297,6 +499,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
 import {
   Table,
   TableBody,
@@ -316,6 +519,7 @@ import {
   PaginationNext,
   PaginationPrev,
 } from "@/components/ui/pagination";
+
 import {
   Popover,
   PopoverContent,
@@ -323,7 +527,7 @@ import {
 } from "@/components/ui/popover";
 const data = [
   {
-    tartib: "1",
+    id: 1,
     ombor: "omborxona",
     xodim: "Husan Kamolov",
     taminot: "Taminot ",
@@ -341,7 +545,7 @@ const data = [
     tovar: "REFLEX GREY Gilamlari",
   },
   {
-    tartib: "2",
+    id: 2,
     ombor: "omborxona",
     xodim: "Husan Kamolov",
     taminot: "Taminot ",
@@ -360,7 +564,7 @@ const data = [
     tovar: "REFLEX GREY Gilamlari",
   },
   {
-    tartib: "3",
+    id: 3,
     ombor: "omborxona",
     xodim: "Husan Kamolov",
     taminot: "Taminot ",
@@ -379,7 +583,7 @@ const data = [
     tovar: "REFLEX GREY Gilamlari",
   },
   {
-    tartib: "4",
+    id: 4,
     ombor: "omborxona",
     xodim: "Husan Kamolov",
     taminot: "Taminot ",
@@ -398,7 +602,7 @@ const data = [
     tovar: "REFLEX GREY Gilamlari",
   },
   {
-    tartib: "5",
+    id: 5,
     ombor: "omborxona",
     xodim: "Husan Kamolov",
     taminot: "Taminot ",
@@ -417,7 +621,7 @@ const data = [
     tovar: "REFLEX GREY Gilamlari",
   },
   {
-    tartib: "6",
+    id: 6,
     ombor: "omborxona",
     xodim: "Husan Kamolov",
     taminot: "Taminot ",
@@ -436,7 +640,7 @@ const data = [
     tovar: "REFLEX GREY Gilamlari",
   },
   {
-    tartib: "7",
+    id: 7,
     ombor: "omborxona",
     xodim: "Husan Kamolov",
     taminot: "Taminot ",
@@ -455,7 +659,7 @@ const data = [
     tovar: "REFLEX GREY Gilamlari",
   },
   {
-    tartib: "8",
+    id: 8,
     ombor: "omborxona",
     xodim: "Husan Kamolov",
     taminot: "Taminot ",
@@ -474,7 +678,7 @@ const data = [
     tovar: "REFLEX GREY Gilamlari",
   },
   {
-    tartib: "9",
+    id: 9,
     ombor: "omborxona",
     xodim: "Husan Kamolov",
     taminot: "Taminot ",
@@ -493,7 +697,7 @@ const data = [
     tovar: "REFLEX GREY Gilamlari",
   },
   {
-    tartib: "10",
+    id: 10,
     ombor: "omborxona",
     xodim: "Husan Kamolov",
     taminot: "Taminot ",
@@ -512,7 +716,7 @@ const data = [
     tovar: "REFLEX GREY Gilamlari",
   },
   {
-    tartib: "11",
+    id: 11,
     ombor: "omborxona",
     xodim: "Husan Kamolov",
     taminot: "Taminot ",
@@ -531,7 +735,7 @@ const data = [
     tovar: "REFLEX GREY Gilamlari",
   },
   {
-    tartib: "12",
+    id: 12,
     ombor: "omborxona",
     xodim: "Husan Kamolov",
     taminot: "Taminot ",
@@ -550,7 +754,7 @@ const data = [
     tovar: "REFLEX GREY Gilamlari",
   },
   {
-    tartib: "13",
+    id: 13,
     ombor: "omborxona",
     xodim: "Husan Kamolov",
     taminot: "Taminot ",

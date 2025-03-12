@@ -14,19 +14,17 @@
           </SelectGroup>
         </SelectContent>
       </Select>
-      <Select>
-        <SelectTrigger class="bg-slate-50 border-transparent">
-          <SelectValue placeholder="Sana" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            <SelectItem value="sana"> Sana </SelectItem>
-            <SelectItem value="sana_1"> Sana 1 </SelectItem>
-            <SelectItem value="sana_2"> Sana 2 </SelectItem>
-            <SelectItem value="sana_3"> Sana 3 </SelectItem>
-          </SelectGroup>
-        </SelectContent>
-      </Select>
+      <Popover>
+        <PopoverTrigger
+          class="bg-slate-50 border-transparent rounded-md text-slate-500"
+        >
+          Sana
+        </PopoverTrigger>
+        <PopoverContent>
+          <RangeCalendar v-model="value" class="rounded-md border" />
+        </PopoverContent>
+      </Popover>
+
       <Select class="">
         <SelectTrigger class="bg-slate-50 border-transparent">
           <SelectValue placeholder="Taminotchilar" />
@@ -201,8 +199,54 @@
             }}</TableCell>
             <TableCell class="border text-center">{{ invoice.sana }}</TableCell>
             <TableCell class="text-center cursor-pointer">
-              <img src="../svg/dots.svg" alt="" />
-              <!-- {{ invoice.totalAmount }} -->
+              <Popover>
+                <PopoverTrigger>
+                  <img src="../svg/dots.svg" alt="" />
+                </PopoverTrigger>
+                <PopoverContent
+                  class="cursor-pointer flex flex-col rounded-xl w-52"
+                >
+                  <div
+                    class="flex items-center gap-3 py-2.5 hover:bg-slate-100 px-2 rounded-lg"
+                  >
+                    <span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M4.21 20.52a.73.73 0 0 1-.52-.21a.75.75 0 0 1-.22-.6l.31-3.84A.73.73 0 0 1 4 15.4L15.06 4.34a3.2 3.2 0 0 1 2.28-.86a3.3 3.3 0 0 1 2.25.91a3.31 3.31 0 0 1 .11 4.5L8.63 20a.77.77 0 0 1-.46.22l-3.89.35Zm1-4.26L5 19l2.74-.25l10.9-10.92A1.72 1.72 0 0 0 17.31 5a1.6 1.6 0 0 0-1.19.42ZM15.59 4.87"
+                        />
+                      </svg>
+                    </span>
+                    <span>Tahrirlash</span>
+                  </div>
+                  <div
+                    class="flex items-center gap-3 py-2.5 text-red-600 hover:bg-slate-100 px-2 rounded-lg"
+                  >
+                    <span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="1.5"
+                          d="M14 11v6m-4-6v6M6 7v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7M4 7h16M7 7l2-4h6l2 4"
+                        />
+                      </svg> </span
+                    ><span>O'chirish</span>
+                  </div>
+                </PopoverContent>
+              </Popover>
             </TableCell>
           </TableRow>
         </TableBody>
@@ -216,8 +260,8 @@
         :default-page="2"
       >
         <PaginationList v-slot="{ items }" class="flex items-center gap-1">
-          <PaginationFirst />
-          <PaginationPrev />
+          <PaginationFirst class="hover:bg-indigo-600 hover:text-slate-50" />
+          <PaginationPrev class="hover:bg-indigo-600 hover:text-slate-50" />
 
           <template v-for="(item, index) in items">
             <PaginationListItem
@@ -227,7 +271,7 @@
               as-child
             >
               <Button
-                class="w-10 h-10 p-0"
+                class="w-10 h-10 p-0 hover:bg-indigo-600 hover:text-slate-50 rounded-md"
                 :variant="item.value === page ? 'default' : 'outline'"
               >
                 {{ item.value }}
@@ -236,8 +280,8 @@
             <PaginationEllipsis v-else :key="item.type" :index="index" />
           </template>
 
-          <PaginationNext />
-          <PaginationLast />
+          <PaginationNext class="hover:bg-indigo-600 hover:text-slate-50" />
+          <PaginationLast class="hover:bg-indigo-600 hover:text-slate-50" />
         </PaginationList>
       </Pagination>
     </div>
@@ -245,6 +289,19 @@
 </template>
 
 <script setup lang="ts">
+import type { DateRange } from "reka-ui";
+import { RangeCalendar } from "@/components/ui/range-calendar";
+import { getLocalTimeZone, today } from "@internationalized/date";
+import { type Ref, ref } from "vue";
+
+const start = today(getLocalTimeZone());
+const end = start.add({ days: 7 });
+
+const value = ref({
+  start,
+  end,
+}) as Ref<DateRange>;
+
 import {
   Select,
   SelectContent,
@@ -254,6 +311,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import {
   Table,
   TableBody,
