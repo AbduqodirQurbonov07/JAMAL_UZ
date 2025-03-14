@@ -4,7 +4,7 @@
       class="flex flex-col gap-1 w-1.5/6 border-r border-slate-300 h-screen"
     >
       <ul>
-        <p class="p-3.5 ml-1 mb-1 border-b border-slate-300">
+        <p class="p-3.5 h-[7vh] ml-1 mb-1 border-b border-slate-300">
           <img src="./svg/logo.svg" alt="" />
         </p>
         <ul class="flex flex-col gap-1 px-4">
@@ -220,18 +220,26 @@
       </ul>
     </aside>
     <header class="w-5/6">
-      <div>
-        <p class="p-2.5 border-b border-slate-300 h-[8%] font-semibold text-xl">
+      <div class="flex items-center w-[85vw] h-[7vh] border-b border-slate-300">
+        <p class="p-2.5 w-[86vw] font-semibold text-xl">
           {{ $route.name }}
         </p>
+        <div>
+          <Avatar>
+            <AvatarImage src="https://github.com/unovue.png" alt="@unovue" />
+            <AvatarFallback>QA</AvatarFallback>
+          </Avatar>
+        </div>
       </div>
-      <main class="h-[93%] p-4">
+      <main class="h-[93vh]">
         <router-view></router-view>
       </main>
     </header>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+</script>
 
 <style scoped></style>

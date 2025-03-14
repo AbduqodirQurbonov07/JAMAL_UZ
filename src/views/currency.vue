@@ -1,7 +1,7 @@
 <template>
   <div class="">
-    <div class="grid grid-cols-5 gap-3">
-      <div class="flex w-[1400px] justify-between py-3">
+    <div class="grid grid-cols-5 gap-3 px-4 py-2">
+      <div class="flex w-[84vw] justify-between py-3">
         <div
           class="flex items-center cursor-pointer justify-start gap-2 px-3 py-1.5 border border-slate-200 rounded-lg placeholder:text-slate-400"
         >
@@ -124,9 +124,11 @@
         </Popover>
       </div>
     </div>
-    <div class="flex gap-3 p-5">
+    <div
+      class="grid grid-cols-4 gap-3 p-5 bg-[#F3F3F3] content-start h-[82vh] w-[85vw]"
+    >
       <div
-        class="flex items-start bg-white p-4 w-96 h-24 justify-between rounded-xl border"
+        class="flex items-start bg-white p-4 w-80 h-24 justify-between rounded-xl border"
       >
         <Popover>
           <PopoverTrigger>
@@ -235,7 +237,7 @@
         </Popover>
       </div>
       <div
-        class="flex items-start bg-white p-4 w-96 h-24 justify-between rounded-xl border"
+        class="flex items-start bg-white p-4 w-80 h-24 justify-between rounded-xl border"
       >
         <Popover>
           <PopoverTrigger>
@@ -344,7 +346,7 @@
         </Popover>
       </div>
       <div
-        class="flex items-start bg-white p-4 w-96 h-24 justify-between rounded-xl border"
+        class="flex items-start bg-white p-4 w-80 h-24 justify-between rounded-xl border"
       >
         <Popover>
           <PopoverTrigger>

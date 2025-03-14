@@ -1,7 +1,7 @@
 <template>
   <div class="">
-    <div class="grid grid-cols-5 gap-3">
-      <div class="flex w-[1400px] justify-between py-3">
+    <div class="grid grid-cols-5 gap-3 p-4">
+      <div class="flex w-[84vw] h-[8vh] justify-between py-3">
         <div
           class="flex items-center cursor-pointer justify-start gap-2 px-3 py-1.5 border border-slate-200 rounded-lg placeholder:text-slate-400"
         >
@@ -51,7 +51,7 @@
           <PopoverContent class="w-[700px]">
             <div class="flex flex-col p-6">
               <div class="flex items-center justify-between pb-5 border-b mb-8">
-                <p >Omborxona qo'shish</p>
+                <p>Omborxona qo'shish</p>
                 <button>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -104,9 +104,11 @@
         </Popover>
       </div>
     </div>
-    <div class="grid grid-cols-3 gap-3 p-5">
+    <div
+      class="grid grid-cols-4 gap-3 p-5 content-start bg-[#F3F3F3] h-[83vh] w-[85vw]"
+    >
       <div
-        class="flex items-start bg-white p-4 w-96 justify-between rounded-xl border"
+        class="flex items-start bg-white p-4 w-80 justify-between rounded-xl border"
       >
         <Popover>
           <PopoverTrigger>
@@ -205,7 +207,7 @@
         </Popover>
       </div>
       <div
-        class="flex items-start bg-white p-4 w-96 justify-between rounded-xl border"
+        class="flex items-start bg-white p-4 w-80 justify-between rounded-xl border"
       >
         <Popover>
           <PopoverTrigger>
@@ -304,7 +306,7 @@
         </Popover>
       </div>
       <div
-        class="flex items-start bg-white p-4 w-96 justify-between rounded-xl border"
+        class="flex items-start bg-white p-4 w-80 justify-between rounded-xl border"
       >
         <Popover>
           <PopoverTrigger>
@@ -403,7 +405,7 @@
         </Popover>
       </div>
       <div
-        class="flex items-start bg-white p-4 w-96 justify-between rounded-xl border"
+        class="flex items-start bg-white p-4 w-80 justify-between rounded-xl border"
       >
         <Popover>
           <PopoverTrigger>
@@ -543,306 +545,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-const data = [
-  {
-    id: 1,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    eni: "400 sm ",
-    boyi: "1200 sm",
-    code: "999",
-    email: "mahmudnamazov705@gmail.com",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    soni: "1 200",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    sana: "3.10.2025",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 2,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    code: "999",
-    soni: "1 200",
-    email: "mahmudnamazov705@gmail.com",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 3,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    eni: "400 Metr ",
-    code: "999",
-    email: "mahmudnamazov705@gmail.com",
-    soni: "1 200",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    boyi: "1200 Metr",
-    sana: "3.10.2025",
-    miqdor: "1200",
-    haridor: "Mahmud Namazov",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 4,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    miqdor: "1200",
-    code: "999",
-    soni: "1 200",
-    qoldiq: "1 000",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    jami: "4 400",
-    valyuta: "UZS",
-    eni: "400 Metr ",
-    email: "mahmudnamazov705@gmail.com",
-    sana: "3.10.2025",
-    boyi: "1200 Metr",
-    haridor: "Mahmud Namazov",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 5,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    code: "999",
-    soni: "1 200",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    qoldiq: "1 000",
-    jami: "4 400",
-    email: "mahmudnamazov705@gmail.com",
-    valyuta: "UZS",
-    haridor: "Mahmud Namazov",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 6,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    miqdor: "1200",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    email: "mahmudnamazov705@gmail.com",
-    soni: "1 200",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    eni: "400 Metr ",
-    sana: "3.10.2025",
-    boyi: "1200 Metr",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 7,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    miqdor: "1200",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    email: "mahmudnamazov705@gmail.com",
-    qoldiq: "1 000",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    jami: "4 400",
-    valyuta: "UZS",
-    eni: "400 Metr ",
-    sana: "3.10.2025",
-    boyi: "1200 Metr",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 8,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    miqdor: "1200",
-    email: "mahmudnamazov705@gmail.com",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    eni: "400 Metr ",
-    sana: "3.10.2025",
-    boyi: "1200 Metr",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 9,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    email: "mahmudnamazov705@gmail.com",
-    qoldiq: "1 000",
-    jami: "4 400",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    valyuta: "UZS",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 10,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    email: "mahmudnamazov705@gmail.com",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    umumiy: "120 000 000 UZS",
-    narx: "100 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 11,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    qoldiq: "1 000",
-    jami: "4 400",
-    email: "mahmudnamazov705@gmail.com",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    valyuta: "UZS",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    umumiy: "120 000 000 UZS",
-    narx: "100 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 12,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    qoldiq: "1 000",
-    email: "mahmudnamazov705@gmail.com",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    jami: "4 400",
-    valyuta: "UZS",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    umumiy: "120 000 000 UZS",
-    narx: "100 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 13,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    qoldiq: "1 000",
-    email: "mahmudnamazov705@gmail.com",
-    jami: "4 400",
-    valyuta: "UZS",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-];
 </script>
 
 <style scoped></style>

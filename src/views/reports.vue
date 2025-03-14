@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="grid grid-cols-5 gap-3">
+    <div class="grid grid-cols-5 gap-3 px-4 py-3 w-[85vw]">
       <Select>
         <SelectTrigger class="bg-slate-50 border-transparent">
           <SelectValue placeholder="Omborxona" />
@@ -16,7 +16,7 @@
       </Select>
       <Popover>
         <PopoverTrigger
-          class="bg-slate-50 border-transparent rounded-md text-slate-500"
+          class="bg-slate-50 text-start px-3 border-transparent rounded-md text-slate-400"
         >
           Sana
         </PopoverTrigger>
@@ -130,7 +130,7 @@
         </button>
       </div>
     </div>
-    <div class="mt-4 flex flex-col items-center gap-2.5">
+    <div class="mt-4 flex flex-col w-[85vw] items-center gap-2.5">
       <Table class="border">
         <TableHeader class="border">
           <TableRow class="border">
@@ -257,7 +257,7 @@
         :total="100"
         :sibling-count="1"
         show-edges
-        :default-page="2"
+        :default-page="1"
       >
         <PaginationList v-slot="{ items }" class="flex items-center gap-1">
           <PaginationFirst class="hover:bg-indigo-600 hover:text-slate-50" />
@@ -289,6 +289,7 @@
 </template>
 
 <script setup lang="ts">
+import { Button } from "@/components/ui/button";
 import type { DateRange } from "reka-ui";
 import { RangeCalendar } from "@/components/ui/range-calendar";
 import { getLocalTimeZone, today } from "@internationalized/date";

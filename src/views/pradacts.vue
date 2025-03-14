@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="grid grid-cols-5 gap-3">
+    <div class="grid grid-cols-5 gap-3 w-[85vw] px-4 py-3">
       <Select class="p-2">
         <SelectTrigger class="bg-slate-50 border-transparent text-base h-12">
           <SelectValue placeholder="Omborxona" />
@@ -83,7 +83,7 @@
           <span>Tozalash</span>
         </button>
       </div>
-      <div class="flex border-t w-[1400px] justify-between py-3">
+      <div class="flex border-t w-[84vw] justify-between py-3">
         <div
           class="flex items-center cursor-pointer justify-start gap-2 px-3 py-1.5 border border-slate-200 rounded-lg placeholder:text-slate-400"
         >
@@ -309,7 +309,7 @@
         </Popover>
       </div>
     </div>
-    <div class="flex flex-col items-center gap-3">
+    <div class="flex flex-col items-center w-[85vw] gap-3">
       <Table class="border">
         <TableHeader class="border">
           <TableRow class="border">
@@ -490,6 +490,7 @@
 </template>
 
 <script setup lang="ts">
+import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,

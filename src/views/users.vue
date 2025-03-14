@@ -1,7 +1,7 @@
 <template>
   <div class="">
-    <div class="grid grid-cols-5 gap-3">
-      <div class="flex w-[1400px] justify-between py-3">
+    <div class="grid grid-cols-5 gap-3 px-4">
+      <div class="flex w-[83vw] justify-between py-3">
         <div
           class="flex items-center cursor-pointer justify-start gap-2 px-3 py-1.5 border border-slate-200 rounded-lg placeholder:text-slate-400"
         >
@@ -151,7 +151,7 @@
         </Popover>
       </div>
     </div>
-    <div class="flex flex-col items-center gap-3">
+    <div class="flex flex-col items-center gap-3 w-[85vw]">
       <Table class="border">
         <TableHeader class="border">
           <TableRow class="border">
@@ -283,30 +283,13 @@
         </PaginationList>
       </Pagination>
     </div>
-  </div>
-  <div class="flex justify-end mt-8">
-    <Popover>
-      <PopoverTrigger
-        class="flex items-center gap-2 border border-slate-200 px-4 py-4 text-base rounded-2xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
-      >
-        <span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-          >
-            <path
-              fill="currentColor"
-              d="M19 12.998h-6v6h-2v-6H5v-2h6v-6h2v6h6z"
-            />
-          </svg>
-        </span>
-      </PopoverTrigger>
-      <PopoverContent class="w-[500px]">
-        <div class="flex items-center border-b-2 py-3 justify-between">
-          <p>Sotuv oynasi</p>
-          <button>
+
+    <div class="flex justify-end mt-8">
+      <Popover>
+        <PopoverTrigger
+          class="flex items-center gap-2 border border-slate-200 px-4 py-4 text-base rounded-2xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
+        >
+          <span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -315,192 +298,213 @@
             >
               <path
                 fill="currentColor"
-                d="m6.4 18.308l-.708-.708l5.6-5.6l-5.6-5.6l.708-.708l5.6 5.6l5.6-5.6l.708.708l-5.6 5.6l5.6 5.6l-.708.708l-5.6-5.6z"
+                d="M19 12.998h-6v6h-2v-6H5v-2h6v-6h2v6h6z"
               />
             </svg>
-          </button>
-        </div>
-        <div class="flex flex-col p-6 bg-slate-50">
-          <ul class="grid grid-cols-1 p-4 rounded-lg gap-3 bg-white">
-            <li class="flex flex-col gap-1.5 mt-2.5 mb-5">
-              <Label for="size"
-                >Ombor<span class="text-orange-500"> *</span></Label
+          </span>
+        </PopoverTrigger>
+        <PopoverContent class="w-[500px]">
+          <div class="flex items-center border-b-2 py-3 justify-between">
+            <p>Sotuv oynasi</p>
+            <button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
               >
-              <Select>
-                <SelectTrigger class="border-slate-300">
-                  <SelectValue placeholder="Omborxona" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectItem value="Omborxona "> Omborxona </SelectItem>
-                    <SelectItem value="Omborxona 1"> Omborxona 1 </SelectItem>
-                    <SelectItem value="Omborxona 2"> Omborxona 2 </SelectItem>
-                    <SelectItem value="Omborxona 3"> Omborxona 3 </SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </li>
-            <li class="flex flex-col gap-1.5 mb-5">
-              <label for="size"
-                >Kategoriya<span class="text-orange-500"> *</span></label
-              >
-              <Select>
-                <SelectTrigger class="border-slate-300">
-                  <SelectValue placeholder="Kateroriya" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectItem value="Omborxona ">
-                      REFLEX GREY Gilamlari
-                    </SelectItem>
-                    <SelectItem value="Omborxona 1"> Omborxona 1 </SelectItem>
-                    <SelectItem value="Omborxona 2"> Omborxona 2 </SelectItem>
-                    <SelectItem value="Omborxona 3"> Omborxona 3 </SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </li>
-            <li class="grid grid-cols-2 gap-48 mb-5">
-              <div class="flex flex-col w-[280px] gap-1.5">
-                <Label for="size"
-                  >Narx<span class="text-orange-500"> *</span></Label
-                >
-                <input
-                  type="number"
-                  class="border border-slate-300 px-3 py-2 rounded-lg"
+                <path
+                  fill="currentColor"
+                  d="m6.4 18.308l-.708-.708l5.6-5.6l-5.6-5.6l.708-.708l5.6 5.6l5.6-5.6l.708.708l-5.6 5.6l5.6 5.6l-.708.708l-5.6-5.6z"
                 />
-              </div>
-              <div class="flex flex-col w-24 gap-1.5">
+              </svg>
+            </button>
+          </div>
+          <div class="flex flex-col p-6 bg-slate-50">
+            <ul class="grid grid-cols-1 p-4 rounded-lg gap-3 bg-white">
+              <li class="flex flex-col gap-1.5 mt-2.5 mb-5">
                 <Label for="size"
-                  >Valyuta<span class="text-orange-500"> *</span></Label
+                  >Ombor<span class="text-orange-500"> *</span></Label
                 >
                 <Select>
                   <SelectTrigger class="border-slate-300">
-                    <SelectValue placeholder="" />
+                    <SelectValue placeholder="Omborxona" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
-                      <SelectItem value="Omborxona 1">UZS </SelectItem>
-                      <SelectItem value="Omborxona 2">USD </SelectItem>
-                      <SelectItem value="Omborxona 3">RUB</SelectItem>
+                      <SelectItem value="Omborxona "> Omborxona </SelectItem>
+                      <SelectItem value="Omborxona 1"> Omborxona 1 </SelectItem>
+                      <SelectItem value="Omborxona 2"> Omborxona 2 </SelectItem>
+                      <SelectItem value="Omborxona 3"> Omborxona 3 </SelectItem>
                     </SelectGroup>
                   </SelectContent>
                 </Select>
-              </div>
-            </li>
-            <li class="flex flex-col gap-1.5 mb-5">
-              <Label for="size"
-                >Turi<span class="text-orange-500"> *</span></Label
-              >
-              <Tabs default-value="account" class="w-[400px]">
-                <TabsList>
-                  <TabsTrigger value="account"> Tayyor </TabsTrigger>
-                  <TabsTrigger value="password"> Ochanuvchi </TabsTrigger>
-                </TabsList>
-              </Tabs>
-            </li>
-            <li class="grid grid-cols-2 gap-3 mb-5">
-              <div class="flex flex-col gap-1.5">
+              </li>
+              <li class="flex flex-col gap-1.5 mb-5">
+                <label for="size"
+                  >Kategoriya<span class="text-orange-500"> *</span></label
+                >
+                <Select>
+                  <SelectTrigger class="border-slate-300">
+                    <SelectValue placeholder="Kateroriya" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="Omborxona ">
+                        REFLEX GREY Gilamlari
+                      </SelectItem>
+                      <SelectItem value="Omborxona 1"> Omborxona 1 </SelectItem>
+                      <SelectItem value="Omborxona 2"> Omborxona 2 </SelectItem>
+                      <SelectItem value="Omborxona 3"> Omborxona 3 </SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </li>
+              <li class="grid grid-cols-2 gap-48 mb-5">
+                <div class="flex flex-col w-[280px] gap-1.5">
+                  <Label for="size"
+                    >Narx<span class="text-orange-500"> *</span></Label
+                  >
+                  <input
+                    type="number"
+                    class="border border-slate-300 px-3 py-2 rounded-lg"
+                  />
+                </div>
+                <div class="flex flex-col w-24 gap-1.5">
+                  <Label for="size"
+                    >Valyuta<span class="text-orange-500"> *</span></Label
+                  >
+                  <Select>
+                    <SelectTrigger class="border-slate-300">
+                      <SelectValue placeholder="" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectItem value="Omborxona 1">UZS </SelectItem>
+                        <SelectItem value="Omborxona 2">USD </SelectItem>
+                        <SelectItem value="Omborxona 3">RUB</SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </li>
+              <li class="flex flex-col gap-1.5 mb-5">
                 <Label for="size"
-                  >Miqdor<span class="text-orange-500"> </span
+                  >Turi<span class="text-orange-500"> *</span></Label
+                >
+                <Tabs default-value="account" class="w-[400px]">
+                  <TabsList>
+                    <TabsTrigger value="account"> Tayyor </TabsTrigger>
+                    <TabsTrigger value="password"> Ochanuvchi </TabsTrigger>
+                  </TabsList>
+                </Tabs>
+              </li>
+              <li class="grid grid-cols-2 gap-3 mb-5">
+                <div class="flex flex-col gap-1.5">
+                  <Label for="size"
+                    >Miqdor<span class="text-orange-500"> </span
+                  ></Label>
+                  <input
+                    type="number"
+                    class="border border-slate-300 px-3 py-2 rounded-lg"
+                  />
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <Label for="size"
+                    >Olcham<span class="text-orange-500"> </span
+                  ></Label>
+                  <input
+                    type="number"
+                    class="border border-slate-300 px-3 py-2 rounded-lg"
+                  />
+                </div>
+              </li>
+              <li class="flex flex-col gap-1.5 mt-2.5 mb-5">
+                <Label for="size"
+                  >Mijoz<span class="text-orange-500"> *</span></Label
+                >
+                <Select>
+                  <SelectTrigger class="border-slate-300">
+                    <SelectValue placeholder="Mijoz" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="Mijoz ">
+                        Shamsidinov Alisher</SelectItem
+                      >
+                      <SelectItem value="Mijoz_1"
+                        >Shamsidinov Alisher
+                      </SelectItem>
+                      <SelectItem value="Mijoz_2">
+                        Shamsidinov Alisher
+                      </SelectItem>
+                      <SelectItem value="Mijoz_3">
+                        Shamsidinov Alisher
+                      </SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </li>
+              <li class="flex flex-col gap-1.5 mb-5">
+                <Label for="size">
+                  Mijoz turi<span class="text-orange-500"> </span
+                ></Label>
+                <Tabs default-value="account" class="w-[400px]">
+                  <TabsList>
+                    <TabsTrigger value="account"> Oddiy mijoz </TabsTrigger>
+                    <TabsTrigger value="password"> Doimiy mijoz </TabsTrigger>
+                  </TabsList>
+                </Tabs>
+              </li>
+            </ul>
+            <div class="bg-white mt-4 p-4 rounded-lg">
+              <li class="flex flex-col gap-1.5">
+                <Label for="size">
+                  To'lov turi
+                  <span class="text-orange-500"> </span
+                ></Label>
+                <Tabs default-value="account" class="w-[400px]">
+                  <TabsList>
+                    <TabsTrigger value="account"> Naqd </TabsTrigger>
+                    <TabsTrigger value="password"> Nasiya </TabsTrigger>
+                  </TabsList>
+                </Tabs>
+              </li>
+            </div>
+            <div class="bg-white mt-4 p-4 rounded-lg">
+              <li class="flex flex-col gap-1.5">
+                <Label for="size">
+                  Sana
+                  <span class="text-orange-500"> </span
                 ></Label>
                 <input
-                  type="number"
+                  type="date"
                   class="border border-slate-300 px-3 py-2 rounded-lg"
                 />
-              </div>
-              <div class="flex flex-col gap-1.5">
-                <Label for="size"
-                  >Olcham<span class="text-orange-500"> </span
-                ></Label>
-                <input
-                  type="number"
-                  class="border border-slate-300 px-3 py-2 rounded-lg"
-                />
-              </div>
-            </li>
-            <li class="flex flex-col gap-1.5 mt-2.5 mb-5">
-              <Label for="size"
-                >Mijoz<span class="text-orange-500"> *</span></Label
-              >
-              <Select>
-                <SelectTrigger class="border-slate-300">
-                  <SelectValue placeholder="Mijoz" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup>
-                    <SelectItem value="Mijoz "> Shamsidinov Alisher</SelectItem>
-                    <SelectItem value="Mijoz_1"
-                      >Shamsidinov Alisher
-                    </SelectItem>
-                    <SelectItem value="Mijoz_2">
-                      Shamsidinov Alisher
-                    </SelectItem>
-                    <SelectItem value="Mijoz_3">
-                      Shamsidinov Alisher
-                    </SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-            </li>
-            <li class="flex flex-col gap-1.5 mb-5">
-              <Label for="size">
-                Mijoz turi<span class="text-orange-500"> </span
-              ></Label>
-              <Tabs default-value="account" class="w-[400px]">
-                <TabsList>
-                  <TabsTrigger value="account"> Oddiy mijoz </TabsTrigger>
-                  <TabsTrigger value="password"> Doimiy mijoz </TabsTrigger>
-                </TabsList>
-              </Tabs>
-            </li>
-          </ul>
-          <div class="bg-white mt-4 p-4 rounded-lg">
-            <li class="flex flex-col gap-1.5">
-              <Label for="size">
-                To'lov turi
-                <span class="text-orange-500"> </span
-              ></Label>
-              <Tabs default-value="account" class="w-[400px]">
-                <TabsList>
-                  <TabsTrigger value="account"> Naqd </TabsTrigger>
-                  <TabsTrigger value="password"> Nasiya </TabsTrigger>
-                </TabsList>
-              </Tabs>
-            </li>
+              </li>
+            </div>
+            <!-- <div class="flex flex-col gap-8"></div> -->
           </div>
-          <div class="bg-white mt-4 p-4 rounded-lg">
-            <li class="flex flex-col gap-1.5">
-              <Label for="size">
-                Sana
-                <span class="text-orange-500"> </span
-              ></Label>
-              <input
-                type="date"
-                class="border border-slate-300 px-3 py-2 rounded-lg"
-              />
-            </li>
+          <div class="flex items-center my-4 justify-end gap-3">
+            <button
+              class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300"
+            >
+              Yopish
+            </button>
+            <button
+              class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
+            >
+              Saqlash
+            </button>
           </div>
-          <!-- <div class="flex flex-col gap-8"></div> -->
-        </div>
-        <div class="flex items-center my-4 justify-end gap-3">
-          <button
-            class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300"
-          >
-            Yopish
-          </button>
-          <button
-            class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
-          >
-            Saqlash
-          </button>
-        </div>
-      </PopoverContent>
-    </Popover>
+        </PopoverContent>
+      </Popover>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
