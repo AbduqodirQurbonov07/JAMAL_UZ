@@ -1,6 +1,8 @@
 <template>
+  <!-- <Login /> -->
   <div class="flex w-screen h-screen">
     <aside
+      v-if="!islogin"
       class="flex flex-col gap-1 w-1.5/6 border-r border-slate-300 h-screen"
     >
       <ul>
@@ -219,27 +221,79 @@
         </ul>
       </ul>
     </aside>
-    <header class="w-5/6">
-      <div class="flex items-center w-[85vw] h-[7vh] border-b border-slate-300">
+    <header :class="[islogin ? 'w-full' : 'w-5/6']">
+      <div
+        v-if="!islogin"
+        class="flex items-center w-[85vw] h-[7vh] border-b border-slate-300"
+      >
         <p class="p-2.5 w-[86vw] font-semibold text-xl">
           {{ $route.name }}
         </p>
         <div>
-          <Avatar>
-            <AvatarImage src="https://github.com/unovue.png" alt="@unovue" />
-            <AvatarFallback>QA</AvatarFallback>
-          </Avatar>
+          <Popover>
+            <PopoverTrigger>
+              <Avatar>
+                <AvatarImage
+                  src="https://github.com/unovue.png"
+                  alt="@unovue"
+                />
+                <AvatarFallback> Admin</AvatarFallback>
+              </Avatar>
+            </PopoverTrigger>
+            <PopoverContent>
+              <button
+                @click="logOut"
+                class="flex text-lg gap-2 px-2 py-1 rounded-md justify-center pr-[10vw] hover:bg-indigo-600 text-start hover:text-slate-50"
+              >
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24px"
+                    height="24px"
+                    viewBox="0 0 512 512"
+                  >
+                    <path
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="32"
+                      d="M320 176v-40a40 40 0 0 0-40-40H88a40 40 0 0 0-40 40v240a40 40 0 0 0 40 40h192a40 40 0 0 0 40-40v-40m64-160l80 80l-80 80m-193-80h273"
+                    />
+                  </svg> </span
+                ><span>chiqish</span>
+              </button>
+            </PopoverContent>
+          </Popover>
         </div>
       </div>
-      <main class="h-[93vh]">
-        <router-view></router-view>
-      </main>
+      <router-view></router-view>
     </header>
+    <!-- <main class="h-[93vh]"></main> -->
   </div>
 </template>
 
 <script setup lang="ts">
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Button from "./components/ui/button/Button.vue";
+import Login from "./views/login.vue";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import router from "./router";
+import { computed, ref } from "vue";
+import { useRoute } from "vue-router";
+const route = useRoute();
+//http://147.182.234.78:5000/
+const islogin = computed(() =>
+  route.name == "Login" || route.name == "notFound" ? true : false
+);
+function logOut() {
+  localStorage.removeItem("token");
+  router.push("login");
+}
 </script>
 
 <style scoped></style>

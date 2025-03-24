@@ -29,9 +29,9 @@
             placeholder="Qidiruv..."
           />
         </div>
-        <Popover>
-          <PopoverTrigger
-            class="flex items-center gap-2 border border-slate-200 pr-20 px-4 py-2 text-base rounded-xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
+        <Dialog class="w-820px">
+          <DialogTrigger
+            class="flex cursor-pointer items-center gap-2 border border-slate-200 pr-20 px-4 py-2 text-base rounded-xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
           >
             <span>
               <svg
@@ -47,76 +47,59 @@
               </svg>
             </span>
             <span> Button</span>
-          </PopoverTrigger>
-          <PopoverContent class="w-[700px]">
-            <div class="flex flex-col p-6">
-              <div class="flex items-center justify-between pb-5 border-b mb-8">
-                <p>Mijoz qo'shish</p>
-                <button>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="m6.4 18.308l-.708-.708l5.6-5.6l-5.6-5.6l.708-.708l5.6 5.6l5.6-5.6l.708.708l-5.6 5.6l5.6 5.6l-.708.708l-5.6-5.6z"
-                    />
-                  </svg>
-                </button>
-              </div>
-              <ul class="grid grid-cols-2 gap-3">
-                <li class="flex flex-col gap-1.5 mt-2.5 mb-5">
-                  <Label for="size"
-                    >Isim<span class="text-orange-500"> *</span></Label
-                  >
-                  <input
-                    type="text"
-                    class="border border-slate-300 px-3 py-2 rounded-lg"
-                  />
-                </li>
-                <li class="flex flex-col gap-1.5 mb-5">
-                  <label for="size"
-                    >Familiya<span class="text-orange-500"> *</span></label
-                  >
-                  <input
-                    type="text"
-                    class="border border-slate-300 px-3 py-2 rounded-lg"
-                  />
-                </li>
-                <li class="flex flex-col gap-1.5 mb-5">
-                  <Label for="size"
-                    >Telefon raqam 1<span class="text-orange-500">
-                      *</span
-                    ></Label
-                  >
-                  <input
-                    type="tel"
-                    class="border border-slate-300 px-3 py-2 rounded-lg"
-                  />
-                </li>
-                <li class="flex flex-col gap-1.5">
-                  <Label for="size"
-                    >Telefon raqam 2<span class="text-orange-500">
-                      *</span
-                    ></Label
-                  >
-                  <input
-                    type="tel"
-                    class="border border-slate-300 px-3 py-2 rounded-lg"
-                  />
-                </li>
-              </ul>
-              <div class="flex flex-col gap-8">
-                <div class="flex items-start flex-col">
-                  <label for="izoh">Izoh</label>
-                  <textarea
-                    class="border border-slate-300 p-3 rounded-xl w-[620px] h-32"
-                    name=""
-                    id="izoh"
-                  ></textarea>
-                </div>
+          </DialogTrigger>
+          <DialogContent class="max-w-[725px]">
+            <DialogHeader class="border-b p-4">
+              <DialogTitle> Mijoz qo'shish </DialogTitle>
+            </DialogHeader>
+            <ul class="grid grid-cols-2 gap-3">
+              <li class="flex flex-col gap-1.5 mt-2.5">
+                <Label for="size"
+                  >Isim<span class="text-orange-500"> *</span></Label
+                >
+                <input
+                  type="text"
+                  class="border border-slate-300 px-3 py-2 rounded-lg"
+                />
+              </li>
+              <li class="flex flex-col gap-1.5 mb-5">
+                <label for="size"
+                  >Familiya<span class="text-orange-500"> *</span></label
+                >
+                <input
+                  type="text"
+                  class="border border-slate-300 px-3 py-2 rounded-lg"
+                />
+              </li>
+              <li class="flex flex-col gap-1.5 mb-5">
+                <Label for="size"
+                  >Telefon raqam 1<span class="text-orange-500"> *</span></Label
+                >
+                <input
+                  type="tel"
+                  class="border border-slate-300 px-3 py-2 rounded-lg"
+                />
+              </li>
+              <li class="flex flex-col gap-1.5">
+                <Label for="size"
+                  >Telefon raqam 2<span class="text-orange-500"> *</span></Label
+                >
+                <input
+                  type="tel"
+                  class="border border-slate-300 px-3 py-2 rounded-lg"
+                />
+              </li>
+              <li class="flex items-start flex-col">
+                <label for="izoh">Izoh</label>
+                <textarea
+                  class="border border-slate-300 p-3 rounded-xl w-[674px] h-32"
+                  name=""
+                  id="izoh"
+                ></textarea>
+              </li>
+            </ul>
+            <DialogFooter>
+              <div class="flex flex-col gap-8 w-[450px]">
                 <div class="flex items-center justify-end gap-3">
                   <button
                     class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300"
@@ -130,9 +113,9 @@
                   </button>
                 </div>
               </div>
-            </div>
-          </PopoverContent>
-        </Popover>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
     <div class="flex flex-col items-center w-[85vw] gap-3">
@@ -164,21 +147,25 @@
         <TableBody>
           <TableRow
             class="hover:bg-indigo-100 border-2 hover:border-l-2 hover:border-l-indigo-700"
-            v-for="invoice in data"
-            :key="invoice.ombor"
+            v-for="(inf, index) in data?.data"
+            :key="inf?.clientId"
           >
             <TableCell class="border text-center">
-              {{ invoice.id }}
+              {{ index + 1 }}
             </TableCell>
             <TableCell class="border">
-              {{ invoice.haridor }}
+              {{ `${inf?.clientName} ${inf?.clientLastName}` }}
             </TableCell>
-            <TableCell class="border text-center">{{ invoice.tel1 }}</TableCell>
+            <TableCell class="border text-center">{{
+              inf?.clientNomer1
+            }}</TableCell>
 
-            <TableCell class="border text-center">{{ invoice.tel2 }}</TableCell>
-            <TableCell class="border text-center">{{ invoice.sana }}</TableCell>
+            <TableCell class="border text-center">{{
+              inf?.clientNomer2
+            }}</TableCell>
+            <TableCell class="border text-center">{{}}</TableCell>
             <TableCell class="text-center border text-[16px] leading-[20px]">{{
-              invoice.izoh
+              inf?.clientDescription
             }}</TableCell>
             <TableCell class="text-center cursor-pointer">
               <Popover>
@@ -236,7 +223,7 @@
       <Pagination
         v-slot="{ page }"
         :items-per-page="10"
-        :total="100"
+        :total="data?.count"
         :sibling-count="1"
         show-edges
         :default-page="1"
@@ -299,293 +286,62 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-const data = [
-  {
-    id: 1,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    eni: "400 sm ",
-    boyi: "1200 sm",
-    code: "999",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    soni: "1 200",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    sana: "3.10.2025",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 2,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    code: "999",
-    soni: "1 200",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 3,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    eni: "400 Metr ",
-    code: "999",
-    soni: "1 200",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    boyi: "1200 Metr",
-    sana: "3.10.2025",
-    miqdor: "1200",
-    haridor: "Mahmud Namazov",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 4,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    miqdor: "1200",
-    code: "999",
-    soni: "1 200",
-    qoldiq: "1 000",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    jami: "4 400",
-    valyuta: "UZS",
-    eni: "400 Metr ",
-    sana: "3.10.2025",
-    boyi: "1200 Metr",
-    haridor: "Mahmud Namazov",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 5,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    code: "999",
-    soni: "1 200",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    haridor: "Mahmud Namazov",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 6,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    miqdor: "1200",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    eni: "400 Metr ",
-    sana: "3.10.2025",
-    boyi: "1200 Metr",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 7,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    miqdor: "1200",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    qoldiq: "1 000",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    jami: "4 400",
-    valyuta: "UZS",
-    eni: "400 Metr ",
-    sana: "3.10.2025",
-    boyi: "1200 Metr",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 8,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    miqdor: "1200",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    eni: "400 Metr ",
-    sana: "3.10.2025",
-    boyi: "1200 Metr",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 9,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    qoldiq: "1 000",
-    jami: "4 400",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    valyuta: "UZS",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 10,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    umumiy: "120 000 000 UZS",
-    narx: "100 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 11,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    qoldiq: "1 000",
-    jami: "4 400",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    valyuta: "UZS",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    umumiy: "120 000 000 UZS",
-    narx: "100 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 12,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    qoldiq: "1 000",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    jami: "4 400",
-    valyuta: "UZS",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    umumiy: "120 000 000 UZS",
-    narx: "100 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 13,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-];
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
+import axios from "axios";
+import { ref } from "vue";
+import router from "@/router";
+type DateMask = (date: string) => string;
+const todatestring: DateMask = (date) => {
+  const parseDate = new Date(date);
+  const day = parseDate.getDate().toString().padStart(2, "0");
+  const month = (parseDate.getMonth() + 1).toString().padStart(2, "0");
+  const year = parseDate.getFullYear();
+
+  return `${day}.${month}.${year}`;
+};
+
+interface DataItem {
+  id: string;
+  name: string;
+  [key: string]: any;
+}
+
+const data = ref<DataItem[] | null | any>(null);
+const loading = ref<boolean>(false);
+const error = ref<string | null>(null);
+const fetchData = async (page: number = 1): Promise<void> => {
+  const token = localStorage.getItem("token");
+
+  loading.value = true;
+  error.value = null;
+
+  try {
+    const response = await axios.get<DataItem[]>(
+      `/client/getall?limit=10&page=${page}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    data.value = response.data;
+  } catch (err: any) {
+    error.value = err.response?.data?.massage || "Failed to fetch data";
+    if (err.response.status === 401) router.push("/login");
+  } finally {
+    loading.value = false;
+  }
+};
+fetchData();
 </script>
 
 <style scoped></style>

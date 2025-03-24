@@ -111,186 +111,151 @@
             placeholder="Qidiruv..."
           />
         </div>
-        <Popover>
-          <PopoverTrigger
-            class="flex items-center gap-2 border border-slate-200 pr-20 px-4 py-2 text-base rounded-xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
-          >
-            <span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 32 32"
-              >
-                <path
-                  fill="currentColor"
-                  d="M16 3C8.832 3 3 8.832 3 16s5.832 13 13 13s13-5.832 13-13S23.168 3 16 3m0 2c6.087 0 11 4.913 11 11s-4.913 11-11 11S5 22.087 5 16S9.913 5 16 5m-1 5v5h-5v2h5v5h2v-5h5v-2h-5v-5z"
+        <Dialog class="w-[800px]">
+          <DialogTrigger as-child>
+            <div
+              class="flex items-center gap-2 border border-slate-200 pr-20 px-4 py-2 text-base rounded-xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
+            >
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 32 32"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M16 3C8.832 3 3 8.832 3 16s5.832 13 13 13s13-5.832 13-13S23.168 3 16 3m0 2c6.087 0 11 4.913 11 11s-4.913 11-11 11S5 22.087 5 16S9.913 5 16 5m-1 5v5h-5v2h5v5h2v-5h5v-2h-5v-5z"
+                  />
+                </svg>
+              </span>
+              <span> Button</span>
+            </div>
+          </DialogTrigger>
+          <DialogContent class="max-w-[700px]">
+            <DialogHeader class="border-b pb-4">
+              <DialogTitle> Inventarizatsiya </DialogTitle>
+            </DialogHeader>
+            <ul class="grid grid-cols-2 gap-3">
+              <li class="flex flex-col gap-1.5 mt-2.5 mb-5">
+                <Label for="size"
+                  >Standart size<span class="text-orange-500"> *</span></Label
+                >
+                <Select id="size">
+                  <SelectTrigger class="border border-slate-300">
+                    <SelectValue placeholder="Omborxona" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="Omborxona "> Omborxona </SelectItem>
+                      <SelectItem value="Omborxona 1"> Omborxona 1 </SelectItem>
+                      <SelectItem value="Omborxona 2"> Omborxona 2 </SelectItem>
+                      <SelectItem value="Omborxona 3"> Omborxona 3 </SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </li>
+              <li class="flex flex-col gap-1.5 mb-5">
+                <label for="size"
+                  >Boyi<span class="text-orange-500"> *</span></label
+                >
+                <input
+                  type="number"
+                  class="border border-slate-300 px-3 py-2 rounded-lg"
+                  placeholder="Bo'yi"
                 />
-              </svg>
-            </span>
-            <span> Button</span>
-          </PopoverTrigger>
-          <PopoverContent class="w-[700px]">
-            <div class="flex flex-col gap-8 p-6">
-              <div class="flex items-center justify-between pb-5 border-b">
-                <p>Inventarizatsiya</p>
-                <button>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="m6.4 18.308l-.708-.708l5.6-5.6l-5.6-5.6l.708-.708l5.6 5.6l5.6-5.6l.708.708l-5.6 5.6l5.6 5.6l-.708.708l-5.6-5.6z"
-                    />
-                  </svg>
-                </button>
-              </div>
-              <ul class="grid grid-cols-2 gap-3">
-                <li class="flex flex-col gap-1.5 mt-2.5 mb-5">
-                  <Label for="size"
-                    >Standart size<span class="text-orange-500"> *</span></Label
-                  >
-                  <Select id="size">
-                    <SelectTrigger class="border border-slate-300">
-                      <SelectValue placeholder="Omborxona" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectItem value="Omborxona "> Omborxona </SelectItem>
-                        <SelectItem value="Omborxona 1">
-                          Omborxona 1
-                        </SelectItem>
-                        <SelectItem value="Omborxona 2">
-                          Omborxona 2
-                        </SelectItem>
-                        <SelectItem value="Omborxona 3">
-                          Omborxona 3
-                        </SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                </li>
-                <li class="flex flex-col gap-1.5 mb-5">
-                  <label for="size"
-                    >Boyi<span class="text-orange-500"> *</span></label
-                  >
-                  <input
-                    type="number"
-                    class="border border-slate-300 px-3 py-2 rounded-lg"
-                    placeholder="Bo'yi"
-                  />
-                </li>
-                <li class="flex flex-col gap-1.5 mb-5">
-                  <Label for="size"
-                    >Valyuta<span class="text-orange-500"> *</span></Label
-                  >
-                  <Select id="size">
-                    <SelectTrigger class="border border-slate-300">
-                      <SelectValue placeholder="Omborxona" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectItem value="Omborxona "> Omborxona </SelectItem>
-                        <SelectItem value="Omborxona 1">
-                          Omborxona 1
-                        </SelectItem>
-                        <SelectItem value="Omborxona 2">
-                          Omborxona 2
-                        </SelectItem>
-                        <SelectItem value="Omborxona 3">
-                          Omborxona 3
-                        </SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                </li>
-                <li class="flex flex-col gap-1.5 mb-5">
-                  <Label for="size"
-                    >Ombor<span class="text-orange-500"> *</span></Label
-                  >
-                  <Select id="size">
-                    <SelectTrigger class="border border-slate-300">
-                      <SelectValue placeholder="Omborxona" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectItem value="Omborxona "> Omborxona </SelectItem>
-                        <SelectItem value="Omborxona 1">
-                          Omborxona 1
-                        </SelectItem>
-                        <SelectItem value="Omborxona 2">
-                          Omborxona 2
-                        </SelectItem>
-                        <SelectItem value="Omborxona 3">
-                          Omborxona 3
-                        </SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                </li>
-                <li class="flex flex-col gap-1.5 mb-5">
-                  <Label for="size"
-                    >Kategoriya<span class="text-orange-500"> *</span></Label
-                  >
-                  <Select id="size">
-                    <SelectTrigger class="border border-slate-300">
-                      <SelectValue placeholder="Omborxona" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectItem value="Omborxona "> Omborxona </SelectItem>
-                        <SelectItem value="Omborxona 1">
-                          Omborxona 1
-                        </SelectItem>
-                        <SelectItem value="Omborxona 2">
-                          Omborxona 2
-                        </SelectItem>
-                        <SelectItem value="Omborxona 3">
-                          Omborxona 3
-                        </SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                </li>
-                <li class="flex flex-col gap-1.5 mb-5">
-                  <Label for="size"
-                    >Miqdor<span class="text-orange-500"> *</span></Label
-                  >
-                  <input
-                    type="number"
-                    class="border border-slate-300 px-3 py-2 rounded-lg"
-                    placeholder="Bo'yi"
-                  />
-                </li>
-                <li class="flex flex-col gap-1.5">
-                  <Label for="size">Tan narxi </Label>
-                  <input
-                    type="number"
-                    class="border border-slate-300 px-3 py-2 rounded-lg"
-                    placeholder="Bo'yi"
-                  />
-                </li>
-                <li class="flex flex-col gap-1.5">
-                  <Label for="size">Sotuv narxi </Label>
-                  <input
-                    type="number"
-                    class="border border-slate-300 px-3 py-2 rounded-lg"
-                    placeholder="Bo'yi"
-                  />
-                </li>
-              </ul>
-              <div class="flex flex-col gap-8">
-                <div class="flex items-start flex-col">
-                  <label for="izoh">Izoh</label>
-                  <textarea
-                    class="border p-3 border-slate-300 rounded-xl w-[620px] h-32"
-                    name=""
-                    id="izoh"
-                  ></textarea>
-                </div>
+              </li>
+              <li class="flex flex-col gap-1.5 mb-5">
+                <Label for="size"
+                  >Valyuta<span class="text-orange-500"> *</span></Label
+                >
+                <Select id="size">
+                  <SelectTrigger class="border border-slate-300">
+                    <SelectValue placeholder="Omborxona" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="Omborxona "> Omborxona </SelectItem>
+                      <SelectItem value="Omborxona 1"> Omborxona 1 </SelectItem>
+                      <SelectItem value="Omborxona 2"> Omborxona 2 </SelectItem>
+                      <SelectItem value="Omborxona 3"> Omborxona 3 </SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </li>
+              <li class="flex flex-col gap-1.5 mb-5">
+                <Label for="size"
+                  >Ombor<span class="text-orange-500"> *</span></Label
+                >
+                <Select id="size">
+                  <SelectTrigger class="border border-slate-300">
+                    <SelectValue placeholder="Omborxona" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="Omborxona "> Omborxona </SelectItem>
+                      <SelectItem value="Omborxona 1"> Omborxona 1 </SelectItem>
+                      <SelectItem value="Omborxona 2"> Omborxona 2 </SelectItem>
+                      <SelectItem value="Omborxona 3"> Omborxona 3 </SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </li>
+              <li class="flex flex-col gap-1.5 mb-5">
+                <Label for="size"
+                  >Kategoriya<span class="text-orange-500"> *</span></Label
+                >
+                <Select id="size">
+                  <SelectTrigger class="border border-slate-300">
+                    <SelectValue placeholder="Omborxona" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="Omborxona "> Omborxona </SelectItem>
+                      <SelectItem value="Omborxona 1"> Omborxona 1 </SelectItem>
+                      <SelectItem value="Omborxona 2"> Omborxona 2 </SelectItem>
+                      <SelectItem value="Omborxona 3"> Omborxona 3 </SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </li>
+              <li class="flex flex-col gap-1.5 mb-5">
+                <Label for="size"
+                  >Miqdor<span class="text-orange-500"> *</span></Label
+                >
+                <input
+                  type="number"
+                  class="border border-slate-300 px-3 py-2 rounded-lg"
+                  placeholder="Bo'yi"
+                />
+              </li>
+              <li class="flex flex-col gap-1.5">
+                <Label for="size">Tan narxi </Label>
+                <input
+                  type="number"
+                  class="border border-slate-300 px-3 py-2 rounded-lg"
+                  placeholder="Bo'yi"
+                />
+              </li>
+              <li class="flex flex-col gap-1.5">
+                <Label for="size">Sotuv narxi </Label>
+                <input
+                  type="number"
+                  class="border border-slate-300 px-3 py-2 rounded-lg"
+                  placeholder="Bo'yi"
+                />
+              </li>
+              <li class="flex items-start gap-1.5 flex-col">
+                <label for="izoh">Izoh</label>
+                <textarea
+                  class="border p-3 border-slate-300 rounded-xl w-[650px] h-32"
+                  name=""
+                  id="izoh"
+                ></textarea>
+              </li>
+            </ul>
+            <DialogFooter class="mt-8">
+              <div class="flex flex-col gap-8 w-[450px]">
                 <div class="flex items-center justify-end gap-3">
                   <button
                     class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300"
@@ -304,9 +269,9 @@
                   </button>
                 </div>
               </div>
-            </div>
-          </PopoverContent>
-        </Popover>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
     <div class="flex flex-col items-center w-[85vw] gap-3">
@@ -353,36 +318,50 @@
         <TableBody>
           <TableRow
             class="hover:bg-indigo-100 border-2 hover:border-l-2 hover:border-l-indigo-700"
-            v-for="invoice in data"
-            :key="invoice.ombor"
+            v-for="(inf, index) in data?.data"
+            :key="inf?.carpet_carpetId"
           >
             <TableCell class="border">
-              {{ invoice.id }}
+              {{ index + 1 }}
             </TableCell>
             <TableCell class="border">
-              {{ invoice.ombor }}
+              {{ inf?.warehouse_warehouseName }}
             </TableCell>
             <TableCell class="border text-center">{{
-              invoice.tovar
+              inf?.category_categoryName
             }}</TableCell>
 
-            <TableCell class="border text-center">{{ invoice.code }}</TableCell>
-            <TableCell class="border text-center">{{ invoice.eni }}</TableCell>
+            <TableCell class="border text-center">{{
+              inf?.size_sizeCode
+            }}</TableCell>
+            <TableCell class="border text-center">{{
+              formattedCurreny(inf?.carpet_length)
+            }}</TableCell>
 
-            <TableCell class="border text-center">{{ invoice.boyi }}</TableCell>
-            <TableCell class="border text-center">{{ invoice.soni }}</TableCell>
+            <TableCell class="border text-center">{{
+              formattedCurreny(inf?.carpet_height)
+            }}</TableCell>
+            <TableCell class="border text-center">{{
+              formattedCurreny(inf?.carpet_stockQuantity)
+            }}</TableCell>
             <TableCell class="flex items-center justify-center gap-2">
-              {{ invoice.qoldiq }}</TableCell
-            >
-            <TableCell class="border text-center">{{ invoice.jami }}</TableCell>
+              {{
+            }}</TableCell>
+            <TableCell class="border text-center">{{}}</TableCell>
             <TableCell class="border text-center">
-              {{ invoice.valyuta }}
+              {{ inf?.currency_currencySymbol }}
             </TableCell>
 
-            <TableCell class="border text-center">{{ invoice.narx }}</TableCell>
-            <TableCell class="border text-center">{{ invoice.narx }}</TableCell>
             <TableCell class="border text-center">{{
-              invoice.umumiy
+              formattedCurreny(inf?.carpet_cost)
+            }}</TableCell>
+            <TableCell class="border text-center">{{
+              formattedCurreny(inf?.carpet_price)
+            }}</TableCell>
+            <TableCell class="border text-center">{{
+              formattedCurreny(
+                Number(inf?.carpet_cost) + Number(inf?.carpet_price)
+              )
             }}</TableCell>
             <TableCell class="border text-center">
               <span>
@@ -455,7 +434,7 @@
       <Pagination
         v-slot="{ page }"
         :items-per-page="10"
-        :total="100"
+        :total="data?.count"
         :sibling-count="1"
         show-edges
         :default-page="2"
@@ -490,6 +469,15 @@
 </template>
 
 <script setup lang="ts">
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -526,254 +514,57 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-const data = [
-  {
-    id: 1,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    eni: "400 sm ",
-    boyi: "1200 sm",
-    code: "999",
-    soni: "1 200",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    sana: "3.10.2025",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 2,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    code: "999",
-    soni: "1 200",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 3,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    eni: "400 Metr ",
-    code: "999",
-    soni: "1 200",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    boyi: "1200 Metr",
-    sana: "3.10.2025",
-    miqdor: "1200",
-    haridor: "Mahmud Namazov",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 4,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    miqdor: "1200",
-    code: "999",
-    soni: "1 200",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    eni: "400 Metr ",
-    sana: "3.10.2025",
-    boyi: "1200 Metr",
-    haridor: "Mahmud Namazov",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 5,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    code: "999",
-    soni: "1 200",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    haridor: "Mahmud Namazov",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 6,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    miqdor: "1200",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    eni: "400 Metr ",
-    sana: "3.10.2025",
-    boyi: "1200 Metr",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 7,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    miqdor: "1200",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    eni: "400 Metr ",
-    sana: "3.10.2025",
-    boyi: "1200 Metr",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 8,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    miqdor: "1200",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    eni: "400 Metr ",
-    sana: "3.10.2025",
-    boyi: "1200 Metr",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 9,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 10,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    umumiy: "120 000 000 UZS",
-    narx: "100 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 11,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    umumiy: "120 000 000 UZS",
-    narx: "100 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 12,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    umumiy: "120 000 000 UZS",
-    narx: "100 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 13,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-];
+import axios from "axios";
+import { ref } from "vue";
+import router from "@/router";
+const formattedCurreny = (rawValue: number) => {
+  return Number(rawValue)
+    .toFixed(0)
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+type DateMask = (date: string) => string;
+const todatestring: DateMask = (date) => {
+  const parseDate = new Date(date);
+  const day = parseDate.getDate().toString().padStart(2, "0");
+  const month = (parseDate.getMonth() + 1).toString().padStart(2, "0");
+  const year = parseDate.getFullYear();
+
+  return `${day}.${month}.${year}`;
+};
+
+interface DataItem {
+  id: string;
+  name: string;
+  [key: string]: any;
+}
+
+const data = ref<DataItem[] | null | any>(null);
+const loading = ref<boolean>(false);
+const error = ref<string | null>(null);
+const fetchData = async (page: number = 1): Promise<void> => {
+  const token = localStorage.getItem("token");
+
+  loading.value = true;
+  error.value = null;
+
+  try {
+    const response = await axios.get<DataItem[]>(
+      `/carpet/getall?limit=10&page=${page}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    data.value = response.data;
+  } catch (err: any) {
+    error.value = err.response?.data?.massage || "Failed to fetch data";
+    if (err.response.status === 401) router.push("/login");
+  } finally {
+    loading.value = false;
+  }
+};
+fetchData();
 </script>
 
 <style scoped></style>

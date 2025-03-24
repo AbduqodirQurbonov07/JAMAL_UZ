@@ -29,29 +29,97 @@
             placeholder="Qidiruv..."
           />
         </div>
-        <Popover>
-          <PopoverTrigger
-            class="flex items-center gap-2 border border-slate-200 pr-10 px-4 py-2 text-base rounded-xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
-          >
-            <span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 32 32"
-              >
-                <path
-                  fill="currentColor"
-                  d="M16 3C8.832 3 3 8.832 3 16s5.832 13 13 13s13-5.832 13-13S23.168 3 16 3m0 2c6.087 0 11 4.913 11 11s-4.913 11-11 11S5 22.087 5 16S9.913 5 16 5m-1 5v5h-5v2h5v5h2v-5h5v-2h-5v-5z"
+        <Dialog class="w-[800px]">
+          <DialogTrigger>
+            <div
+              class="flex items-center gap-2 border border-slate-200 pr-10 px-4 py-2 text-base rounded-xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
+            >
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 32 32"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M16 3C8.832 3 3 8.832 3 16s5.832 13 13 13s13-5.832 13-13S23.168 3 16 3m0 2c6.087 0 11 4.913 11 11s-4.913 11-11 11S5 22.087 5 16S9.913 5 16 5m-1 5v5h-5v2h5v5h2v-5h5v-2h-5v-5z"
+                  />
+                </svg>
+              </span>
+              <span> Button</span>
+            </div>
+          </DialogTrigger>
+          <DialogContent class="max-w-[700px]">
+            <DialogHeader>
+              <DialogTitle> Taminotchi qo'shish </DialogTitle>
+            </DialogHeader>
+            <ul class="grid grid-cols-1 gap-3">
+              <li class="flex flex-col gap-1.5 mt-2.5 mb-5">
+                <Label for="size"
+                  >Nomi<span class="text-orange-500">*</span></Label
+                >
+                <input
+                  v-model="contributorName"
+                  type="text"
+                  class="border border-slate-300 px-3 py-2 rounded-lg"
                 />
-              </svg>
-            </span>
-            <span> Button</span>
-          </PopoverTrigger>
+              </li>
+              <li class="grid grid-cols-2 gap-1.5 mb-5">
+                <div class="flex flex-col gap-1.5">
+                  <Label for="size"
+                    >Diler<span class="text-orange-500">*</span></Label
+                  >
+                  <input
+                    v-model="contributordiller"
+                    type="text"
+                    class="border border-slate-300 px-3 py-2 rounded-lg"
+                  />
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <Label for="size"
+                    >Telefon <span class="text-orange-500">*</span></Label
+                  >
+                  <input
+                    v-model="contributorNomer"
+                    type="tel"
+                    class="border border-slate-300 px-3 py-2 rounded-lg"
+                  />
+                </div>
+              </li>
+              <li class="flex items-start flex-col">
+                <label for="izoh">Izoh</label>
+                <textarea
+                  v-model="contributorDescription"
+                  class="border border-slate-300 p-3 rounded-xl w-[650px] h-32"
+                  name=""
+                  id="izoh"
+                ></textarea>
+              </li>
+            </ul>
+
+            <DialogFooter>
+              <div class="flex items-center justify-end gap-3">
+                <button
+                  class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300"
+                >
+                  Yopish
+                </button>
+                <button
+                  @click="submitcontributor"
+                  class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
+                >
+                  Saqlash
+                </button>
+              </div>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+        <Popover>
           <PopoverContent class="w-[700px]">
             <div class="flex flex-col p-6">
               <div class="flex items-center justify-between pb-5 border-b mb-8">
-                <p>Taminotchi qo'shish</p>
+                <p></p>
                 <button>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -66,59 +134,8 @@
                   </svg>
                 </button>
               </div>
-              <ul class="grid grid-cols-1 gap-3">
-                <li class="flex flex-col gap-1.5 mt-2.5 mb-5">
-                  <Label for="size"
-                    >Nomi<span class="text-orange-500">*</span></Label
-                  >
-                  <input
-                    type="text"
-                    class="border border-slate-300 px-3 py-2 rounded-lg"
-                  />
-                </li>
-                <li class="grid grid-cols-2 gap-1.5 mb-5">
-                  <div class="flex flex-col gap-1.5">
-                    <Label for="size"
-                      >Diler<span class="text-orange-500">*</span></Label
-                    >
-                    <input
-                      type="text"
-                      class="border border-slate-300 px-3 py-2 rounded-lg"
-                    />
-                  </div>
-                  <div class="flex flex-col gap-1.5">
-                    <Label for="size"
-                      >Telefon <span class="text-orange-500">*</span></Label
-                    >
-                    <input
-                      type="tel"
-                      class="border border-slate-300 px-3 py-2 rounded-lg"
-                    />
-                  </div>
-                </li>
-              </ul>
-              <div class="flex flex-col gap-8">
-                <div class="flex items-start flex-col">
-                  <label for="izoh">Izoh</label>
-                  <textarea
-                    class="border border-slate-300 p-3 rounded-xl w-[620px] h-32"
-                    name=""
-                    id="izoh"
-                  ></textarea>
-                </div>
-                <div class="flex items-center justify-end gap-3">
-                  <button
-                    class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300"
-                  >
-                    Yopish
-                  </button>
-                  <button
-                    class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
-                  >
-                    Saqlash
-                  </button>
-                </div>
-              </div>
+
+              <div class="flex flex-col gap-8"></div>
             </div>
           </PopoverContent>
         </Popover>
@@ -128,18 +145,22 @@
       class="grid grid-cols-4 gap-3 p-5 h-[81vh] bg-[#F3F3F3] content-start w-[85vw]"
     >
       <div
+        v-for="inf in data?.data"
+        :key="inf?.contributorId"
         class="flex items-start bg-white p-4 w-80 justify-between rounded-xl border"
       >
         <Popover>
           <PopoverTrigger>
             <div class="flex flex-col items-start gap-3">
               <p class="flex items-center gap-3">
-                <span class="text-xl font-semibold">Urgaz MCHJ</span
+                <span class="text-xl font-semibold">{{
+                  inf?.contributorName
+                }}</span
                 ><span
                   class="bg-[#F3F3F3] text-gray-700 px-1 rounded-xl"
                 ></span>
               </p>
-              <p class="">+998 94 227 65 65</p>
+              <p class="">{{ inf?.contributorNomer }}</p>
             </div>
           </PopoverTrigger>
           <PopoverContent class="w-[450px] h-auto">
@@ -163,565 +184,24 @@
               <ul>
                 <li class="flex justify-between py-2 border-b">
                   <p class="text-gray-600">Nomi</p>
-                  <p>Urgaz MCHJ</p>
+                  <p>{{ inf?.contributorName }}</p>
                 </li>
                 <li class="flex justify-between py-2 border-b">
                   <p class="text-gray-600">Telefon raqam</p>
-                  <p>+998 93 111 12 22</p>
+                  <p>{{ inf?.contributorNomer }}</p>
                 </li>
                 <li class="flex justify-between py-2 border-b">
                   <p class="text-gray-600">Diler</p>
-                  <p>Samarqand ombor</p>
+                  <p>{{ inf?.contributorConnector }}</p>
                 </li>
                 <li class="flex justify-between py-2 border-b">
                   <p class="text-gray-600">Yaratilgan sana</p>
-                  <p>3.12.2025</p>
+                  <!-- <p>{{ inf?. }}</p> -->
                 </li>
                 <li class="flex flex-col border-b gap-1 py-2">
                   <p class="text-gray-600">Izoh</p>
                   <p class="max-w-[250px] text-sm">
-                    Call center xodimi: Uarbek Yoldoshev Telefon raqami: +998 99
-                    011 12 33
-                  </p>
-                </li>
-              </ul>
-            </div>
-          </PopoverContent>
-        </Popover>
-        <Popover>
-          <PopoverTrigger>
-            <img src="../svg/dots.svg" alt="" />
-          </PopoverTrigger>
-          <PopoverContent class="cursor-pointer flex flex-col rounded-xl w-52">
-            <div
-              class="flex items-center gap-3 py-2.5 hover:bg-slate-100 px-2 rounded-lg"
-            >
-              <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M4.21 20.52a.73.73 0 0 1-.52-.21a.75.75 0 0 1-.22-.6l.31-3.84A.73.73 0 0 1 4 15.4L15.06 4.34a3.2 3.2 0 0 1 2.28-.86a3.3 3.3 0 0 1 2.25.91a3.31 3.31 0 0 1 .11 4.5L8.63 20a.77.77 0 0 1-.46.22l-3.89.35Zm1-4.26L5 19l2.74-.25l10.9-10.92A1.72 1.72 0 0 0 17.31 5a1.6 1.6 0 0 0-1.19.42ZM15.59 4.87"
-                  />
-                </svg>
-              </span>
-              <span>Tahrirlash</span>
-            </div>
-            <div
-              class="flex items-center gap-3 py-2.5 text-red-600 hover:bg-slate-100 px-2 rounded-lg"
-            >
-              <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
-                    d="M14 11v6m-4-6v6M6 7v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7M4 7h16M7 7l2-4h6l2 4"
-                  />
-                </svg> </span
-              ><span>O'chirish</span>
-            </div>
-          </PopoverContent>
-        </Popover>
-      </div>
-      <div
-        class="flex items-start bg-white p-4 w-80 h-24 justify-between rounded-xl border"
-      >
-        <Popover>
-          <PopoverTrigger>
-            <div class="flex flex-col items-start gap-3">
-              <p class="flex items-center gap-3">
-                <span class="text-xl font-semibold">Urgaz MCHJ</span
-                ><span
-                  class="bg-[#F3F3F3] text-gray-700 px-1 rounded-xl"
-                ></span>
-              </p>
-              <p class="">+998 94 227 65 65</p>
-            </div>
-          </PopoverTrigger>
-          <PopoverContent class="w-[450px] h-auto">
-            <div class="flex flex-col">
-              <div class="flex items-center justify-between pb-5 mb-8">
-                <p class="text-gray-900 font-semibold text-lg">Taminotchi</p>
-                <button>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="m6.4 18.308l-.708-.708l5.6-5.6l-5.6-5.6l.708-.708l5.6 5.6l5.6-5.6l.708.708l-5.6 5.6l5.6 5.6l-.708.708l-5.6-5.6z"
-                    />
-                  </svg>
-                </button>
-              </div>
-              <ul>
-                <li class="flex justify-between py-2 border-b">
-                  <p class="text-gray-600">Nomi</p>
-                  <p>Urgaz MCHJ</p>
-                </li>
-                <li class="flex justify-between py-2 border-b">
-                  <p class="text-gray-600">Telefon raqam</p>
-                  <p>+998 93 111 12 22</p>
-                </li>
-                <li class="flex justify-between py-2 border-b">
-                  <p class="text-gray-600">Diler</p>
-                  <p>Samarqand ombor</p>
-                </li>
-                <li class="flex justify-between py-2 border-b">
-                  <p class="text-gray-600">Yaratilgan sana</p>
-                  <p>3.12.2025</p>
-                </li>
-                <li class="flex flex-col border-b gap-1 py-2">
-                  <p class="text-gray-600">Izoh</p>
-                  <p class="max-w-[250px] text-sm">
-                    Call center xodimi: Uarbek Yoldoshev Telefon raqami: +998 99
-                    011 12 33
-                  </p>
-                </li>
-              </ul>
-            </div>
-          </PopoverContent>
-        </Popover>
-        <Popover>
-          <PopoverTrigger>
-            <img src="../svg/dots.svg" alt="" />
-          </PopoverTrigger>
-          <PopoverContent class="cursor-pointer flex flex-col rounded-xl w-52">
-            <div
-              class="flex items-center gap-3 py-2.5 hover:bg-slate-100 px-2 rounded-lg"
-            >
-              <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M4.21 20.52a.73.73 0 0 1-.52-.21a.75.75 0 0 1-.22-.6l.31-3.84A.73.73 0 0 1 4 15.4L15.06 4.34a3.2 3.2 0 0 1 2.28-.86a3.3 3.3 0 0 1 2.25.91a3.31 3.31 0 0 1 .11 4.5L8.63 20a.77.77 0 0 1-.46.22l-3.89.35Zm1-4.26L5 19l2.74-.25l10.9-10.92A1.72 1.72 0 0 0 17.31 5a1.6 1.6 0 0 0-1.19.42ZM15.59 4.87"
-                  />
-                </svg>
-              </span>
-              <span>Tahrirlash</span>
-            </div>
-            <div
-              class="flex items-center gap-3 py-2.5 text-red-600 hover:bg-slate-100 px-2 rounded-lg"
-            >
-              <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
-                    d="M14 11v6m-4-6v6M6 7v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7M4 7h16M7 7l2-4h6l2 4"
-                  />
-                </svg> </span
-              ><span>O'chirish</span>
-            </div>
-          </PopoverContent>
-        </Popover>
-      </div>
-      <div
-        class="flex items-start bg-white p-4 w-80 h-24 justify-between rounded-xl border"
-      >
-        <Popover>
-          <PopoverTrigger>
-            <div class="flex flex-col items-start gap-3">
-              <p class="flex items-center gap-3">
-                <span class="text-xl font-semibold">Urgaz MCHJ</span
-                ><span
-                  class="bg-[#F3F3F3] text-gray-700 px-1 rounded-xl"
-                ></span>
-              </p>
-              <p class="">+998 94 227 65 65</p>
-            </div>
-          </PopoverTrigger>
-          <PopoverContent class="w-[450px] h-auto">
-            <div class="flex flex-col">
-              <div class="flex items-center justify-between pb-5 mb-8">
-                <p class="text-gray-900 font-semibold text-lg">Taminotchi</p>
-                <button>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="m6.4 18.308l-.708-.708l5.6-5.6l-5.6-5.6l.708-.708l5.6 5.6l5.6-5.6l.708.708l-5.6 5.6l5.6 5.6l-.708.708l-5.6-5.6z"
-                    />
-                  </svg>
-                </button>
-              </div>
-              <ul>
-                <li class="flex justify-between py-2 border-b">
-                  <p class="text-gray-600">Nomi</p>
-                  <p>Urgaz MCHJ</p>
-                </li>
-                <li class="flex justify-between py-2 border-b">
-                  <p class="text-gray-600">Telefon raqam</p>
-                  <p>+998 93 111 12 22</p>
-                </li>
-                <li class="flex justify-between py-2 border-b">
-                  <p class="text-gray-600">Diler</p>
-                  <p>Samarqand ombor</p>
-                </li>
-                <li class="flex justify-between py-2 border-b">
-                  <p class="text-gray-600">Yaratilgan sana</p>
-                  <p>3.12.2025</p>
-                </li>
-                <li class="flex flex-col border-b gap-1 py-2">
-                  <p class="text-gray-600">Izoh</p>
-                  <p class="max-w-[250px] text-sm">
-                    Call center xodimi: Uarbek Yoldoshev Telefon raqami: +998 99
-                    011 12 33
-                  </p>
-                </li>
-              </ul>
-            </div>
-          </PopoverContent>
-        </Popover>
-        <Popover>
-          <PopoverTrigger>
-            <img src="../svg/dots.svg" alt="" />
-          </PopoverTrigger>
-          <PopoverContent class="cursor-pointer flex flex-col rounded-xl w-52">
-            <div
-              class="flex items-center gap-3 py-2.5 hover:bg-slate-100 px-2 rounded-lg"
-            >
-              <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M4.21 20.52a.73.73 0 0 1-.52-.21a.75.75 0 0 1-.22-.6l.31-3.84A.73.73 0 0 1 4 15.4L15.06 4.34a3.2 3.2 0 0 1 2.28-.86a3.3 3.3 0 0 1 2.25.91a3.31 3.31 0 0 1 .11 4.5L8.63 20a.77.77 0 0 1-.46.22l-3.89.35Zm1-4.26L5 19l2.74-.25l10.9-10.92A1.72 1.72 0 0 0 17.31 5a1.6 1.6 0 0 0-1.19.42ZM15.59 4.87"
-                  />
-                </svg>
-              </span>
-              <span>Tahrirlash</span>
-            </div>
-            <div
-              class="flex items-center gap-3 py-2.5 text-red-600 hover:bg-slate-100 px-2 rounded-lg"
-            >
-              <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
-                    d="M14 11v6m-4-6v6M6 7v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7M4 7h16M7 7l2-4h6l2 4"
-                  />
-                </svg> </span
-              ><span>O'chirish</span>
-            </div>
-          </PopoverContent>
-        </Popover>
-      </div>
-      <div
-        class="flex items-start bg-white p-4 w-80 h-24 justify-between rounded-xl border"
-      >
-        <Popover>
-          <PopoverTrigger>
-            <div class="flex flex-col items-start gap-3">
-              <p class="flex items-center gap-3">
-                <span class="text-xl font-semibold">Urgaz MCHJ</span
-                ><span
-                  class="bg-[#F3F3F3] text-gray-700 px-1 rounded-xl"
-                ></span>
-              </p>
-              <p class="">+998 94 227 65 65</p>
-            </div>
-          </PopoverTrigger>
-          <PopoverContent class="w-[450px] h-auto">
-            <div class="flex flex-col">
-              <div class="flex items-center justify-between pb-5 mb-8">
-                <p class="text-gray-900 font-semibold text-lg">Taminotchi</p>
-                <button>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="m6.4 18.308l-.708-.708l5.6-5.6l-5.6-5.6l.708-.708l5.6 5.6l5.6-5.6l.708.708l-5.6 5.6l5.6 5.6l-.708.708l-5.6-5.6z"
-                    />
-                  </svg>
-                </button>
-              </div>
-              <ul>
-                <li class="flex justify-between py-2 border-b">
-                  <p class="text-gray-600">Nomi</p>
-                  <p>Urgaz MCHJ</p>
-                </li>
-                <li class="flex justify-between py-2 border-b">
-                  <p class="text-gray-600">Telefon raqam</p>
-                  <p>+998 93 111 12 22</p>
-                </li>
-                <li class="flex justify-between py-2 border-b">
-                  <p class="text-gray-600">Diler</p>
-                  <p>Samarqand ombor</p>
-                </li>
-                <li class="flex justify-between py-2 border-b">
-                  <p class="text-gray-600">Yaratilgan sana</p>
-                  <p>3.12.2025</p>
-                </li>
-                <li class="flex flex-col border-b gap-1 py-2">
-                  <p class="text-gray-600">Izoh</p>
-                  <p class="max-w-[250px] text-sm">
-                    Call center xodimi: Uarbek Yoldoshev Telefon raqami: +998 99
-                    011 12 33
-                  </p>
-                </li>
-              </ul>
-            </div>
-          </PopoverContent>
-        </Popover>
-        <Popover>
-          <PopoverTrigger>
-            <img src="../svg/dots.svg" alt="" />
-          </PopoverTrigger>
-          <PopoverContent class="cursor-pointer flex flex-col rounded-xl w-52">
-            <div
-              class="flex items-center gap-3 py-2.5 hover:bg-slate-100 px-2 rounded-lg"
-            >
-              <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M4.21 20.52a.73.73 0 0 1-.52-.21a.75.75 0 0 1-.22-.6l.31-3.84A.73.73 0 0 1 4 15.4L15.06 4.34a3.2 3.2 0 0 1 2.28-.86a3.3 3.3 0 0 1 2.25.91a3.31 3.31 0 0 1 .11 4.5L8.63 20a.77.77 0 0 1-.46.22l-3.89.35Zm1-4.26L5 19l2.74-.25l10.9-10.92A1.72 1.72 0 0 0 17.31 5a1.6 1.6 0 0 0-1.19.42ZM15.59 4.87"
-                  />
-                </svg>
-              </span>
-              <span>Tahrirlash</span>
-            </div>
-            <div
-              class="flex items-center gap-3 py-2.5 text-red-600 hover:bg-slate-100 px-2 rounded-lg"
-            >
-              <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
-                    d="M14 11v6m-4-6v6M6 7v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7M4 7h16M7 7l2-4h6l2 4"
-                  />
-                </svg> </span
-              ><span>O'chirish</span>
-            </div>
-          </PopoverContent>
-        </Popover>
-      </div>
-      <div
-        class="flex items-start bg-white p-4 w-80 h-24 justify-between rounded-xl border"
-      >
-        <Popover>
-          <PopoverTrigger>
-            <div class="flex flex-col items-start gap-3">
-              <p class="flex items-center gap-3">
-                <span class="text-xl font-semibold">Urgaz MCHJ</span
-                ><span
-                  class="bg-[#F3F3F3] text-gray-700 px-1 rounded-xl"
-                ></span>
-              </p>
-              <p class="">+998 94 227 65 65</p>
-            </div>
-          </PopoverTrigger>
-          <PopoverContent class="w-[450px] h-auto">
-            <div class="flex flex-col">
-              <div class="flex items-center justify-between pb-5 mb-8">
-                <p class="text-gray-900 font-semibold text-lg">Taminotchi</p>
-                <button>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="m6.4 18.308l-.708-.708l5.6-5.6l-5.6-5.6l.708-.708l5.6 5.6l5.6-5.6l.708.708l-5.6 5.6l5.6 5.6l-.708.708l-5.6-5.6z"
-                    />
-                  </svg>
-                </button>
-              </div>
-              <ul>
-                <li class="flex justify-between py-2 border-b">
-                  <p class="text-gray-600">Nomi</p>
-                  <p>Urgaz MCHJ</p>
-                </li>
-                <li class="flex justify-between py-2 border-b">
-                  <p class="text-gray-600">Telefon raqam</p>
-                  <p>+998 93 111 12 22</p>
-                </li>
-                <li class="flex justify-between py-2 border-b">
-                  <p class="text-gray-600">Diler</p>
-                  <p>Samarqand ombor</p>
-                </li>
-                <li class="flex justify-between py-2 border-b">
-                  <p class="text-gray-600">Yaratilgan sana</p>
-                  <p>3.12.2025</p>
-                </li>
-                <li class="flex flex-col border-b gap-1 py-2">
-                  <p class="text-gray-600">Izoh</p>
-                  <p class="max-w-[250px] text-sm">
-                    Call center xodimi: Uarbek Yoldoshev Telefon raqami: +998 99
-                    011 12 33
-                  </p>
-                </li>
-              </ul>
-            </div>
-          </PopoverContent>
-        </Popover>
-        <Popover>
-          <PopoverTrigger>
-            <img src="../svg/dots.svg" alt="" />
-          </PopoverTrigger>
-          <PopoverContent class="cursor-pointer flex flex-col rounded-xl w-52">
-            <div
-              class="flex items-center gap-3 py-2.5 hover:bg-slate-100 px-2 rounded-lg"
-            >
-              <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M4.21 20.52a.73.73 0 0 1-.52-.21a.75.75 0 0 1-.22-.6l.31-3.84A.73.73 0 0 1 4 15.4L15.06 4.34a3.2 3.2 0 0 1 2.28-.86a3.3 3.3 0 0 1 2.25.91a3.31 3.31 0 0 1 .11 4.5L8.63 20a.77.77 0 0 1-.46.22l-3.89.35Zm1-4.26L5 19l2.74-.25l10.9-10.92A1.72 1.72 0 0 0 17.31 5a1.6 1.6 0 0 0-1.19.42ZM15.59 4.87"
-                  />
-                </svg>
-              </span>
-              <span>Tahrirlash</span>
-            </div>
-            <div
-              class="flex items-center gap-3 py-2.5 text-red-600 hover:bg-slate-100 px-2 rounded-lg"
-            >
-              <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
-                    d="M14 11v6m-4-6v6M6 7v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7M4 7h16M7 7l2-4h6l2 4"
-                  />
-                </svg> </span
-              ><span>O'chirish</span>
-            </div>
-          </PopoverContent>
-        </Popover>
-      </div>
-      <div
-        class="flex items-start bg-white p-4 w-80 h-24 justify-between rounded-xl border"
-      >
-        <Popover>
-          <PopoverTrigger>
-            <div class="flex flex-col items-start gap-3">
-              <p class="flex items-center gap-3">
-                <span class="text-xl font-semibold">Urgaz MCHJ</span
-                ><span
-                  class="bg-[#F3F3F3] text-gray-700 px-1 rounded-xl"
-                ></span>
-              </p>
-              <p class="">+998 94 227 65 65</p>
-            </div>
-          </PopoverTrigger>
-          <PopoverContent class="w-[450px] h-auto">
-            <div class="flex flex-col">
-              <div class="flex items-center justify-between pb-5 mb-8">
-                <p class="text-gray-900 font-semibold text-lg">Taminotchi</p>
-                <button>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="m6.4 18.308l-.708-.708l5.6-5.6l-5.6-5.6l.708-.708l5.6 5.6l5.6-5.6l.708.708l-5.6 5.6l5.6 5.6l-.708.708l-5.6-5.6z"
-                    />
-                  </svg>
-                </button>
-              </div>
-              <ul>
-                <li class="flex justify-between py-2 border-b">
-                  <p class="text-gray-600">Nomi</p>
-                  <p>Urgaz MCHJ</p>
-                </li>
-                <li class="flex justify-between py-2 border-b">
-                  <p class="text-gray-600">Telefon raqam</p>
-                  <p>+998 93 111 12 22</p>
-                </li>
-                <li class="flex justify-between py-2 border-b">
-                  <p class="text-gray-600">Diler</p>
-                  <p>Samarqand ombor</p>
-                </li>
-                <li class="flex justify-between py-2 border-b">
-                  <p class="text-gray-600">Yaratilgan sana</p>
-                  <p>3.12.2025</p>
-                </li>
-                <li class="flex flex-col border-b gap-1 py-2">
-                  <p class="text-gray-600">Izoh</p>
-                  <p class="max-w-[250px] text-sm">
-                    Call center xodimi: Uarbek Yoldoshev Telefon raqami: +998 99
-                    011 12 33
+                    {{ inf?.contributorDescription }}
                   </p>
                 </li>
               </ul>
@@ -781,342 +261,93 @@
 
 <script setup lang="ts">
 import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 import { Label } from "@/components/ui/label";
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import {
-  Pagination,
-  PaginationEllipsis,
-  PaginationFirst,
-  PaginationLast,
-  PaginationList,
-  PaginationListItem,
-  PaginationNext,
-  PaginationPrev,
-} from "@/components/ui/pagination";
 
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-const data = [
-  {
-    id: 1,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    eni: "400 sm ",
-    boyi: "1200 sm",
-    code: "999",
-    email: "mahmudnamazov705@gmail.com",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    soni: "1 200",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    sana: "3.10.2025",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 2,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    code: "999",
-    soni: "1 200",
-    email: "mahmudnamazov705@gmail.com",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 3,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    eni: "400 Metr ",
-    code: "999",
-    email: "mahmudnamazov705@gmail.com",
-    soni: "1 200",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    boyi: "1200 Metr",
-    sana: "3.10.2025",
-    miqdor: "1200",
-    haridor: "Mahmud Namazov",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 4,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    miqdor: "1200",
-    code: "999",
-    soni: "1 200",
-    qoldiq: "1 000",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    jami: "4 400",
-    valyuta: "UZS",
-    eni: "400 Metr ",
-    email: "mahmudnamazov705@gmail.com",
-    sana: "3.10.2025",
-    boyi: "1200 Metr",
-    haridor: "Mahmud Namazov",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 5,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    code: "999",
-    soni: "1 200",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    qoldiq: "1 000",
-    jami: "4 400",
-    email: "mahmudnamazov705@gmail.com",
-    valyuta: "UZS",
-    haridor: "Mahmud Namazov",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 6,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    miqdor: "1200",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    email: "mahmudnamazov705@gmail.com",
-    soni: "1 200",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    eni: "400 Metr ",
-    sana: "3.10.2025",
-    boyi: "1200 Metr",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 7,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    miqdor: "1200",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    email: "mahmudnamazov705@gmail.com",
-    qoldiq: "1 000",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    jami: "4 400",
-    valyuta: "UZS",
-    eni: "400 Metr ",
-    sana: "3.10.2025",
-    boyi: "1200 Metr",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 8,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    miqdor: "1200",
-    email: "mahmudnamazov705@gmail.com",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    eni: "400 Metr ",
-    sana: "3.10.2025",
-    boyi: "1200 Metr",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 9,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    email: "mahmudnamazov705@gmail.com",
-    qoldiq: "1 000",
-    jami: "4 400",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    valyuta: "UZS",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 10,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    email: "mahmudnamazov705@gmail.com",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    umumiy: "120 000 000 UZS",
-    narx: "100 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 11,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    qoldiq: "1 000",
-    jami: "4 400",
-    email: "mahmudnamazov705@gmail.com",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    valyuta: "UZS",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    umumiy: "120 000 000 UZS",
-    narx: "100 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 12,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    qoldiq: "1 000",
-    email: "mahmudnamazov705@gmail.com",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    jami: "4 400",
-    valyuta: "UZS",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    umumiy: "120 000 000 UZS",
-    narx: "100 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 13,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    qoldiq: "1 000",
-    email: "mahmudnamazov705@gmail.com",
-    jami: "4 400",
-    valyuta: "UZS",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-];
+
+import axios from "axios";
+import { ref } from "vue";
+import router from "@/router";
+type DateMask = (date: string) => string;
+const todatestring: DateMask = (date) => {
+  const parseDate = new Date(date);
+  const day = parseDate.getDate().toString().padStart(2, "0");
+  const month = (parseDate.getMonth() + 1).toString().padStart(2, "0");
+  const year = parseDate.getFullYear();
+
+  return `${day}.${month}.${year}`;
+};
+
+interface DataItem {
+  id: string;
+  name: string;
+  [key: string]: any;
+}
+
+const data = ref<DataItem[] | null | any>(null);
+const loading = ref<boolean>(false);
+const error = ref<string | null>(null);
+const fetchData = async (page: number = 1): Promise<void> => {
+  const token = localStorage.getItem("token");
+
+  loading.value = true;
+  error.value = null;
+
+  try {
+    const response = await axios.get<DataItem[]>(
+      `/contributor/getall?limit=10&page=${page}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    data.value = response.data;
+  } catch (err: any) {
+    error.value = err.response?.data?.massage || "Failed to fetch data";
+    if (err.response.status === 401) router.push("/login");
+  } finally {
+    loading.value = false;
+  }
+};
+fetchData();
+const contributorName = ref("");
+const contributorDescription = ref("");
+const contributorNomer = ref("");
+const contributordiller = ref("");
+const submitcontributor = async () => {
+  const token = localStorage.getItem("token");
+  const payload = {
+    contributorName: contributorName.value,
+    contributorDescription: contributorDescription.value,
+    contributorNomer: contributorNomer.value,
+    contributorConnector: contributordiller.value,
+  };
+  try {
+    const response = await axios.post(`/contributor/create`, payload, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    window.location.reload();
+    console.log("contributor create", response.data);
+  } catch (err: any) {
+    console.log("Error");
+  }
+};
 </script>
 
 <style scoped></style>

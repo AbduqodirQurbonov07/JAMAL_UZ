@@ -77,11 +77,11 @@
       <div></div>
       <div class="grid grid-cols-2 justify-end items-center">
         <li class="list-none"></li>
-        <button
+        <Button
           class="border border-slate-200 p-2 text-sm rounded-lg transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
         >
           Saqlash
-        </button>
+        </Button>
       </div>
       <div class="flex items-center gap-1">
         <button
@@ -170,34 +170,74 @@
         <TableBody>
           <TableRow
             class="hover:bg-indigo-100 hover:border-l hover:border-l-indigo-600"
-            v-for="invoice in data"
-            :key="invoice.ombor"
+            v-for="inf in data?.data"
+            :key="inf.id"
           >
             <TableCell class="font-medium">
-              {{ invoice.ombor }}
+              {{ inf?.warehouse_warehouseName }}
             </TableCell>
             <TableCell class="border text-center">{{
-              invoice.xodim
+              inf?.user_userFirstName
             }}</TableCell>
             <TableCell class="border text-center">{{
-              invoice.taminot
+              inf?.contributor_contributorName
             }}</TableCell>
             <TableCell class="border text-center">{{
-              invoice.haridor
+              inf?.client_clientName
             }}</TableCell>
             <TableCell class="border text-center">{{
-              invoice.tovar
+              inf?.category_categoryName
             }}</TableCell>
-            <TableCell class="border text-center">{{ invoice.eni }}</TableCell>
-            <TableCell class="border text-center">{{ invoice.boyi }}</TableCell>
-            <TableCell class="flex items-center justify-center gap-2">
-              <img src="../svg/top.svg" alt="" />{{ invoice.miqdor }}</TableCell
+            <TableCell class="border text-center"
+              >{{ Number(inf?.size_sizeWidth) }} m</TableCell
             >
-            <TableCell class="border text-center">{{ invoice.narx }}</TableCell>
+            <TableCell class="border text-center"
+              >{{ Number(inf?.report_height) }} m</TableCell
+            >
+            <TableCell class="flex items-center justify-center gap-2">
+              <span v-if="inf?.report_action == 'EXIT'">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 1024 1024"
+                >
+                  <path
+                    fill="red"
+                    d="M572.235 205.282v600.365a30.118 30.118 0 1 1-60.235 0V205.282L292.382 438.633a28.913 28.913 0 0 1-42.646 0a33.43 33.43 0 0 1 0-45.236l271.058-288.045a28.913 28.913 0 0 1 42.647 0L834.5 393.397a33.43 33.43 0 0 1 0 45.176a28.913 28.913 0 0 1-42.647 0l-219.618-233.23z"
+                  />
+                </svg>
+              </span>
+              <span class="text-green-500" v-else>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 32 32"
+                >
+                  <path
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="m6 22l10 8l10-8m-10 8V2"
+                  />
+                </svg>
+              </span>
+              <span>{{ inf?.report_quantity }}</span>
+            </TableCell>
             <TableCell class="border text-center">{{
-              invoice.umumiy
+              formattedCurreny(Number(inf?.report_price))
             }}</TableCell>
-            <TableCell class="border text-center">{{ invoice.sana }}</TableCell>
+            <TableCell class="border text-center">{{
+              formattedCurreny(
+                Number(inf?.report_quantity) * Number(inf?.report_price)
+              )
+            }}</TableCell>
+            <TableCell class="border text-center">{{
+              todatestring(inf?.report_date)
+            }}</TableCell>
             <TableCell class="text-center cursor-pointer">
               <Popover>
                 <PopoverTrigger>
@@ -254,7 +294,7 @@
       <Pagination
         v-slot="{ page }"
         :items-per-page="10"
-        :total="100"
+        :total="data?.count"
         :sibling-count="1"
         show-edges
         :default-page="1"
@@ -337,178 +377,55 @@ import {
   PaginationNext,
   PaginationPrev,
 } from "@/components/ui/pagination";
+import axios from "axios";
+import router from "@/router";
+interface DataItem {
+  id: string;
+  name: string;
+  [key: string]: any;
+}
 
-const data = [
-  {
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    sana: "3.10.2025",
-    miqdor: "1200",
-    haridor: "Mahmud Namazov",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    miqdor: "1200",
-    eni: "400 Metr ",
-    sana: "3.10.2025",
-    boyi: "1200 Metr",
-    haridor: "Mahmud Namazov",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    haridor: "Mahmud Namazov",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    miqdor: "1200",
-    haridor: "Mahmud Namazov",
-    eni: "400 Metr ",
-    sana: "3.10.2025",
-    boyi: "1200 Metr",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    miqdor: "1200",
-    haridor: "Mahmud Namazov",
-    eni: "400 Metr ",
-    sana: "3.10.2025",
-    boyi: "1200 Metr",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    miqdor: "1200",
-    haridor: "Mahmud Namazov",
-    eni: "400 Metr ",
-    sana: "3.10.2025",
-    boyi: "1200 Metr",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    umumiy: "120 000 000 UZS",
-    narx: "100 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    umumiy: "120 000 000 UZS",
-    narx: "100 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    umumiy: "120 000 000 UZS",
-    narx: "100 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-];
+const formattedCurreny = (rawValue: number) => {
+  return Number(rawValue)
+    .toFixed(0)
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+type DateMask = (date: string) => string;
+const todatestring: DateMask = (date) => {
+  const parseDate = new Date(date);
+  const day = parseDate.getDate().toString().padStart(2, "0");
+  const month = (parseDate.getMonth() + 1).toString().padStart(2, "0");
+  const year = parseDate.getFullYear();
+
+  return `${day}.${month}.${year}`;
+};
+const data = ref<DataItem[] | null | any>(null);
+const loading = ref<boolean>(false);
+const error = ref<string | null>(null);
+const fetchData = async (page: number = 1): Promise<void> => {
+  const token = localStorage.getItem("token");
+
+  loading.value = true;
+  error.value = null;
+
+  try {
+    const response = await axios.get<DataItem[]>(
+      `/report/getall?limit=10&page=${page}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    data.value = response.data;
+  } catch (err: any) {
+    error.value = err.response?.data?.massage || "Failed to fetch data";
+    if (err.response.status === 401) router.push("/login");
+  } finally {
+    loading.value = false;
+  }
+};
+fetchData();
 </script>
 
 <style scoped></style>

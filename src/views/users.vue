@@ -29,8 +29,8 @@
             placeholder="Qidiruv..."
           />
         </div>
-        <Popover>
-          <PopoverTrigger
+        <Dialog class="w-[800px]">
+          <DialogTrigger
             class="flex items-center gap-2 border border-slate-200 pr-10 px-4 py-2 text-base rounded-xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
           >
             <span>
@@ -47,108 +47,103 @@
               </svg>
             </span>
             <span> Foydalanuvchi</span>
-          </PopoverTrigger>
-          <PopoverContent class="w-[700px]">
-            <div class="flex flex-col p-6">
-              <div class="flex items-center justify-between pb-5 border-b mb-8">
-                <p>Foydalanuvchi qo'shish</p>
-                <button>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="m6.4 18.308l-.708-.708l5.6-5.6l-5.6-5.6l.708-.708l5.6 5.6l5.6-5.6l.708.708l-5.6 5.6l5.6 5.6l-.708.708l-5.6-5.6z"
-                    />
-                  </svg>
-                </button>
-              </div>
-              <ul class="grid grid-cols-2 gap-3">
-                <li class="flex flex-col gap-1.5 mt-2.5 mb-5">
-                  <Label for="size"
-                    >Isim<span class="text-orange-500"> *</span></Label
-                  >
-                  <input
-                    type="text"
-                    class="border border-slate-300 px-3 py-2 rounded-lg"
-                  />
-                </li>
-                <li class="flex flex-col gap-1.5 mb-5">
-                  <label for="size"
-                    >Familiya<span class="text-orange-500"> *</span></label
-                  >
-                  <input
-                    type="text"
-                    class="border border-slate-300 px-3 py-2 rounded-lg"
-                  />
-                </li>
-                <li class="flex flex-col gap-1.5 mb-5">
-                  <Label for="size"
-                    >Telefon raqam 1<span class="text-orange-500">
-                      *</span
-                    ></Label
-                  >
-                  <input
-                    type="tel"
-                    class="border border-slate-300 px-3 py-2 rounded-lg"
-                  />
-                </li>
-                <li class="flex flex-col gap-1.5">
-                  <Label for="size"
-                    >Email<span class="text-orange-500"> *</span></Label
-                  >
-                  <input
-                    type="email"
-                    class="border border-slate-300 px-3 py-2 rounded-lg"
-                  />
-                </li>
-                <li class="flex flex-col gap-1.5 mt-2.5 mb-5">
-                  <Label for="size"
-                    >Login<span class="text-orange-500"> *</span></Label
-                  >
-                  <input
-                    type="text"
-                    class="border border-slate-300 px-3 py-2 rounded-lg"
-                  />
-                </li>
-                <li class="flex flex-col gap-1.5 mt-2.5 mb-5">
-                  <Label for="size"
-                    >Parol<span class="text-orange-500"> *</span></Label
-                  >
-                  <input
-                    type="password"
-                    class="border border-slate-300 px-3 py-2 rounded-lg"
-                  />
-                </li>
-              </ul>
-              <div class="flex flex-col gap-8">
-                <div class="flex items-start flex-col">
-                  <label for="izoh">Izoh</label>
-                  <textarea
-                    class="border border-slate-300 p-3 rounded-xl w-[620px] h-32"
-                    name=""
-                    id="izoh"
-                  ></textarea>
-                </div>
-                <div class="flex items-center justify-end gap-3">
-                  <button
-                    class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300"
-                  >
-                    Yopish
-                  </button>
-                  <button
-                    class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
-                  >
-                    Saqlash
-                  </button>
+          </DialogTrigger>
+          <DialogContent class="max-w-[700px]">
+            <DialogHeader class="border-b pb-4">
+              <DialogTitle> Foydalanuvchi qo'shish </DialogTitle>
+            </DialogHeader>
+            <ul class="grid grid-cols-2 gap-3">
+              <li class="flex flex-col gap-1.5 mt-2.5 mb-5">
+                <Label for="size"
+                  >Isim<span class="text-orange-500"> *</span></Label
+                >
+                <input
+                  v-model="userfirstName"
+                  type="text"
+                  class="border border-slate-300 px-3 py-2 rounded-lg"
+                />
+              </li>
+              <li class="flex flex-col gap-1.5 mb-5">
+                <label for="size"
+                  >Familiya<span class="text-orange-500"> *</span></label
+                >
+                <input
+                  v-model="userlastName"
+                  type="text"
+                  class="border border-slate-300 px-3 py-2 rounded-lg"
+                />
+              </li>
+              <li class="flex flex-col gap-1.5 mb-5">
+                <Label for="size"
+                  >Telefon raqam 1<span class="text-orange-500"> *</span></Label
+                >
+                <input
+                  v-model="userTel"
+                  type="text"
+                  class="border border-slate-300 px-3 py-2 rounded-lg"
+                />
+              </li>
+              <li class="flex flex-col gap-1.5">
+                <Label for="size"
+                  >Email<span class="text-orange-500"> *</span></Label
+                >
+                <input
+                  v-model="userEmail"
+                  type="email"
+                  class="border border-slate-300 px-3 py-2 rounded-lg"
+                />
+              </li>
+              <li class="flex flex-col gap-1.5 mt-2.5 mb-5">
+                <Label for="size"
+                  >Login<span class="text-orange-500"> *</span></Label
+                >
+                <input
+                  v-model="login"
+                  type="text"
+                  class="border border-slate-300 px-3 py-2 rounded-lg"
+                />
+              </li>
+              <li class="flex flex-col gap-1.5 mt-2.5 mb-5">
+                <Label for="size"
+                  >Parol<span class="text-orange-500"> *</span></Label
+                >
+                <input
+                  v-model="password"
+                  type="password"
+                  class="border border-slate-300 px-3 py-2 rounded-lg"
+                />
+              </li>
+              <li class="flex items-start flex-col">
+                <label for="izoh">Izoh</label>
+                <textarea
+                  v-model="userCom"
+                  class="border border-slate-300 p-3 rounded-xl w-[650px] h-32"
+                  name=""
+                  id="izoh"
+                ></textarea>
+              </li>
+            </ul>
+            <DialogFooter class="">
+              <div class="flex flex-col p-6">
+                <div class="flex flex-col gap-8">
+                  <div class="flex items-center justify-end gap-3">
+                    <button
+                      class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300"
+                    >
+                      Yopish
+                    </button>
+                    <button
+                      @click="submitUser"
+                      class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
+                    >
+                      Saqlash
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          </PopoverContent>
-        </Popover>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       </div>
     </div>
     <div class="flex flex-col items-center gap-3 w-[85vw]">
@@ -177,24 +172,22 @@
         </TableHeader>
         <TableBody>
           <TableRow
+            v-for="(inf, index) in data?.data"
+            :key="inf?.userId"
             class="hover:bg-indigo-100 border-2 hover:border-l-2 hover:border-l-indigo-700"
-            v-for="invoice in data"
-            :key="invoice.ombor"
           >
-            <TableCell class="border text-center">
-              {{ invoice.id }}
-            </TableCell>
-            <TableCell class="border">
-              {{ invoice.haridor }}
-            </TableCell>
-            <TableCell class="border text-center">{{ invoice.tel1 }}</TableCell>
+            <TableCell class="border text-center">{{ index + 1 }} </TableCell>
+            <TableCell class="border">{{ `${inf?.userFirstName}` }} </TableCell>
+            <TableCell class="border text-center">{{
+              inf?.userNomer
+            }}</TableCell>
 
             <TableCell class="border text-center">{{
-              invoice.email
+              inf?.userEmail
             }}</TableCell>
-            <TableCell class="border text-center">{{ invoice.sana }}</TableCell>
+            <TableCell class="border text-center">{{}}</TableCell>
             <TableCell class="text-center border text-[16px] leading-[20px]">{{
-              invoice.izoh
+              inf?.userDescription
             }}</TableCell>
             <TableCell class="text-center cursor-pointer">
               <Popover>
@@ -252,7 +245,7 @@
       <Pagination
         v-slot="{ page }"
         :items-per-page="10"
-        :total="100"
+        :total="data?.count"
         :sibling-count="1"
         show-edges
         :default-page="1"
@@ -284,10 +277,11 @@
       </Pagination>
     </div>
 
-    <div class="flex justify-end mt-8">
-      <Popover>
-        <PopoverTrigger
-          class="flex items-center gap-2 border border-slate-200 px-4 py-4 text-base rounded-2xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
+    <!-- <div class="fixed mt-8">
+      <Dialog>
+        <DialogTrigger
+          as-child
+          class="flex cursor-pointer items-center gap-2 border border-slate-200 px-4 py-4 text-base rounded-2xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
         >
           <span>
             <svg
@@ -302,24 +296,12 @@
               />
             </svg>
           </span>
-        </PopoverTrigger>
-        <PopoverContent class="w-[500px]">
-          <div class="flex items-center border-b-2 py-3 justify-between">
-            <p>Sotuv oynasi</p>
-            <button>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  fill="currentColor"
-                  d="m6.4 18.308l-.708-.708l5.6-5.6l-5.6-5.6l.708-.708l5.6 5.6l5.6-5.6l.708.708l-5.6 5.6l5.6 5.6l-.708.708l-5.6-5.6z"
-                />
-              </svg>
-            </button>
-          </div>
+        </DialogTrigger>
+        <DialogScrollContent class="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Sotuv oynasi </DialogTitle>
+          </DialogHeader>
+          <div class="grid gap-4 py-4 h-[300dvh]"></div>
           <div class="flex flex-col p-6 bg-slate-50">
             <ul class="grid grid-cols-1 p-4 rounded-lg gap-3 bg-white">
               <li class="flex flex-col gap-1.5 mt-2.5 mb-5">
@@ -483,23 +465,25 @@
                 />
               </li>
             </div>
-            <!-- <div class="flex flex-col gap-8"></div> -->
-          </div>
-          <div class="flex items-center my-4 justify-end gap-3">
-            <button
-              class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300"
-            >
-              Yopish
-            </button>
-            <button
-              class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
-            >
-              Saqlash
-            </button>
-          </div>
-        </PopoverContent>
-      </Popover>
-    </div>
+            <div class="flex flex-col gap-8"></div> -->
+    <!-- </div>
+          <DialogFooter>
+            <div class="flex items-center my-4 justify-end gap-3">
+              <button
+                class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300"
+              >
+                Yopish
+              </button>
+              <button
+                class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
+              >
+                Saqlash
+              </button>
+            </div>
+          </DialogFooter>
+        </DialogScrollContent>
+      </Dialog>
+    </div> -->
   </div>
 </template>
 
@@ -510,17 +494,15 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import { Label } from "@/components/ui/label";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -542,306 +524,93 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-const data = [
-  {
-    id: 1,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    eni: "400 sm ",
-    boyi: "1200 sm",
-    code: "999",
-    email: "mahmudnamazov705@gmail.com",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    soni: "1 200",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    sana: "3.10.2025",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 2,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    code: "999",
-    soni: "1 200",
-    email: "mahmudnamazov705@gmail.com",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 3,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    eni: "400 Metr ",
-    code: "999",
-    email: "mahmudnamazov705@gmail.com",
-    soni: "1 200",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    boyi: "1200 Metr",
-    sana: "3.10.2025",
-    miqdor: "1200",
-    haridor: "Mahmud Namazov",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 4,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    miqdor: "1200",
-    code: "999",
-    soni: "1 200",
-    qoldiq: "1 000",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    jami: "4 400",
-    valyuta: "UZS",
-    eni: "400 Metr ",
-    email: "mahmudnamazov705@gmail.com",
-    sana: "3.10.2025",
-    boyi: "1200 Metr",
-    haridor: "Mahmud Namazov",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 5,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    code: "999",
-    soni: "1 200",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    qoldiq: "1 000",
-    jami: "4 400",
-    email: "mahmudnamazov705@gmail.com",
-    valyuta: "UZS",
-    haridor: "Mahmud Namazov",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 6,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    miqdor: "1200",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    email: "mahmudnamazov705@gmail.com",
-    soni: "1 200",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    eni: "400 Metr ",
-    sana: "3.10.2025",
-    boyi: "1200 Metr",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 7,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    miqdor: "1200",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    email: "mahmudnamazov705@gmail.com",
-    qoldiq: "1 000",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    jami: "4 400",
-    valyuta: "UZS",
-    eni: "400 Metr ",
-    sana: "3.10.2025",
-    boyi: "1200 Metr",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 8,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    miqdor: "1200",
-    email: "mahmudnamazov705@gmail.com",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    eni: "400 Metr ",
-    sana: "3.10.2025",
-    boyi: "1200 Metr",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 9,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    email: "mahmudnamazov705@gmail.com",
-    qoldiq: "1 000",
-    jami: "4 400",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    valyuta: "UZS",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 10,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    email: "mahmudnamazov705@gmail.com",
-    qoldiq: "1 000",
-    jami: "4 400",
-    valyuta: "UZS",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    umumiy: "120 000 000 UZS",
-    narx: "100 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 11,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    qoldiq: "1 000",
-    jami: "4 400",
-    email: "mahmudnamazov705@gmail.com",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    valyuta: "UZS",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    umumiy: "120 000 000 UZS",
-    narx: "100 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 12,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    qoldiq: "1 000",
-    email: "mahmudnamazov705@gmail.com",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    jami: "4 400",
-    valyuta: "UZS",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    umumiy: "120 000 000 UZS",
-    narx: "100 000 UZS",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-  {
-    id: 13,
-    ombor: "omborxona",
-    xodim: "Husan Kamolov",
-    taminot: "Taminot ",
-    haridor: "Mahmud Namazov",
-    code: "999",
-    soni: "1 200",
-    qoldiq: "1 000",
-    email: "mahmudnamazov705@gmail.com",
-    jami: "4 400",
-    valyuta: "UZS",
-    tel1: "+ 998 91 088 29 07",
-    tel2: "+ 998 91 088 29 07",
-    izoh: "Законом предусмотрено предоставление права на бесплатное пользование городским... ",
-    miqdor: "1200",
-    sana: "3.10.2025",
-    narx: "100 000 UZS",
-    umumiy: "120 000 000 UZS",
-    eni: "400 Metr ",
-    boyi: "1200 Metr",
-    tovar: "REFLEX GREY Gilamlari",
-  },
-];
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
+import axios from "axios";
+import { ref } from "vue";
+import router from "@/router";
+type DateMask = (date: string) => string;
+const todatestring: DateMask = (date) => {
+  const parseDate = new Date(date);
+  const day = parseDate.getDate().toString().padStart(2, "0");
+  const month = (parseDate.getMonth() + 1).toString().padStart(2, "0");
+  const year = parseDate.getFullYear();
+
+  return `${day}.${month}.${year}`;
+};
+
+interface DataItem {
+  id: string;
+  name: string;
+  [key: string]: any;
+}
+
+const data = ref<DataItem[] | null | any>(null);
+const loading = ref<boolean>(false);
+const error = ref<string | null>(null);
+const fetchData = async (page: number = 1): Promise<void> => {
+  const token = localStorage.getItem("token");
+
+  loading.value = true;
+  error.value = null;
+
+  try {
+    const response = await axios.get<DataItem[]>(
+      `/user/getall?limit=10&page=${page}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    data.value = response.data;
+  } catch (err: any) {
+    error.value = err.response?.data?.massage || "Failed to fetch data";
+    if (err.response.status === 401) router.push("/login");
+  } finally {
+    loading.value = false;
+  }
+};
+fetchData();
+const login = ref("");
+const password = ref("");
+const userlastName = ref("");
+const userfirstName = ref("");
+const userTel = ref<number>(0);
+const userEmail = ref("");
+const userCom = ref("");
+
+const submitUser = async () => {
+  const token = localStorage.getItem("token");
+  const payload = {
+    userFirstName: userfirstName.value,
+    userNomer: userTel.value,
+    userPassword: password.value,
+    userLogin: login.value,
+    userLastName: userlastName.value,
+    userDescription: userCom.value,
+    userEmail: userEmail.value,
+  };
+  try {
+    const response = await axios.post(`/auth/register`, payload, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    window.location.reload();
+    console.log("warehouse create", response.data);
+  } catch (err: any) {
+    console.log(typeof payload.userNomer);
+    console.log("Error");
+  }
+};
 </script>
 
 <style scoped></style>
