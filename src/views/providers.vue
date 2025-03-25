@@ -214,6 +214,7 @@
           </PopoverTrigger>
           <PopoverContent class="cursor-pointer flex flex-col rounded-xl w-52">
             <div
+              :id="inf?.contributorId"
               class="flex items-center gap-3 py-2.5 hover:bg-slate-100 px-2 rounded-lg"
             >
               <span>
@@ -232,6 +233,8 @@
               <span>Tahrirlash</span>
             </div>
             <div
+              @click="deleteBtn"
+              :id="inf?.contributorId"
               class="flex items-center gap-3 py-2.5 text-red-600 hover:bg-slate-100 px-2 rounded-lg"
             >
               <span>
@@ -346,6 +349,27 @@ const submitcontributor = async () => {
     console.log("contributor create", response.data);
   } catch (err: any) {
     console.log("Error");
+  }
+};
+
+const deleteBtn = async (e: any) => {
+  const token = localStorage.getItem("token");
+
+  try {
+    const response = await axios.patch<DataItem[]>(
+      `/contributor/delete/${e?.target?.id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    data.value = response.data;
+    console.log(data.value);
+
+    window.location.reload();
+  } catch (err: any) {
+    error.value = err.response?.data?.massage || "Failed to fetch data";
   }
 };
 </script>

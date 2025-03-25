@@ -252,7 +252,7 @@ const fetchData = async (page: number = 1): Promise<void> => {
 
   try {
     const response = await axios.get<DataItem[]>(
-      `/warehouse/getall?limit=10&page=${page}`,
+      `/warehouse/getall?limit=20&page=${page}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -284,7 +284,7 @@ const submitWarehouse = async () => {
         Authorization: `Bearer ${token}`,
       },
     });
-    window.location.reload();
+    // window.location.reload();
     console.log("warehouse create", response.data);
   } catch (err: any) {
     console.log("Error");

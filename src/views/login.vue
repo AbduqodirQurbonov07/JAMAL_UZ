@@ -17,7 +17,12 @@
         <p class="font-semibold text-2xl">Xush Kelibsiz!</p>
         <p class="text-[#667085]">Iltimos hisob ma’lumotlarini kiriting</p>
       </div>
-      <form @submit.prevent="submitForm" class="flex flex-col gap-3" action="">
+      <form
+        @submit.prevent="submitForm"
+        @keyup.enter="submitForm"
+        class="flex flex-col gap-3"
+        action=""
+      >
         <label for="">Login</label>
         <input
           v-model="login"

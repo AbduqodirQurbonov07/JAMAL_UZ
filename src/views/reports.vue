@@ -171,7 +171,7 @@
           <TableRow
             class="hover:bg-indigo-100 hover:border-l hover:border-l-indigo-600"
             v-for="inf in data?.data"
-            :key="inf.id"
+            :key="inf.report_reportId"
           >
             <TableCell class="font-medium">
               {{ inf?.warehouse_warehouseName }}
@@ -225,7 +225,7 @@
                   />
                 </svg>
               </span>
-              <span>{{ inf?.report_quantity }}</span>
+              <span>{{ formattedCurreny(inf?.report_quantity) }}</span>
             </TableCell>
             <TableCell class="border text-center">{{
               formattedCurreny(Number(inf?.report_price))

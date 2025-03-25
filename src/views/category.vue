@@ -70,14 +70,18 @@
                   <Label for="size"
                     >Taminotchi<span class="text-orange-500">*</span></Label
                   >
-                  <Select class="">
+                  <Select v-model="contributor">
                     <SelectTrigger class="border-slate-300">
-                      <SelectValue placeholder="Taminotchilar" />
+                      <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectGroup>
-                        <SelectItem value="taminotchilar">
-                          Taminotchilar
+                        <SelectItem
+                          v-for="items in itemStore.contributors"
+                          :key="items?.contributorId"
+                          :value="items?.contributorId"
+                        >
+                          {{ items.contributorName }}
                         </SelectItem>
                       </SelectGroup>
                     </SelectContent>
@@ -129,10 +133,10 @@
                 ><span class="bg-[#F3F3F3] text-gray-700 rounded-xl"></span>
               </p>
               <div
-                class="flex flex-col pr-72 items-start bg-slate-50 p-1 px-2 border text-gray-700 rounded-sm"
+                class="flex flex-col w-96 items-start bg-slate-50 p-1 px-2 border text-gray-700 rounded-sm"
               >
                 <p class="font-semibold">
-                  {{ inf?.contributor.contributorName }}
+                  {{ inf?.contributor?.contributorName }}
                 </p>
                 <p>{{ inf?.categoryDescription }}</p>
               </div>
@@ -173,13 +177,13 @@
                 </li>
                 <li class="flex justify-between py-2 border-b">
                   <p class="text-gray-600">Taminotchi</p>
-                  <p>{{ inf?.contributor.contributorName }}</p>
+                  <p>{{ inf?.contributor?.contributorName }}</p>
                 </li>
                 <li class="flex flex-col gap-1 py-2">
                   <p class="text-gray-600">Izoh</p>
                   <p class="max-w-[250px] text-sm">
                     {{
-                      `${inf?.contributor.contributorDescription}  ${inf?.contributor.contributorNomer}`
+                      `${inf?.contributor?.contributorDescription}  ${inf?.contributor?.contributorNomer}`
                     }}
                   </p>
                 </li>
@@ -193,6 +197,7 @@
           </PopoverTrigger>
           <PopoverContent class="cursor-pointer flex flex-col rounded-xl w-52">
             <div
+              :id="inf?.categoryId"
               class="flex items-center gap-3 py-2.5 hover:bg-slate-100 px-2 rounded-lg"
             >
               <span>
@@ -211,6 +216,8 @@
               <span>Tahrirlash</span>
             </div>
             <div
+              @click="deleteBtn"
+              :id="inf?.categoryId"
               class="flex items-center gap-3 py-2.5 text-red-600 hover:bg-slate-100 px-2 rounded-lg"
             >
               <span>
@@ -239,7 +246,6 @@
 </template>
 
 <script setup lang="ts">
-// import { UseApiStore } from "@/store";
 import {
   Dialog,
   DialogContent,
@@ -269,6 +275,7 @@ import {
 import axios from "axios";
 import { ref } from "vue";
 import router from "@/router";
+
 type DateMask = (date: string) => string;
 const todatestring: DateMask = (date) => {
   const parseDate = new Date(date);
@@ -284,7 +291,6 @@ interface DataItem {
   name: string;
   [key: string]: any;
 }
-
 const data = ref<DataItem[] | null | any>(null);
 const loading = ref<boolean>(false);
 const error = ref<string | null>(null);
@@ -295,14 +301,11 @@ const fetchData = async (page: number = 1): Promise<void> => {
   error.value = null;
 
   try {
-    const response = await axios.get<DataItem[]>(
-      `/category/getall?limit=10&page=${page}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const response = await axios.get<DataItem[]>(`/category/getall`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     data.value = response.data;
   } catch (err: any) {
     error.value = err.response?.data?.massage || "Failed to fetch data";
@@ -313,14 +316,24 @@ const fetchData = async (page: number = 1): Promise<void> => {
 };
 fetchData();
 
+import { useItemStore } from "@/store";
+
+const { fetchItems } = useItemStore();
+const itemStore = useItemStore();
+const loadItems = async () => {
+  await fetchItems();
+};
+
+loadItems();
+const contributor = ref<string | undefined>(undefined);
 const cateName = ref("");
 const cateCom = ref("");
-
 const submitCategory = async () => {
   const token = localStorage.getItem("token");
   const payload = {
     categoryName: cateName.value,
     categoryDescription: cateCom.value,
+    contributor: contributor.value,
   };
   try {
     const response = await axios.post(`/category/create`, payload, {
@@ -329,9 +342,34 @@ const submitCategory = async () => {
       },
     });
     window.location.reload();
-    console.log(response.data);
+    console.log("taminot", payload.contributor);
   } catch (err: any) {
     console.log("Error");
+  }
+};
+
+const deleteBtn = async (e: any) => {
+  const token = localStorage.getItem("token");
+  console.log(e.target.id);
+
+  try {
+    const response = await axios.patch<DataItem[]>(
+      `/category/delete/${e?.target?.id}`,
+      {
+        categoryName: "",
+        contributor: e?.target?.id,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    data.value = response.data;
+    console.log(e.target.id);
+    window.location.reload();
+  } catch (err: any) {
+    error.value = err.response?.data?.massage || "Failed to fetch data";
   }
 };
 </script>

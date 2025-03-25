@@ -123,7 +123,7 @@
                 ></textarea>
               </li>
             </ul>
-            <DialogFooter class="">
+            <DialogFooter class="flex justify-end">
               <div class="flex flex-col p-6">
                 <div class="flex flex-col gap-8">
                   <div class="flex items-center justify-end gap-3">
@@ -489,15 +489,6 @@
 
 <script setup lang="ts">
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import { Label } from "@/components/ui/label";
 import {
@@ -533,6 +524,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
+import { computed } from "vue";
 import axios from "axios";
 import { ref } from "vue";
 import router from "@/router";
@@ -583,15 +575,14 @@ const login = ref("");
 const password = ref("");
 const userlastName = ref("");
 const userfirstName = ref("");
-const userTel = ref<number>(0);
+const userTel = ref("");
 const userEmail = ref("");
 const userCom = ref("");
-
 const submitUser = async () => {
   const token = localStorage.getItem("token");
   const payload = {
     userFirstName: userfirstName.value,
-    userNomer: userTel.value,
+    userNomer: Number(userTel.value),
     userPassword: password.value,
     userLogin: login.value,
     userLastName: userlastName.value,
@@ -611,6 +602,19 @@ const submitUser = async () => {
     console.log("Error");
   }
 };
+
+const formattedPhone1 = computed(() => {
+  if (userTel.value.startsWith("998")) {
+    return userTel.value.replace(
+      /(\d{3})(\d{2})(\d{3})(\d{2})(\d{2})/,
+      "$1 $2 $3 $4 $5"
+    );
+  } else if (userTel.value.length === 9) {
+    return userTel.value.replace(/(\d{2})(\d{3})(\d{2})(\d{2})/, "$1 $2 $3 $4");
+  } else {
+    return userTel.value;
+  }
+});
 </script>
 
 <style scoped></style>

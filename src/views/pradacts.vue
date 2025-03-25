@@ -1,16 +1,19 @@
 <template>
   <div>
     <div class="grid grid-cols-5 gap-3 w-[85vw] px-4 py-3">
-      <Select class="p-2">
+      <Select v-model="warehouse" class="p-2">
         <SelectTrigger class="bg-slate-50 border-transparent text-base h-12">
           <SelectValue placeholder="Omborxona" />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            <SelectItem value="Omborxona "> Omborxona </SelectItem>
-            <SelectItem value="Omborxona 1"> Omborxona 1 </SelectItem>
-            <SelectItem value="Omborxona 2"> Omborxona 2 </SelectItem>
-            <SelectItem value="Omborxona 3"> Omborxona 3 </SelectItem>
+            <SelectItem
+              v-for="itm in itemStore.warehouses"
+              :key="itm?.warehouseId"
+              :value="itm?.warehouseId"
+            >
+              {{ itm?.warehouseName }}
+            </SelectItem>
           </SelectGroup>
         </SelectContent>
       </Select>
@@ -20,10 +23,13 @@
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            <SelectItem value="taminotchilar "> Taminotchilar </SelectItem>
-            <SelectItem value="taminotchilar_1"> Taminotchilar 1 </SelectItem>
-            <SelectItem value="taminotchilar_2"> Taminotchilar 2 </SelectItem>
-            <SelectItem value="taminotchilar_3"> Taminotchilar 3 </SelectItem>
+            <SelectItem
+              v-for="itm in itemStore.category"
+              :key="itm?.categoryId"
+              :value="itm?.categoryId"
+            >
+              {{ itm?.categoryName }}
+            </SelectItem>
           </SelectGroup>
         </SelectContent>
       </Select>
@@ -114,7 +120,7 @@
         <Dialog class="w-[800px]">
           <DialogTrigger as-child>
             <div
-              class="flex items-center gap-2 border border-slate-200 pr-20 px-4 py-2 text-base rounded-xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
+              class="flex cursor-pointer items-center gap-2 border border-slate-200 pr-20 px-4 py-2 text-base rounded-xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
             >
               <span>
                 <svg
@@ -141,16 +147,21 @@
                 <Label for="size"
                   >Standart size<span class="text-orange-500"> *</span></Label
                 >
-                <Select id="size">
+                <Select id="size" v-model="standartSize">
                   <SelectTrigger class="border border-slate-300">
-                    <SelectValue placeholder="Omborxona" />
+                    <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
-                      <SelectItem value="Omborxona "> Omborxona </SelectItem>
-                      <SelectItem value="Omborxona 1"> Omborxona 1 </SelectItem>
-                      <SelectItem value="Omborxona 2"> Omborxona 2 </SelectItem>
-                      <SelectItem value="Omborxona 3"> Omborxona 3 </SelectItem>
+                      <SelectItem
+                        v-for="itm in itemStore.sizes"
+                        :key="itm?.sizeId"
+                        :value="itm?.sizeId"
+                      >
+                        {{
+                          `${formattedCurreny(itm?.sizeWidth)} - ${itm?.sizeCode}`
+                        }}
+                      </SelectItem>
                     </SelectGroup>
                   </SelectContent>
                 </Select>
@@ -160,25 +171,28 @@
                   >Boyi<span class="text-orange-500"> *</span></label
                 >
                 <input
+                  v-model="CarpetHeight"
                   type="number"
                   class="border border-slate-300 px-3 py-2 rounded-lg"
-                  placeholder="Bo'yi"
                 />
               </li>
               <li class="flex flex-col gap-1.5 mb-5">
                 <Label for="size"
                   >Valyuta<span class="text-orange-500"> *</span></Label
                 >
-                <Select id="size">
+                <Select id="size" v-model="currency">
                   <SelectTrigger class="border border-slate-300">
-                    <SelectValue placeholder="Omborxona" />
+                    <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
-                      <SelectItem value="Omborxona "> Omborxona </SelectItem>
-                      <SelectItem value="Omborxona 1"> Omborxona 1 </SelectItem>
-                      <SelectItem value="Omborxona 2"> Omborxona 2 </SelectItem>
-                      <SelectItem value="Omborxona 3"> Omborxona 3 </SelectItem>
+                      <SelectItem
+                        v-for="itm in itemStore.currency"
+                        :key="itm?.currencyId"
+                        :value="itm?.currencyId"
+                      >
+                        {{ itm?.currencySymbol }}
+                      </SelectItem>
                     </SelectGroup>
                   </SelectContent>
                 </Select>
@@ -187,16 +201,19 @@
                 <Label for="size"
                   >Ombor<span class="text-orange-500"> *</span></Label
                 >
-                <Select id="size">
+                <Select id="size" v-model="warehouse">
                   <SelectTrigger class="border border-slate-300">
-                    <SelectValue placeholder="Omborxona" />
+                    <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
-                      <SelectItem value="Omborxona "> Omborxona </SelectItem>
-                      <SelectItem value="Omborxona 1"> Omborxona 1 </SelectItem>
-                      <SelectItem value="Omborxona 2"> Omborxona 2 </SelectItem>
-                      <SelectItem value="Omborxona 3"> Omborxona 3 </SelectItem>
+                      <SelectItem
+                        v-for="itm in itemStore.warehouses"
+                        :key="itm?.warehouseId"
+                        :value="itm?.warehouseId"
+                      >
+                        {{ itm?.warehouseName }}
+                      </SelectItem>
                     </SelectGroup>
                   </SelectContent>
                 </Select>
@@ -205,16 +222,19 @@
                 <Label for="size"
                   >Kategoriya<span class="text-orange-500"> *</span></Label
                 >
-                <Select id="size">
+                <Select id="size" v-model="category">
                   <SelectTrigger class="border border-slate-300">
-                    <SelectValue placeholder="Omborxona" />
+                    <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
-                      <SelectItem value="Omborxona "> Omborxona </SelectItem>
-                      <SelectItem value="Omborxona 1"> Omborxona 1 </SelectItem>
-                      <SelectItem value="Omborxona 2"> Omborxona 2 </SelectItem>
-                      <SelectItem value="Omborxona 3"> Omborxona 3 </SelectItem>
+                      <SelectItem
+                        v-for="itm in itemStore.category"
+                        :key="itm?.categoryId"
+                        :value="itm?.categoryId"
+                      >
+                        {{ itm?.categoryName }}
+                      </SelectItem>
                     </SelectGroup>
                   </SelectContent>
                 </Select>
@@ -224,32 +244,32 @@
                   >Miqdor<span class="text-orange-500"> *</span></Label
                 >
                 <input
+                  v-model="CarpetQuantity"
                   type="number"
                   class="border border-slate-300 px-3 py-2 rounded-lg"
-                  placeholder="Bo'yi"
                 />
               </li>
               <li class="flex flex-col gap-1.5">
                 <Label for="size">Tan narxi </Label>
                 <input
+                  v-model="CarpetCost"
                   type="number"
                   class="border border-slate-300 px-3 py-2 rounded-lg"
-                  placeholder="Bo'yi"
                 />
               </li>
               <li class="flex flex-col gap-1.5">
                 <Label for="size">Sotuv narxi </Label>
                 <input
+                  v-model="CarpetPrice"
                   type="number"
                   class="border border-slate-300 px-3 py-2 rounded-lg"
-                  placeholder="Bo'yi"
                 />
               </li>
               <li class="flex items-start gap-1.5 flex-col">
                 <label for="izoh">Izoh</label>
                 <textarea
+                  v-model="CarpetCom"
                   class="border p-3 border-slate-300 rounded-xl w-[650px] h-32"
-                  name=""
                   id="izoh"
                 ></textarea>
               </li>
@@ -263,6 +283,7 @@
                     Yopish
                   </button>
                   <button
+                    @click="submitPradacts"
                     class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
                   >
                     Saqlash
@@ -335,7 +356,7 @@
               inf?.size_sizeCode
             }}</TableCell>
             <TableCell class="border text-center">{{
-              formattedCurreny(inf?.carpet_length)
+              formattedCurreny(inf?.size_sizeWidth)
             }}</TableCell>
 
             <TableCell class="border text-center">{{
@@ -345,9 +366,11 @@
               formattedCurreny(inf?.carpet_stockQuantity)
             }}</TableCell>
             <TableCell class="flex items-center justify-center gap-2">
-              {{
+              {{}}</TableCell
+            >
+            <TableCell class="border text-center">{{
+              formattedCurreny(inf?.carpet_length)
             }}</TableCell>
-            <TableCell class="border text-center">{{}}</TableCell>
             <TableCell class="border text-center">
               {{ inf?.currency_currencySymbol }}
             </TableCell>
@@ -565,6 +588,49 @@ const fetchData = async (page: number = 1): Promise<void> => {
   }
 };
 fetchData();
+import { useItemStore } from "@/store";
+
+const { fetchItems } = useItemStore();
+const itemStore = useItemStore();
+const loadItems = async () => {
+  await fetchItems();
+};
+
+loadItems();
+const standartSize = ref<string | undefined>(undefined);
+const currency = ref<string | undefined>(undefined);
+const warehouse = ref<string | undefined>(undefined);
+const category = ref<string | undefined>(undefined);
+const CarpetHeight = ref("");
+const CarpetQuantity = ref("");
+const CarpetCost = ref<string | null>(null);
+const CarpetPrice = ref<number | null>(null);
+const CarpetCom = ref("");
+
+const submitPradacts = async () => {
+  const token = localStorage.getItem("token");
+  const payload = {
+    standartSize: standartSize.value,
+    currency: currency.value,
+    warehouse: warehouse.value,
+    category: category.value,
+    height: CarpetHeight.value,
+    stockQuantity: CarpetQuantity.value,
+    cost: CarpetCost.value,
+    price: CarpetPrice.value,
+  };
+  try {
+    const response = await axios.post(`/carpet/create`, payload, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    window.location.reload();
+    console.log("warehouse create", response.data);
+  } catch (err: any) {
+    console.log("Error");
+  }
+};
 </script>
 
 <style scoped></style>

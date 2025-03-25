@@ -58,6 +58,7 @@
                   >Isim<span class="text-orange-500"> *</span></Label
                 >
                 <input
+                  v-model="clientName"
                   type="text"
                   class="border border-slate-300 px-3 py-2 rounded-lg"
                 />
@@ -67,6 +68,7 @@
                   >Familiya<span class="text-orange-500"> *</span></label
                 >
                 <input
+                  v-model="clientLasName"
                   type="text"
                   class="border border-slate-300 px-3 py-2 rounded-lg"
                 />
@@ -76,6 +78,7 @@
                   >Telefon raqam 1<span class="text-orange-500"> *</span></Label
                 >
                 <input
+                  v-model="clientTel1"
                   type="tel"
                   class="border border-slate-300 px-3 py-2 rounded-lg"
                 />
@@ -85,6 +88,7 @@
                   >Telefon raqam 2<span class="text-orange-500"> *</span></Label
                 >
                 <input
+                  v-model="clientTel2"
                   type="tel"
                   class="border border-slate-300 px-3 py-2 rounded-lg"
                 />
@@ -92,6 +96,7 @@
               <li class="flex items-start flex-col">
                 <label for="izoh">Izoh</label>
                 <textarea
+                  v-model="clientCom"
                   class="border border-slate-300 p-3 rounded-xl w-[674px] h-32"
                   name=""
                   id="izoh"
@@ -107,6 +112,7 @@
                     Yopish
                   </button>
                   <button
+                    @click="submitClient"
                     class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
                   >
                     Saqlash
@@ -342,6 +348,33 @@ const fetchData = async (page: number = 1): Promise<void> => {
   }
 };
 fetchData();
+const clientName = ref("");
+const clientLasName = ref("");
+const clientTel1 = ref("");
+const clientTel2 = ref("");
+const clientCom = ref("");
+
+const submitClient = async () => {
+  const token = localStorage.getItem("token");
+  const payload = {
+    clientName: clientName.value,
+    clientLastName: clientLasName.value,
+    clientNomer1: Number(clientTel1.value),
+    clientNomer2: Number(clientTel2.value),
+    clientDescription: clientCom.value,
+  };
+  try {
+    const response = await axios.post(`/client/create`, payload, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    window.location.reload();
+    console.log("warehouse create", response.data);
+  } catch (err: any) {
+    console.log("Error");
+  }
+};
 </script>
 
 <style scoped></style>

@@ -303,9 +303,9 @@ const fetchData = async (page: number = 1): Promise<void> => {
   }
 };
 fetchData();
-const currencyname = ref<string | null>("");
+const currencyname = ref<string>("");
 const currencyCCY = ref("");
-const currencyAmount = ref<number | null>(null);
+const currencyAmount = ref<number>(0);
 const currencyCom = ref("");
 
 const submitCurrency = async () => {
@@ -317,7 +317,7 @@ const submitCurrency = async () => {
     currencySymbol: currencyCCY.value,
   };
   try {
-    const response = await axios.post(`/category/create`, payload, {
+    const response = await axios.post(`/currency/create`, payload, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -326,6 +326,7 @@ const submitCurrency = async () => {
     console.log(response.data);
   } catch (err: any) {
     console.log("Error");
+    console.log(typeof payload.currencyName);
   }
 };
 </script>

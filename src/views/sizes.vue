@@ -58,6 +58,7 @@
                   >Eni<span class="text-orange-500">*</span></Label
                 >
                 <input
+                  v-model="sizeWidth"
                   type="number"
                   class="border border-slate-300 px-3 py-2 rounded-lg"
                 />
@@ -68,6 +69,7 @@
                     >Code<span class="text-orange-500">*</span></Label
                   >
                   <input
+                    v-model="sizeCode"
                     type="text"
                     class="border border-slate-300 px-3 py-2 rounded-lg"
                   />
@@ -77,6 +79,7 @@
                     >Rangi<span class="text-orange-500"></span
                   ></Label>
                   <input
+                    v-model="sizeColor"
                     type="text"
                     class="border border-slate-300 px-3 py-2 rounded-lg"
                   />
@@ -85,6 +88,7 @@
               <li class="flex items-start flex-col">
                 <label for="izoh">Izoh</label>
                 <textarea
+                  v-model="sizeCom"
                   class="border border-slate-300 p-3 rounded-xl w-[650px] h-32"
                   name=""
                   id="izoh"
@@ -99,6 +103,7 @@
                   Yopish
                 </button>
                 <button
+                  @click="submitSize"
                   class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
                 >
                   Saqlash
@@ -296,6 +301,38 @@ const fetchData = async (page: number = 1): Promise<void> => {
   }
 };
 fetchData();
+const sizeWidth = ref<number | null>(null);
+const sizeLength = ref<any>();
+const sizeCode = ref("");
+const sizeColor = ref("");
+const sizeCom = ref("");
+const sizeHeight = ref<any>();
+const sizeName = ref("");
+const submitSize = async () => {
+  const token = localStorage.getItem("token");
+
+  const payload = {
+    sizeLength: sizeLength.value,
+    sizeWidth: sizeWidth.value,
+    sizeCode: sizeCode.value,
+    // sizeHeight: sizeHeight.value,
+    color: sizeColor.value,
+    sizeDescription: sizeCom.value,
+    // sizeName: sizeName.value,
+  };
+  try {
+    const response = await axios.post(`/size/create`, payload, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    window.location.reload();
+    console.log(response.data);
+  } catch (err: any) {
+    console.log("Error");
+    console.log(typeof payload.sizeWidth);
+  }
+};
 </script>
 
 <style scoped></style>

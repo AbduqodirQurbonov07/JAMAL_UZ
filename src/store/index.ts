@@ -1,50 +1,102 @@
 import { defineStore } from "pinia";
-import { reactive, ref } from "vue";
+import { ref, computed } from "vue";
 import axios from "axios";
-import router from "@/router";
-export const UseApiStore = defineStore("api", () => {
-  type DateMask = (date: string) => string;
-  const todatestring: DateMask = (date) => {
-    const parseDate = new Date(date);
-    const day = parseDate.getDate().toString().padStart(2, "0");
-    const month = (parseDate.getMonth() + 1).toString().padStart(2, "0");
-    const year = parseDate.getFullYear();
+interface DataItem {
+  id: string;
+  name: string;
+  [key: string]: any;
+}
+export const useItemStore = defineStore("item", () => {
+  const warehouses = ref<DataItem[] | []>([]);
+  const contributors = ref<DataItem[] | []>([]);
+  const users = ref<DataItem[] | []>([]);
+  const clients = ref<DataItem[] | []>([]);
+  const category = ref<DataItem[] | []>([]);
+  const sizes = ref<DataItem[] | []>([]);
+  const currency = ref<DataItem[] | []>([]);
+  const loadingStore = ref(false);
 
-    return `${day}.${month}.${year}`;
-  };
-
-  interface DataItem {
-    id: string;
-    name: string;
-    [key: string]: any;
-  }
-
-  const data = ref<DataItem[] | null | any>(null);
-  const loading = ref<boolean>(false);
-  const error = ref<string | null>(null);
-  const fetchData = async (page: number = 1): Promise<void> => {
+  const fetchItems = async () => {
     const token = localStorage.getItem("token");
-
-    loading.value = true;
-    error.value = null;
+    loadingStore.value = true;
 
     try {
-      const response = await axios.get<DataItem[]>(
-        `/contributor/getall?limit=10&page=${page}`,
-        {
+      const [
+        warehousesResponse,
+        contributorsResponse,
+        usersResponse,
+        clientsResponse,
+        categoryResponse,
+        sizesResponse,
+        currencyResponse,
+      ] = await Promise.all([
+        axios.get("/warehouse/getall", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
-      );
-      data.value = response.data;
-    } catch (err: any) {
-      error.value = err.response?.data?.massage || "Failed to fetch data";
-      if (err.response.status === 401) router.push("/login");
+        }),
+        axios.get("/contributor/getall", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }),
+        axios.get("/user/getall", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }),
+        axios.get("/client/getall", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }),
+        axios.get("/category/getall", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }),
+        axios.get("/size/getall", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }),
+        axios.get("/currency/getall", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }),
+      ]);
+
+      warehouses.value = warehousesResponse.data["data"];
+      contributors.value = contributorsResponse.data["data"];
+      users.value = usersResponse.data["data"];
+      clients.value = clientsResponse.data["data"];
+      category.value = categoryResponse.data["data"];
+      sizes.value = sizesResponse.data["data"];
+      currency.value = currencyResponse.data["data"];
+      console.log(warehouses.value);
+      console.log(contributors.value);
+      console.log(users.value);
+      console.log(clients.value);
+      console.log(category.value);
+      console.log(sizes.value);
+      console.log(currency.value);
+    } catch (error) {
+      console.error("Error fetching items:", error);
     } finally {
-      loading.value = false;
+      loadingStore.value = false;
     }
   };
 
-  return fetchData(), todatestring, data, loading, error;
+  return {
+    warehouses,
+    contributors,
+    users,
+    clients,
+    loadingStore,
+    fetchItems,
+    category,
+    sizes,
+    currency,
+  };
 });
