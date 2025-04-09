@@ -1,5 +1,10 @@
 <template>
-  <div>
+  <div v-if="loading" class="mx-4 my-5 flex flex-col gap-10">
+    <Skeleton />
+    <Skeleton />
+    <Skeleton />
+  </div>
+  <div v-else>
     <div class="grid grid-cols-5 gap-3 w-[85vw] px-4 py-3">
       <Select v-model="warehouse" class="p-2">
         <SelectTrigger class="bg-slate-50 border-transparent text-base h-12">
@@ -277,11 +282,13 @@
             <DialogFooter class="mt-8">
               <div class="flex flex-col gap-8 w-[450px]">
                 <div class="flex items-center justify-end gap-3">
-                  <button
-                    class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300"
-                  >
-                    Yopish
-                  </button>
+                  <DialogClose as-child>
+                    <button
+                      class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300"
+                    >
+                      Yopish
+                    </button>
+                  </DialogClose>
                   <button
                     @click="submitPradacts"
                     class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
@@ -409,45 +416,215 @@
                 <PopoverContent
                   class="cursor-pointer flex flex-col rounded-xl w-52"
                 >
-                  <div
-                    class="flex items-center gap-3 py-2.5 hover:bg-slate-100 px-2 rounded-lg"
-                  >
-                    <span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
+                  <Dialog class="w-[800px]">
+                    <DialogTrigger as-child>
+                      <div
+                        class="flex items-center gap-3 py-2.5 pr-16 hover:bg-slate-100 px-2 rounded-lg"
                       >
-                        <path
-                          fill="currentColor"
-                          d="M4.21 20.52a.73.73 0 0 1-.52-.21a.75.75 0 0 1-.22-.6l.31-3.84A.73.73 0 0 1 4 15.4L15.06 4.34a3.2 3.2 0 0 1 2.28-.86a3.3 3.3 0 0 1 2.25.91a3.31 3.31 0 0 1 .11 4.5L8.63 20a.77.77 0 0 1-.46.22l-3.89.35Zm1-4.26L5 19l2.74-.25l10.9-10.92A1.72 1.72 0 0 0 17.31 5a1.6 1.6 0 0 0-1.19.42ZM15.59 4.87"
-                        />
-                      </svg>
-                    </span>
-                    <span>Tahrirlash</span>
-                  </div>
-                  <div
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="20"
+                          height="20"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            fill="currentColor"
+                            d="M4.21 20.52a.73.73 0 0 1-.52-.21a.75.75 0 0 1-.22-.6l.31-3.84A.73.73 0 0 1 4 15.4L15.06 4.34a3.2 3.2 0 0 1 2.28-.86a3.3 3.3 0 0 1 2.25.91a3.31 3.31 0 0 1 .11 4.5L8.63 20a.77.77 0 0 1-.46.22l-3.89.35Zm1-4.26L5 19l2.74-.25l10.9-10.92A1.72 1.72 0 0 0 17.31 5a1.6 1.6 0 0 0-1.19.42ZM15.59 4.87"
+                          />
+                        </svg>
+
+                        Tahrirlash
+                      </div>
+                    </DialogTrigger>
+                    <DialogContent class="max-w-[700px]">
+                      <DialogHeader class="border-b pb-4">
+                        <DialogTitle> Mahsulotlar tahrirlash </DialogTitle>
+                      </DialogHeader>
+                      <ul class="grid grid-cols-2 gap-3">
+                        <li class="flex flex-col gap-1.5 mt-2.5 mb-5">
+                          <Label for="size"
+                            >Standart size<span class="text-orange-500">
+                              *</span
+                            ></Label
+                          >
+                          <Select id="size" v-model="newStandartSize">
+                            <SelectTrigger class="border border-slate-300">
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectGroup>
+                                <SelectItem
+                                  v-for="itm in itemStore.sizes"
+                                  :key="itm?.sizeId"
+                                  :value="itm?.sizeId"
+                                >
+                                  {{
+                                    `${formattedCurreny(itm?.sizeWidth)} - ${itm?.sizeCode}`
+                                  }}
+                                </SelectItem>
+                              </SelectGroup>
+                            </SelectContent>
+                          </Select>
+                        </li>
+                        <li class="flex flex-col gap-1.5 mb-5">
+                          <label for="size"
+                            >Boyi<span class="text-orange-500"> *</span></label
+                          >
+                          <input
+                            v-model="newCarpetHeight"
+                            type="number"
+                            class="border border-slate-300 px-3 py-2 rounded-lg"
+                          />
+                        </li>
+                        <li class="flex flex-col gap-1.5 mb-5">
+                          <Label for="size"
+                            >Valyuta<span class="text-orange-500">
+                              *</span
+                            ></Label
+                          >
+                          <Select id="size" v-model="newCurrency">
+                            <SelectTrigger class="border border-slate-300">
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectGroup>
+                                <SelectItem
+                                  v-for="itm in itemStore.currency"
+                                  :key="itm?.currencyId"
+                                  :value="itm?.currencyId"
+                                >
+                                  {{ itm?.currencySymbol }}
+                                </SelectItem>
+                              </SelectGroup>
+                            </SelectContent>
+                          </Select>
+                        </li>
+                        <li class="flex flex-col gap-1.5 mb-5">
+                          <Label for="size"
+                            >Ombor<span class="text-orange-500"> *</span></Label
+                          >
+                          <Select id="size" v-model="newWarehouse">
+                            <SelectTrigger class="border border-slate-300">
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectGroup>
+                                <SelectItem
+                                  v-for="itm in itemStore.warehouses"
+                                  :key="itm?.warehouseId"
+                                  :value="itm?.warehouseId"
+                                >
+                                  {{ itm?.warehouseName }}
+                                </SelectItem>
+                              </SelectGroup>
+                            </SelectContent>
+                          </Select>
+                        </li>
+                        <li class="flex flex-col gap-1.5 mb-5">
+                          <Label for="size"
+                            >Kategoriya<span class="text-orange-500">
+                              *</span
+                            ></Label
+                          >
+                          <Select id="size" v-model="newCategory">
+                            <SelectTrigger class="border border-slate-300">
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectGroup>
+                                <SelectItem
+                                  v-for="itm in itemStore.category"
+                                  :key="itm?.categoryId"
+                                  :value="itm?.categoryId"
+                                >
+                                  {{ itm?.categoryName }}
+                                </SelectItem>
+                              </SelectGroup>
+                            </SelectContent>
+                          </Select>
+                        </li>
+                        <li class="flex flex-col gap-1.5 mb-5">
+                          <Label for="size"
+                            >Miqdor<span class="text-orange-500">
+                              *</span
+                            ></Label
+                          >
+                          <input
+                            v-model="newCarpetQuantity"
+                            type="number"
+                            class="border border-slate-300 px-3 py-2 rounded-lg"
+                          />
+                        </li>
+                        <li class="flex flex-col gap-1.5">
+                          <Label for="size">Tan narxi </Label>
+                          <input
+                            v-model="newCarpetCost"
+                            type="number"
+                            class="border border-slate-300 px-3 py-2 rounded-lg"
+                          />
+                        </li>
+                        <li class="flex flex-col gap-1.5">
+                          <Label for="size">Sotuv narxi </Label>
+                          <input
+                            v-model="newCarpetPrice"
+                            type="number"
+                            class="border border-slate-300 px-3 py-2 rounded-lg"
+                          />
+                        </li>
+                        <li class="flex items-start gap-1.5 flex-col">
+                          <label for="izoh">Izoh</label>
+                          <textarea
+                            v-model="newCarpetCom"
+                            class="border p-3 border-slate-300 rounded-xl w-[650px] h-32"
+                            id="izoh"
+                          ></textarea>
+                        </li>
+                      </ul>
+                      <DialogFooter class="mt-8">
+                        <div class="flex flex-col gap-8 w-[450px]">
+                          <div class="flex items-center justify-end gap-3">
+                            <DialogClose as-child>
+                              <button
+                                class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300"
+                              >
+                                Yopish
+                              </button>
+                            </DialogClose>
+                            <button
+                              :id="inf?.carpet_carpetId"
+                              @click="editCarpet"
+                              class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
+                            >
+                              Saqlash
+                            </button>
+                          </div>
+                        </div>
+                      </DialogFooter>
+                    </DialogContent>
+                  </Dialog>
+
+                  <button
+                    :id="inf?.carpet_carpetId"
+                    @click="deleteBtn"
                     class="flex items-center gap-3 py-2.5 text-red-600 hover:bg-slate-100 px-2 rounded-lg"
                   >
-                    <span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="1.5"
-                          d="M14 11v6m-4-6v6M6 7v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7M4 7h16M7 7l2-4h6l2 4"
-                        />
-                      </svg> </span
-                    ><span>O'chirish</span>
-                  </div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="1.5"
+                        d="M14 11v6m-4-6v6M6 7v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7M4 7h16M7 7l2-4h6l2 4"
+                      />
+                    </svg>
+                    O'chirish
+                  </button>
                 </PopoverContent>
               </Popover>
             </TableCell>
@@ -492,9 +669,11 @@
 </template>
 
 <script setup lang="ts">
+import Skeleton from "@/components/content/skeleton.vue";
 import {
   Dialog,
   DialogContent,
+  DialogClose,
   DialogDescription,
   DialogFooter,
   DialogHeader,
@@ -618,6 +797,7 @@ const submitPradacts = async () => {
     stockQuantity: CarpetQuantity.value,
     cost: CarpetCost.value,
     price: CarpetPrice.value,
+    carpetDescription: CarpetCom.value,
   };
   try {
     const response = await axios.post(`/carpet/create`, payload, {
@@ -629,6 +809,77 @@ const submitPradacts = async () => {
     console.log("warehouse create", response.data);
   } catch (err: any) {
     console.log("Error");
+  }
+};
+const deleteBtn = async (e: any) => {
+  const token = localStorage.getItem("token");
+  const payload = {
+    standartSize: standartSize.value,
+    currency: currency.value,
+    warehouse: warehouse.value,
+    category: category.value,
+    height: CarpetHeight.value,
+    stockQuantity: CarpetQuantity.value,
+    cost: CarpetCost.value,
+    price: CarpetPrice.value,
+  };
+  try {
+    const response = await axios.patch<DataItem[]>(
+      `/carpet/delete/${e?.target?.id}`,
+      payload,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    data.value = response.data;
+    // console.log(data.value);
+
+    window.location.reload();
+  } catch (err: any) {
+    error.value = err.response?.data?.massage || "Failed to fetch data";
+  }
+};
+  const newStandartSize = ref<string | undefined>(undefined);
+  const newCurrency = ref<string | undefined>(undefined);
+  const newWarehouse = ref<string | undefined>(undefined);
+  const newCategory = ref<string | undefined>(undefined);
+  const newCarpetHeight = ref("");
+  const newCarpetQuantity = ref("");
+  const newCarpetCost = ref<string | null>(null);
+  const newCarpetPrice = ref<number | null>(null);
+  const newCarpetCom = ref("");
+
+const editCarpet = async (e: any) => {
+  const token = localStorage.getItem("token");
+  console.log(e.target.id);
+  const payload = {
+    standartSize: newStandartSize.value,
+    currency: newCurrency.value,
+    warehouse: newWarehouse.value,
+    category: newCategory.value,
+    height: newCarpetHeight.value,
+    stockQuantity: newCarpetQuantity.value,
+    cost: newCarpetCost.value,
+    price: newCarpetPrice.value,
+    carpetDescription: newCarpetCom.value,
+  };
+  try {
+    const response = await axios.patch<DataItem[]>(
+      `/carpet/edit/${e?.target?.id}`,
+      payload,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    data.value = response.data;
+    console.log(e.target.id);
+    window.location.reload();
+  } catch (err: any) {
+    error.value = err.response?.data?.massage || "Failed to fetch data";
   }
 };
 </script>

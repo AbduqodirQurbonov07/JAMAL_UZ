@@ -243,7 +243,7 @@
             <PopoverContent>
               <button
                 @click="logOut"
-                class="flex text-lg gap-2 px-2 py-1 rounded-md justify-center pr-[10vw] hover:bg-indigo-600 text-start hover:text-slate-50"
+                class="flex text-lg gap-2 px-2 py-1 rounded-md justify-center pr-[10vw] text-red-500 hover:bg-indigo-600 text-start hover:text-slate-50"
               >
                 <span>
                   <svg
@@ -269,14 +269,263 @@
       </div>
       <router-view></router-view>
     </header>
-    <!-- <main class="h-[93vh]"></main> -->
+    <div v-if="!islogin" class="fixed mt-[650px] ml-[1600px]">
+      <Dialog class="w-[700px]">
+        <DialogTrigger as-child>
+          <div
+            class="flex cursor-pointer items-center gap-2 border border-slate-200 px-3 py-3 text-base rounded-2xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
+          >
+            <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  d="M19 12.998h-6v6h-2v-6H5v-2h6v-6h2v6h6z"
+                />
+              </svg>
+            </span>
+          </div>
+        </DialogTrigger>
+        <DialogContent
+          class="sm:max-w-[600px] grid-rows-[auto_minmax(0,1fr)_auto] p-0 max-h-[90dvh]"
+        >
+          <DialogHeader class="p-6 pb-0">
+            <DialogTitle>Sotuv oynasi</DialogTitle>
+          </DialogHeader>
+          <div class="grid gap-4 py-4 overflow-y-auto px-6">
+            <div class="flex flex-col justify-between h-[100dvh]">
+              <div class="flex flex-col p-6 bg-slate-50">
+                <ul class="grid grid-cols-1 p-4 rounded-lg gap-3 bg-white">
+                  <li class="flex flex-col gap-1.5 mt-2.5 mb-5">
+                    <Label for="size"
+                      >Ombor<span class="text-orange-500"> *</span></Label
+                    >
+                    <Select>
+                      <SelectTrigger class="border-slate-300">
+                        <SelectValue placeholder="Omborxona" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectItem value="Omborxona ">
+                            Omborxona
+                          </SelectItem>
+                          <SelectItem value="Omborxona 1">
+                            Omborxona 1
+                          </SelectItem>
+                          <SelectItem value="Omborxona 2">
+                            Omborxona 2
+                          </SelectItem>
+                          <SelectItem value="Omborxona 3">
+                            Omborxona 3
+                          </SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  </li>
+                  <li class="flex flex-col gap-1.5 mb-5">
+                    <label for="size"
+                      >Kategoriya<span class="text-orange-500"> *</span></label
+                    >
+                    <Select>
+                      <SelectTrigger class="border-slate-300">
+                        <SelectValue placeholder="Kateroriya" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectItem value="Omborxona ">
+                            REFLEX GREY Gilamlari
+                          </SelectItem>
+                          <SelectItem value="Omborxona 1">
+                            Omborxona 1
+                          </SelectItem>
+                          <SelectItem value="Omborxona 2">
+                            Omborxona 2
+                          </SelectItem>
+                          <SelectItem value="Omborxona 3">
+                            Omborxona 3
+                          </SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  </li>
+                  <li class="grid grid-cols-2 gap-48 mb-5">
+                    <div class="flex flex-col w-[280px] gap-1.5">
+                      <Label for="size"
+                        >Narx<span class="text-orange-500"> *</span></Label
+                      >
+                      <input
+                        type="number"
+                        class="border border-slate-300 px-3 py-2 rounded-lg"
+                      />
+                    </div>
+                    <div class="flex flex-col w-24 gap-1.5">
+                      <Label for="size"
+                        >Valyuta<span class="text-orange-500"> *</span></Label
+                      >
+                      <Select>
+                        <SelectTrigger class="border-slate-300">
+                          <SelectValue placeholder="" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectGroup>
+                            <SelectItem value="Omborxona 1">UZS </SelectItem>
+                            <SelectItem value="Omborxona 2">USD </SelectItem>
+                            <SelectItem value="Omborxona 3">RUB</SelectItem>
+                          </SelectGroup>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </li>
+                  <li class="flex flex-col gap-1.5 mb-5">
+                    <Label for="size"
+                      >Turi<span class="text-orange-500"> *</span></Label
+                    >
+                    <Tabs default-value="account" class="w-[400px]">
+                      <TabsList>
+                        <TabsTrigger value="account"> Tayyor </TabsTrigger>
+                        <TabsTrigger value="password"> Ochanuvchi </TabsTrigger>
+                      </TabsList>
+                    </Tabs>
+                  </li>
+                  <li class="grid grid-cols-2 gap-3 mb-5">
+                    <div class="flex flex-col gap-1.5">
+                      <Label for="size"
+                        >Miqdor<span class="text-orange-500"> </span
+                      ></Label>
+                      <input
+                        type="number"
+                        class="border border-slate-300 px-3 py-2 rounded-lg"
+                      />
+                    </div>
+                    <div class="flex flex-col gap-1.5">
+                      <Label for="size"
+                        >Olcham<span class="text-orange-500"> </span
+                      ></Label>
+                      <input
+                        type="number"
+                        class="border border-slate-300 px-3 py-2 rounded-lg"
+                      />
+                    </div>
+                  </li>
+                  <li class="flex flex-col gap-1.5 mt-2.5 mb-5">
+                    <Label for="size"
+                      >Mijoz<span class="text-orange-500"> *</span></Label
+                    >
+                    <Select>
+                      <SelectTrigger class="border-slate-300">
+                        <SelectValue placeholder="Mijoz" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectItem value="Mijoz ">
+                            Shamsidinov Alisher</SelectItem
+                          >
+                          <SelectItem value="Mijoz_1"
+                            >Shamsidinov Alisher
+                          </SelectItem>
+                          <SelectItem value="Mijoz_2">
+                            Shamsidinov Alisher
+                          </SelectItem>
+                          <SelectItem value="Mijoz_3">
+                            Shamsidinov Alisher
+                          </SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  </li>
+                  <li class="flex flex-col gap-1.5 mb-5">
+                    <Label for="size">
+                      Mijoz turi<span class="text-orange-500"> </span
+                    ></Label>
+                    <Tabs default-value="account" class="w-[400px]">
+                      <TabsList>
+                        <TabsTrigger value="account"> Oddiy mijoz </TabsTrigger>
+                        <TabsTrigger value="password">
+                          Doimiy mijoz
+                        </TabsTrigger>
+                      </TabsList>
+                    </Tabs>
+                  </li>
+                </ul>
+                <div class="bg-white mt-4 p-4 rounded-lg">
+                  <li class="flex flex-col gap-1.5">
+                    <Label for="size">
+                      To'lov turi
+                      <span class="text-orange-500"> </span
+                    ></Label>
+                    <Tabs default-value="account" class="w-[400px]">
+                      <TabsList>
+                        <TabsTrigger value="account"> Naqd </TabsTrigger>
+                        <TabsTrigger value="password"> Nasiya </TabsTrigger>
+                      </TabsList>
+                    </Tabs>
+                  </li>
+                </div>
+                <div class="bg-white mt-4 p-4 rounded-lg">
+                  <li class="flex flex-col gap-1.5">
+                    <Label for="size">
+                      Sana
+                      <span class="text-orange-500"> </span
+                    ></Label>
+                    <input
+                      type="date"
+                      class="border border-slate-300 px-3 py-2 rounded-lg"
+                    />
+                  </li>
+                </div>
+                <div class="flex flex-col gap-8"></div>
+              </div>
+            </div>
+          </div>
+          <DialogFooter class="p-6 pt-0">
+            <div class="flex items-center my-4 justify-end gap-3">
+              <DialogClose as-child>
+                <button
+                  class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300"
+                >
+                  Yopish
+                </button>
+              </DialogClose>
+              <button
+                class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
+              >
+                Saqlash
+              </button>
+            </div>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogClose,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import Button from "./components/ui/button/Button.vue";
-import Login from "./views/login.vue";
 import {
   Popover,
   PopoverContent,

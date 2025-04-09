@@ -1,5 +1,10 @@
 <template>
-  <div>
+  <div v-if="loading" class="mx-4 my-5 flex flex-col gap-10">
+    <Skeleton />
+    <Skeleton />
+    <Skeleton />
+  </div>
+  <div v-else>
     <div class="grid grid-cols-5 gap-3 px-4 py-3 w-[85vw]">
       <Select>
         <SelectTrigger class="bg-slate-50 border-transparent">
@@ -194,7 +199,7 @@
             <TableCell class="border text-center"
               >{{ Number(inf?.report_height) }} m</TableCell
             >
-            <TableCell class="flex items-center justify-center gap-2">
+            <TableCell class="flex items-center justify-start gap-2">
               <span v-if="inf?.report_action == 'EXIT'">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -264,27 +269,28 @@
                     </span>
                     <span>Tahrirlash</span>
                   </div>
-                  <div
+                  <button
+                    :id="inf?.report_reportId"
+                    @click="deleteBtn"
                     class="flex items-center gap-3 py-2.5 text-red-600 hover:bg-slate-100 px-2 rounded-lg"
                   >
-                    <span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="1.5"
-                          d="M14 11v6m-4-6v6M6 7v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7M4 7h16M7 7l2-4h6l2 4"
-                        />
-                      </svg> </span
-                    ><span>O'chirish</span>
-                  </div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="1.5"
+                        d="M14 11v6m-4-6v6M6 7v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7M4 7h16M7 7l2-4h6l2 4"
+                      />
+                    </svg>
+                    O'chirish
+                  </button>
                 </PopoverContent>
               </Popover>
             </TableCell>
@@ -329,6 +335,7 @@
 </template>
 
 <script setup lang="ts">
+import Skeleton from "@/components/content/skeleton.vue";
 import { Button } from "@/components/ui/button";
 import type { DateRange } from "reka-ui";
 import { RangeCalendar } from "@/components/ui/range-calendar";
@@ -342,7 +349,6 @@ const value = ref({
   start,
   end,
 }) as Ref<DateRange>;
-
 import {
   Select,
   SelectContent,
@@ -399,6 +405,7 @@ const todatestring: DateMask = (date) => {
 
   return `${day}.${month}.${year}`;
 };
+
 const data = ref<DataItem[] | null | any>(null);
 const loading = ref<boolean>(false);
 const error = ref<string | null>(null);
@@ -411,6 +418,7 @@ const fetchData = async (page: number = 1): Promise<void> => {
   try {
     const response = await axios.get<DataItem[]>(
       `/report/getall?limit=10&page=${page}`,
+
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -426,6 +434,28 @@ const fetchData = async (page: number = 1): Promise<void> => {
   }
 };
 fetchData();
+
+const deleteBtn = async (e: any) => {
+  const token = localStorage.getItem("token");
+  const payload = {};
+  try {
+    const response = await axios.patch<DataItem[]>(
+      `/report/delete/${e?.target?.id}`,
+      payload,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    data.value = response.data;
+    // console.log(data.value);
+
+    window.location.reload();
+  } catch (err: any) {
+    error.value = err.response?.data?.massage || "Failed to fetch data";
+  }
+};
 </script>
 
 <style scoped></style>

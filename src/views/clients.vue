@@ -1,5 +1,10 @@
 <template>
-  <div>
+  <div v-if="loading" class="mx-4 my-5 flex flex-col gap-10">
+    <Skeleton />
+    <Skeleton />
+    <Skeleton />
+  </div>
+  <div v-else>
     <div class="grid grid-cols-5 gap-3 px-4">
       <div class="flex w-[84vw] justify-between py-3">
         <div
@@ -106,11 +111,13 @@
             <DialogFooter>
               <div class="flex flex-col gap-8 w-[450px]">
                 <div class="flex items-center justify-end gap-3">
-                  <button
-                    class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300"
-                  >
-                    Yopish
-                  </button>
+                  <DialogClose as-child>
+                    <button
+                      class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300"
+                    >
+                      Yopish
+                    </button>
+                  </DialogClose>
                   <button
                     @click="submitClient"
                     class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
@@ -159,7 +166,11 @@
             <TableCell class="border text-center">
               {{ index + 1 }}
             </TableCell>
-            <TableCell class="border">
+            <TableCell
+              class="border"
+              :name="inf?.clientName"
+              :Lname="inf?.clientLasName"
+            >
               {{ `${inf?.clientName} ${inf?.clientLastName}` }}
             </TableCell>
             <TableCell class="border text-center">{{
@@ -181,45 +192,131 @@
                 <PopoverContent
                   class="cursor-pointer flex flex-col rounded-xl w-52"
                 >
-                  <div
-                    class="flex items-center gap-3 py-2.5 hover:bg-slate-100 px-2 rounded-lg"
-                  >
-                    <span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
+                  <Dialog class="w-820px">
+                    <DialogTrigger>
+                      <div
+                        class="flex items-center gap-3 py-2.5 hover:bg-slate-100 px-2 rounded-lg"
                       >
-                        <path
-                          fill="currentColor"
-                          d="M4.21 20.52a.73.73 0 0 1-.52-.21a.75.75 0 0 1-.22-.6l.31-3.84A.73.73 0 0 1 4 15.4L15.06 4.34a3.2 3.2 0 0 1 2.28-.86a3.3 3.3 0 0 1 2.25.91a3.31 3.31 0 0 1 .11 4.5L8.63 20a.77.77 0 0 1-.46.22l-3.89.35Zm1-4.26L5 19l2.74-.25l10.9-10.92A1.72 1.72 0 0 0 17.31 5a1.6 1.6 0 0 0-1.19.42ZM15.59 4.87"
-                        />
-                      </svg>
-                    </span>
-                    <span>Tahrirlash</span>
-                  </div>
-                  <div
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="20"
+                          height="20"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            fill="currentColor"
+                            d="M4.21 20.52a.73.73 0 0 1-.52-.21a.75.75 0 0 1-.22-.6l.31-3.84A.73.73 0 0 1 4 15.4L15.06 4.34a3.2 3.2 0 0 1 2.28-.86a3.3 3.3 0 0 1 2.25.91a3.31 3.31 0 0 1 .11 4.5L8.63 20a.77.77 0 0 1-.46.22l-3.89.35Zm1-4.26L5 19l2.74-.25l10.9-10.92A1.72 1.72 0 0 0 17.31 5a1.6 1.6 0 0 0-1.19.42ZM15.59 4.87"
+                          />
+                        </svg>
+
+                        Tahrirlash
+                      </div>
+                    </DialogTrigger>
+                    <DialogContent class="max-w-[725px]">
+                      <DialogHeader class="border-b p-4">
+                        <DialogTitle> Mijoz tahrirlash </DialogTitle>
+                      </DialogHeader>
+                      <ul class="grid grid-cols-2 gap-3">
+                        <li class="flex flex-col gap-1.5 mt-2.5">
+                          <Label for="size"
+                            >Isim<span class="text-orange-500"> *</span></Label
+                          >
+                          <input
+                            v-model="newClientName"
+                            type="text"
+                            class="border border-slate-300 px-3 py-2 rounded-lg"
+                          />
+                        </li>
+                        <li class="flex flex-col gap-1.5 mb-5">
+                          <label for="size"
+                            >Familiya<span class="text-orange-500">
+                              *</span
+                            ></label
+                          >
+                          <input
+                            v-model="newClientLasName"
+                            type="text"
+                            class="border border-slate-300 px-3 py-2 rounded-lg"
+                          />
+                        </li>
+                        <li class="flex flex-col gap-1.5 mb-5">
+                          <Label for="size"
+                            >Telefon raqam 1<span class="text-orange-500">
+                              *</span
+                            ></Label
+                          >
+                          <input
+                            v-model="newClientTel1"
+                            type="tel"
+                            class="border border-slate-300 px-3 py-2 rounded-lg"
+                          />
+                        </li>
+                        <li class="flex flex-col gap-1.5">
+                          <Label for="size"
+                            >Telefon raqam 2<span class="text-orange-500">
+                              *</span
+                            ></Label
+                          >
+                          <input
+                            v-model="newClientTel2"
+                            type="tel"
+                            class="border border-slate-300 px-3 py-2 rounded-lg"
+                          />
+                        </li>
+                        <li class="flex items-start flex-col">
+                          <label for="izoh">Izoh</label>
+                          <textarea
+                            v-model="newClientCom"
+                            class="border border-slate-300 p-3 rounded-xl w-[674px] h-32"
+                            name=""
+                            id="izoh"
+                          ></textarea>
+                        </li>
+                      </ul>
+                      <DialogFooter>
+                        <div class="flex flex-col gap-8 w-[450px]">
+                          <div class="flex items-center justify-end gap-3">
+                            <DialogClose as-child>
+                              <button
+                                class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300"
+                              >
+                                Yopish
+                              </button>
+                            </DialogClose>
+                            <button
+                              :id="inf?.clientId"
+                              @click="editClient"
+                              class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
+                            >
+                              Saqlash
+                            </button>
+                          </div>
+                        </div>
+                      </DialogFooter>
+                    </DialogContent>
+                  </Dialog>
+                  <button
+                    :id="inf?.clientId"
+                    @click="deleteBtn"
                     class="flex items-center gap-3 py-2.5 text-red-600 hover:bg-slate-100 px-2 rounded-lg"
                   >
-                    <span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="1.5"
-                          d="M14 11v6m-4-6v6M6 7v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7M4 7h16M7 7l2-4h6l2 4"
-                        />
-                      </svg> </span
-                    ><span>O'chirish</span>
-                  </div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="1.5"
+                        d="M14 11v6m-4-6v6M6 7v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7M4 7h16M7 7l2-4h6l2 4"
+                      />
+                    </svg>
+                    O'chirish
+                  </button>
                 </PopoverContent>
               </Popover>
             </TableCell>
@@ -265,7 +362,7 @@
 
 <script setup lang="ts">
 import { Button } from "@/components/ui/button";
-
+import Skeleton from "@/components/content/skeleton.vue";
 import { Label } from "@/components/ui/label";
 import {
   Table,
@@ -296,6 +393,7 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogClose,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -373,6 +471,68 @@ const submitClient = async () => {
     console.log("warehouse create", response.data);
   } catch (err: any) {
     console.log("Error");
+  }
+};
+
+const deleteBtn = async (e: any) => {
+  const token = localStorage.getItem("token");
+  console.log(e.target?.name);
+  const payload = {
+    clientName: clientName.value,
+    clientLastName: clientLasName.value,
+    clientNomer1: Number(clientTel1.value),
+    clientNomer2: Number(clientTel2.value),
+    clientDescription: clientCom.value,
+  };
+  try {
+    const response = await axios.patch<DataItem[]>(
+      `/client/delete/${e?.target?.id}`,
+      payload,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    data.value = response.data;
+    console.log(data.value);
+
+    window.location.reload();
+  } catch (err: any) {
+    error.value = err.response?.data?.massage || "Failed to fetch data";
+  }
+};
+
+const newClientName = ref("");
+const newClientLasName = ref("");
+const newClientTel1 = ref("");
+const newClientTel2 = ref("");
+const newClientCom = ref("");
+const editClient = async (e: any) => {
+  const token = localStorage.getItem("token");
+  console.log(e.target.id);
+  const payload = {
+    clientName: newClientName.value,
+    clientLastName: newClientLasName.value,
+    clientNomer1: Number(newClientTel1.value),
+    clientNomer2: Number(newClientTel2.value),
+    clientDescription: newClientCom.value,
+  };
+  try {
+    const response = await axios.patch<DataItem[]>(
+      `/client/edit/${e?.target?.id}`,
+      payload,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    data.value = response.data;
+    console.log(e.target.id);
+    window.location.reload();
+  } catch (err: any) {
+    error.value = err.response?.data?.massage || "Failed to fetch data";
   }
 };
 </script>

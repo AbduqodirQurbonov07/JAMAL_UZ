@@ -1,5 +1,10 @@
 <template>
-  <div class="">
+  <div v-if="loading" class="mx-4 my-5 flex flex-col gap-10">
+    <Skeleton />
+    <Skeleton />
+    <Skeleton />
+  </div>
+  <div v-else class="">
     <div class="grid grid-cols-5 gap-3 p-4">
       <div class="flex h-[8vh] w-[84vw] justify-between py-3">
         <div
@@ -100,11 +105,13 @@
 
             <DialogFooter>
               <div class="flex items-center justify-end gap-3">
-                <button
-                  class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300"
-                >
-                  Yopish
-                </button>
+                <DialogClose as-child>
+                  <button
+                    class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300"
+                  >
+                    Yopish
+                  </button>
+                </DialogClose>
                 <button
                   @click="submitcontributor"
                   class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
@@ -157,6 +164,7 @@
                   inf?.contributorName
                 }}</span
                 ><span
+                  :telCon="inf?.contributorNomer"
                   class="bg-[#F3F3F3] text-gray-700 px-1 rounded-xl"
                 ></span>
               </p>
@@ -191,7 +199,12 @@
                   <p>{{ inf?.contributorNomer }}</p>
                 </li>
                 <li class="flex justify-between py-2 border-b">
-                  <p class="text-gray-600">Diler</p>
+                  <p
+                    :dilerCon="inf?.contributorConnector"
+                    class="text-gray-600"
+                  >
+                    Diler
+                  </p>
                   <p>{{ inf?.contributorConnector }}</p>
                 </li>
                 <li class="flex justify-between py-2 border-b">
@@ -213,48 +226,116 @@
             <img src="../svg/dots.svg" alt="" />
           </PopoverTrigger>
           <PopoverContent class="cursor-pointer flex flex-col rounded-xl w-52">
-            <div
-              :id="inf?.contributorId"
-              class="flex items-center gap-3 py-2.5 hover:bg-slate-100 px-2 rounded-lg"
-            >
-              <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
+            <Dialog class="w-[800px]">
+              <DialogTrigger>
+                <button
+                  class="flex items-center gap-3 py-2.5 pr-16 hover:bg-slate-100 px-2 rounded-lg"
                 >
-                  <path
-                    fill="currentColor"
-                    d="M4.21 20.52a.73.73 0 0 1-.52-.21a.75.75 0 0 1-.22-.6l.31-3.84A.73.73 0 0 1 4 15.4L15.06 4.34a3.2 3.2 0 0 1 2.28-.86a3.3 3.3 0 0 1 2.25.91a3.31 3.31 0 0 1 .11 4.5L8.63 20a.77.77 0 0 1-.46.22l-3.89.35Zm1-4.26L5 19l2.74-.25l10.9-10.92A1.72 1.72 0 0 0 17.31 5a1.6 1.6 0 0 0-1.19.42ZM15.59 4.87"
-                  />
-                </svg>
-              </span>
-              <span>Tahrirlash</span>
-            </div>
-            <div
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M4.21 20.52a.73.73 0 0 1-.52-.21a.75.75 0 0 1-.22-.6l.31-3.84A.73.73 0 0 1 4 15.4L15.06 4.34a3.2 3.2 0 0 1 2.28-.86a3.3 3.3 0 0 1 2.25.91a3.31 3.31 0 0 1 .11 4.5L8.63 20a.77.77 0 0 1-.46.22l-3.89.35Zm1-4.26L5 19l2.74-.25l10.9-10.92A1.72 1.72 0 0 0 17.31 5a1.6 1.6 0 0 0-1.19.42ZM15.59 4.87"
+                    />
+                  </svg>
+
+                  Tahrirlash
+                </button>
+              </DialogTrigger>
+              <DialogContent class="max-w-[700px]">
+                <DialogHeader>
+                  <DialogTitle> Taminotchi tahrirlash</DialogTitle>
+                </DialogHeader>
+                <ul class="grid grid-cols-1 gap-3">
+                  <li class="flex flex-col gap-1.5 mt-2.5 mb-5">
+                    <Label for="size"
+                      >Nomi<span class="text-orange-500">*</span></Label
+                    >
+                    <input
+                      v-model="newContributorName"
+                      type="text"
+                      class="border border-slate-300 px-3 py-2 rounded-lg"
+                    />
+                  </li>
+                  <li class="grid grid-cols-2 gap-1.5 mb-5">
+                    <div class="flex flex-col gap-1.5">
+                      <Label for="size"
+                        >Diler<span class="text-orange-500">*</span></Label
+                      >
+                      <input
+                        v-model="newContributordiller"
+                        type="text"
+                        class="border border-slate-300 px-3 py-2 rounded-lg"
+                      />
+                    </div>
+                    <div class="flex flex-col gap-1.5">
+                      <Label for="size"
+                        >Telefon <span class="text-orange-500">*</span></Label
+                      >
+                      <input
+                        v-model="newContributorNomer"
+                        type="tel"
+                        class="border border-slate-300 px-3 py-2 rounded-lg"
+                      />
+                    </div>
+                  </li>
+                  <li class="flex items-start flex-col">
+                    <label for="izoh">Izoh</label>
+                    <textarea
+                      v-model="newContributorDescription"
+                      class="border border-slate-300 p-3 rounded-xl w-[650px] h-32"
+                      name=""
+                      id="izoh"
+                    ></textarea>
+                  </li>
+                </ul>
+
+                <DialogFooter>
+                  <div class="flex items-center justify-end gap-3">
+                    <DialogClose as-child>
+                      <button
+                        class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300"
+                      >
+                        Yopish
+                      </button>
+                    </DialogClose>
+                    <button
+                      :id="inf?.contributorId"
+                      @click="editContributor"
+                      class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
+                    >
+                      Saqlash
+                    </button>
+                  </div>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+            <button
               @click="deleteBtn"
               :id="inf?.contributorId"
               class="flex items-center gap-3 py-2.5 text-red-600 hover:bg-slate-100 px-2 rounded-lg"
             >
-              <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
-                    d="M14 11v6m-4-6v6M6 7v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7M4 7h16M7 7l2-4h6l2 4"
-                  />
-                </svg> </span
-              ><span>O'chirish</span>
-            </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M14 11v6m-4-6v6M6 7v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7M4 7h16M7 7l2-4h6l2 4"
+                />
+              </svg>
+              O'chirish
+            </button>
           </PopoverContent>
         </Popover>
       </div>
@@ -263,10 +344,12 @@
 </template>
 
 <script setup lang="ts">
+import Skeleton from "@/components/content/skeleton.vue";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
+  DialogClose,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -354,10 +437,16 @@ const submitcontributor = async () => {
 
 const deleteBtn = async (e: any) => {
   const token = localStorage.getItem("token");
-
+  const payload = {
+    contributorName: contributorName.value,
+    contributorDescription: contributorDescription.value,
+    contributorNomer: contributorNomer.value,
+    contributorConnector: contributordiller.value,
+  };
   try {
     const response = await axios.patch<DataItem[]>(
       `/contributor/delete/${e?.target?.id}`,
+      payload,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -365,8 +454,38 @@ const deleteBtn = async (e: any) => {
       }
     );
     data.value = response.data;
-    console.log(data.value);
+    // console.log(data.value);
 
+    window.location.reload();
+  } catch (err: any) {
+    error.value = err.response?.data?.massage || "Failed to fetch data";
+  }
+};
+const newContributorName = ref("");
+const newContributorDescription = ref("");
+const newContributorNomer = ref("");
+const newContributordiller = ref("");
+const editContributor = async (e: any) => {
+  const token = localStorage.getItem("token");
+  console.log(e.target.id);
+  const payload = {
+    contributorName: newContributorName.value,
+    contributorDescription: newContributorDescription.value,
+    contributorNomer: newContributorNomer.value,
+    contributorConnector: newContributordiller.value,
+  };
+  try {
+    const response = await axios.patch<DataItem[]>(
+      `/contributor/edit/${e?.target?.id}`,
+      payload,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    data.value = response.data;
+    console.log(e.target.id);
     window.location.reload();
   } catch (err: any) {
     error.value = err.response?.data?.massage || "Failed to fetch data";

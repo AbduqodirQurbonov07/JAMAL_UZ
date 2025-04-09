@@ -1,5 +1,10 @@
 <template>
-  <div class="">
+  <div v-if="loading" class="mx-4 my-5 flex flex-col gap-10">
+    <Skeleton />
+    <Skeleton />
+    <Skeleton />
+  </div>
+  <div v-else>
     <div class="grid grid-cols-5 gap-3 px-4">
       <div class="flex w-[83vw] justify-between py-3">
         <div
@@ -127,11 +132,13 @@
               <div class="flex flex-col p-6">
                 <div class="flex flex-col gap-8">
                   <div class="flex items-center justify-end gap-3">
-                    <button
-                      class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300"
-                    >
-                      Yopish
-                    </button>
+                    <DialogClose as-child>
+                      <button
+                        class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300"
+                      >
+                        Yopish
+                      </button>
+                    </DialogClose>
                     <button
                       @click="submitUser"
                       class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
@@ -215,27 +222,28 @@
                     </span>
                     <span>Tahrirlash</span>
                   </div>
-                  <div
+                  <button
+                    :id="inf?.userId"
+                    @click="deleteBtn"
                     class="flex items-center gap-3 py-2.5 text-red-600 hover:bg-slate-100 px-2 rounded-lg"
                   >
-                    <span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="1.5"
-                          d="M14 11v6m-4-6v6M6 7v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7M4 7h16M7 7l2-4h6l2 4"
-                        />
-                      </svg> </span
-                    ><span>O'chirish</span>
-                  </div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="1.5"
+                        d="M14 11v6m-4-6v6M6 7v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7M4 7h16M7 7l2-4h6l2 4"
+                      />
+                    </svg>
+                    O'chirish
+                  </button>
                 </PopoverContent>
               </Popover>
             </TableCell>
@@ -276,220 +284,12 @@
         </PaginationList>
       </Pagination>
     </div>
-
-    <!-- <div class="fixed mt-8">
-      <Dialog>
-        <DialogTrigger
-          as-child
-          class="flex cursor-pointer items-center gap-2 border border-slate-200 px-4 py-4 text-base rounded-2xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
-        >
-          <span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill="currentColor"
-                d="M19 12.998h-6v6h-2v-6H5v-2h6v-6h2v6h6z"
-              />
-            </svg>
-          </span>
-        </DialogTrigger>
-        <DialogScrollContent class="sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle>Sotuv oynasi </DialogTitle>
-          </DialogHeader>
-          <div class="grid gap-4 py-4 h-[300dvh]"></div>
-          <div class="flex flex-col p-6 bg-slate-50">
-            <ul class="grid grid-cols-1 p-4 rounded-lg gap-3 bg-white">
-              <li class="flex flex-col gap-1.5 mt-2.5 mb-5">
-                <Label for="size"
-                  >Ombor<span class="text-orange-500"> *</span></Label
-                >
-                <Select>
-                  <SelectTrigger class="border-slate-300">
-                    <SelectValue placeholder="Omborxona" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectItem value="Omborxona "> Omborxona </SelectItem>
-                      <SelectItem value="Omborxona 1"> Omborxona 1 </SelectItem>
-                      <SelectItem value="Omborxona 2"> Omborxona 2 </SelectItem>
-                      <SelectItem value="Omborxona 3"> Omborxona 3 </SelectItem>
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </li>
-              <li class="flex flex-col gap-1.5 mb-5">
-                <label for="size"
-                  >Kategoriya<span class="text-orange-500"> *</span></label
-                >
-                <Select>
-                  <SelectTrigger class="border-slate-300">
-                    <SelectValue placeholder="Kateroriya" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectItem value="Omborxona ">
-                        REFLEX GREY Gilamlari
-                      </SelectItem>
-                      <SelectItem value="Omborxona 1"> Omborxona 1 </SelectItem>
-                      <SelectItem value="Omborxona 2"> Omborxona 2 </SelectItem>
-                      <SelectItem value="Omborxona 3"> Omborxona 3 </SelectItem>
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </li>
-              <li class="grid grid-cols-2 gap-48 mb-5">
-                <div class="flex flex-col w-[280px] gap-1.5">
-                  <Label for="size"
-                    >Narx<span class="text-orange-500"> *</span></Label
-                  >
-                  <input
-                    type="number"
-                    class="border border-slate-300 px-3 py-2 rounded-lg"
-                  />
-                </div>
-                <div class="flex flex-col w-24 gap-1.5">
-                  <Label for="size"
-                    >Valyuta<span class="text-orange-500"> *</span></Label
-                  >
-                  <Select>
-                    <SelectTrigger class="border-slate-300">
-                      <SelectValue placeholder="" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectItem value="Omborxona 1">UZS </SelectItem>
-                        <SelectItem value="Omborxona 2">USD </SelectItem>
-                        <SelectItem value="Omborxona 3">RUB</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </li>
-              <li class="flex flex-col gap-1.5 mb-5">
-                <Label for="size"
-                  >Turi<span class="text-orange-500"> *</span></Label
-                >
-                <Tabs default-value="account" class="w-[400px]">
-                  <TabsList>
-                    <TabsTrigger value="account"> Tayyor </TabsTrigger>
-                    <TabsTrigger value="password"> Ochanuvchi </TabsTrigger>
-                  </TabsList>
-                </Tabs>
-              </li>
-              <li class="grid grid-cols-2 gap-3 mb-5">
-                <div class="flex flex-col gap-1.5">
-                  <Label for="size"
-                    >Miqdor<span class="text-orange-500"> </span
-                  ></Label>
-                  <input
-                    type="number"
-                    class="border border-slate-300 px-3 py-2 rounded-lg"
-                  />
-                </div>
-                <div class="flex flex-col gap-1.5">
-                  <Label for="size"
-                    >Olcham<span class="text-orange-500"> </span
-                  ></Label>
-                  <input
-                    type="number"
-                    class="border border-slate-300 px-3 py-2 rounded-lg"
-                  />
-                </div>
-              </li>
-              <li class="flex flex-col gap-1.5 mt-2.5 mb-5">
-                <Label for="size"
-                  >Mijoz<span class="text-orange-500"> *</span></Label
-                >
-                <Select>
-                  <SelectTrigger class="border-slate-300">
-                    <SelectValue placeholder="Mijoz" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectItem value="Mijoz ">
-                        Shamsidinov Alisher</SelectItem
-                      >
-                      <SelectItem value="Mijoz_1"
-                        >Shamsidinov Alisher
-                      </SelectItem>
-                      <SelectItem value="Mijoz_2">
-                        Shamsidinov Alisher
-                      </SelectItem>
-                      <SelectItem value="Mijoz_3">
-                        Shamsidinov Alisher
-                      </SelectItem>
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </li>
-              <li class="flex flex-col gap-1.5 mb-5">
-                <Label for="size">
-                  Mijoz turi<span class="text-orange-500"> </span
-                ></Label>
-                <Tabs default-value="account" class="w-[400px]">
-                  <TabsList>
-                    <TabsTrigger value="account"> Oddiy mijoz </TabsTrigger>
-                    <TabsTrigger value="password"> Doimiy mijoz </TabsTrigger>
-                  </TabsList>
-                </Tabs>
-              </li>
-            </ul>
-            <div class="bg-white mt-4 p-4 rounded-lg">
-              <li class="flex flex-col gap-1.5">
-                <Label for="size">
-                  To'lov turi
-                  <span class="text-orange-500"> </span
-                ></Label>
-                <Tabs default-value="account" class="w-[400px]">
-                  <TabsList>
-                    <TabsTrigger value="account"> Naqd </TabsTrigger>
-                    <TabsTrigger value="password"> Nasiya </TabsTrigger>
-                  </TabsList>
-                </Tabs>
-              </li>
-            </div>
-            <div class="bg-white mt-4 p-4 rounded-lg">
-              <li class="flex flex-col gap-1.5">
-                <Label for="size">
-                  Sana
-                  <span class="text-orange-500"> </span
-                ></Label>
-                <input
-                  type="date"
-                  class="border border-slate-300 px-3 py-2 rounded-lg"
-                />
-              </li>
-            </div>
-            <div class="flex flex-col gap-8"></div> -->
-    <!-- </div>
-          <DialogFooter>
-            <div class="flex items-center my-4 justify-end gap-3">
-              <button
-                class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300"
-              >
-                Yopish
-              </button>
-              <button
-                class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
-              >
-                Saqlash
-              </button>
-            </div>
-          </DialogFooter>
-        </DialogScrollContent>
-      </Dialog>
-    </div> -->
   </div>
 </template>
 
 <script setup lang="ts">
 import { Button } from "@/components/ui/button";
-
+import Skeleton from "@/components/content/skeleton.vue";
 import { Label } from "@/components/ui/label";
 import {
   Table,
@@ -520,6 +320,7 @@ import {
   DialogContent,
   DialogFooter,
   DialogHeader,
+  DialogClose,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
@@ -600,6 +401,36 @@ const submitUser = async () => {
   } catch (err: any) {
     console.log(typeof payload.userNomer);
     console.log("Error");
+  }
+};
+
+const deleteBtn = async (e: any) => {
+  const token = localStorage.getItem("token");
+  const payload = {
+    userFirstName: userfirstName.value,
+    userNomer: Number(userTel.value),
+    userPassword: password.value,
+    userLogin: login.value,
+    userLastName: userlastName.value,
+    userDescription: userCom.value,
+    userEmail: userEmail.value,
+  };
+  try {
+    const response = await axios.patch<DataItem[]>(
+      `/user/delete/${e?.target?.id}`,
+      payload,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    data.value = response.data;
+    console.log(data.value);
+
+    window.location.reload();
+  } catch (err: any) {
+    error.value = err.response?.data?.massage || "Failed to fetch data";
   }
 };
 

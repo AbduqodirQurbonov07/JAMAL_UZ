@@ -1,5 +1,10 @@
 <template>
-  <div class="">
+  <div v-if="loading" class="mx-4 my-5 flex flex-col gap-10">
+    <Skeleton />
+    <Skeleton />
+    <Skeleton />
+  </div>
+  <div v-else class="">
     <div class="grid grid-cols-5 gap-3 px-4">
       <div class="flex w-[84vw] justify-between py-3">
         <div
@@ -97,11 +102,13 @@
             </ul>
             <DialogFooter>
               <div class="flex items-center justify-end gap-3">
-                <button
-                  class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300"
-                >
-                  Yopish
-                </button>
+                <DialogClose as-child>
+                  <button
+                    class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300"
+                  >
+                    Yopish
+                  </button>
+                </DialogClose>
                 <button
                   @click="submitSize"
                   class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
@@ -126,22 +133,22 @@
           <PopoverTrigger>
             <div class="flex flex-col">
               <p class="flex items-center gap-3">
-                <span class="text-xl font-semibold"
+                <span :nameS="inf?.sizeName" class="text-xl font-semibold"
                   >{{ formattedCurreny(inf?.sizeWidth) }} metr</span
-                ><span class="bg-[#F3F3F3] text-gray-700 px-1 rounded-xl">{{
+                ><span class="bg-[#F3F3F3] text-gray-700 px-1 rounded-xl">#{{
                   inf?.sizeCode
                 }}</span>
               </p>
               <p class="text-[#98A2B3]">{{ inf?.color }}</p>
             </div>
           </PopoverTrigger>
-          <PopoverContent class="w-[450px] h-auto">
+          <PopoverContent v-if="!exit" class="w-[450px] h-auto">
             <div class="flex flex-col">
               <div class="flex items-center justify-between pb-5 mb-8">
                 <p class="text-gray-900 font-semibold text-lg">
                   Standart o'lchov
                 </p>
-                <button>
+                <button @click="ExitBtn">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -162,7 +169,7 @@
                 </li>
                 <li class="flex justify-between py-2 border-b">
                   <p class="text-gray-600">Code</p>
-                  <p>{{ inf?.sizeCode }}</p>
+                  <p>#{{ inf?.sizeCode }}</p>
                 </li>
                 <li class="flex justify-between py-2 border-b">
                   <p class="text-gray-600">Rangi</p>
@@ -187,45 +194,114 @@
             <img src="../svg/dots.svg" alt="" />
           </PopoverTrigger>
           <PopoverContent class="cursor-pointer flex flex-col rounded-xl w-52">
-            <div
-              class="flex items-center gap-3 py-2.5 hover:bg-slate-100 px-2 rounded-lg"
-            >
-              <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
+            <Dialog class="w-[800px]">
+              <DialogTrigger>
+                <div
+                  class="flex items-center gap-3 py-2.5 pr-16 hover:bg-slate-100 px-2 rounded-lg"
                 >
-                  <path
-                    fill="currentColor"
-                    d="M4.21 20.52a.73.73 0 0 1-.52-.21a.75.75 0 0 1-.22-.6l.31-3.84A.73.73 0 0 1 4 15.4L15.06 4.34a3.2 3.2 0 0 1 2.28-.86a3.3 3.3 0 0 1 2.25.91a3.31 3.31 0 0 1 .11 4.5L8.63 20a.77.77 0 0 1-.46.22l-3.89.35Zm1-4.26L5 19l2.74-.25l10.9-10.92A1.72 1.72 0 0 0 17.31 5a1.6 1.6 0 0 0-1.19.42ZM15.59 4.87"
-                  />
-                </svg>
-              </span>
-              <span>Tahrirlash</span>
-            </div>
-            <div
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M4.21 20.52a.73.73 0 0 1-.52-.21a.75.75 0 0 1-.22-.6l.31-3.84A.73.73 0 0 1 4 15.4L15.06 4.34a3.2 3.2 0 0 1 2.28-.86a3.3 3.3 0 0 1 2.25.91a3.31 3.31 0 0 1 .11 4.5L8.63 20a.77.77 0 0 1-.46.22l-3.89.35Zm1-4.26L5 19l2.74-.25l10.9-10.92A1.72 1.72 0 0 0 17.31 5a1.6 1.6 0 0 0-1.19.42ZM15.59 4.87"
+                    />
+                  </svg>
+                  Tahrirlash
+                </div>
+              </DialogTrigger>
+              <DialogContent class="max-w-[700px]">
+                <DialogHeader class="border-b pb-4">
+                  <DialogTitle> Standart o'lchov tahrirlash </DialogTitle>
+                </DialogHeader>
+                <ul class="grid grid-cols-1 gap-3">
+                  <li class="flex flex-col gap-1.5 mt-2.5 mb-5">
+                    <Label for="size"
+                      >Eni<span class="text-orange-500">*</span></Label
+                    >
+                    <input
+                      v-model="newSizeWidth"
+                      type="number"
+                      class="border border-slate-300 px-3 py-2 rounded-lg"
+                    />
+                  </li>
+                  <li class="grid grid-cols-2 gap-1.5 mb-5">
+                    <div class="flex flex-col gap-1.5">
+                      <Label for="size"
+                        >Code<span class="text-orange-500">*</span></Label
+                      >
+                      <input
+                        v-model="newSizeCode"
+                        type="text"
+                        class="border border-slate-300 px-3 py-2 rounded-lg"
+                      />
+                    </div>
+                    <div class="flex flex-col gap-1.5">
+                      <Label for="size"
+                        >Rangi<span class="text-orange-500"></span
+                      ></Label>
+                      <input
+                        v-model="newSizeColor"
+                        type="text"
+                        class="border border-slate-300 px-3 py-2 rounded-lg"
+                      />
+                    </div>
+                  </li>
+                  <li class="flex items-start flex-col">
+                    <label for="izoh">Izoh</label>
+                    <textarea
+                      v-model="newSizeCom"
+                      class="border border-slate-300 p-3 rounded-xl w-[650px] h-32"
+                      name=""
+                      id="izoh"
+                    ></textarea>
+                  </li>
+                </ul>
+                <DialogFooter>
+                  <div class="flex items-center justify-end gap-3">
+                    <DialogClose as-child>
+                      <button
+                        class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300"
+                      >
+                        Yopish
+                      </button>
+                    </DialogClose>
+                    <button
+                      :id="inf?.sizeId"
+                      @click="editSizes"
+                      class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
+                    >
+                      Saqlash
+                    </button>
+                  </div>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+            <button
+              :id="inf?.sizeId"
+              @click="deleteBtn"
               class="flex items-center gap-3 py-2.5 text-red-600 hover:bg-slate-100 px-2 rounded-lg"
             >
-              <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
-                    d="M14 11v6m-4-6v6M6 7v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7M4 7h16M7 7l2-4h6l2 4"
-                  />
-                </svg> </span
-              ><span>O'chirish</span>
-            </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M14 11v6m-4-6v6M6 7v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V7M4 7h16M7 7l2-4h6l2 4"
+                />
+              </svg>
+              O'chirish
+            </button>
           </PopoverContent>
         </Popover>
       </div>
@@ -234,6 +310,7 @@
 </template>
 
 <script setup lang="ts">
+import Skeleton from "@/components/content/skeleton.vue";
 import { Label } from "@/components/ui/label";
 import {
   Dialog,
@@ -241,6 +318,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
+  DialogClose,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
@@ -273,6 +351,10 @@ interface DataItem {
   name: string;
   [key: string]: any;
 }
+const exit = ref<boolean>(false);
+const ExitBtn = () => {
+  exit.value = true;
+};
 
 const data = ref<DataItem[] | null | any>(null);
 const loading = ref<boolean>(false);
@@ -285,7 +367,7 @@ const fetchData = async (page: number = 1): Promise<void> => {
 
   try {
     const response = await axios.get<DataItem[]>(
-      `/size/getall?limit=10&page=${page}`,
+      `/size/getall?limit=30&page=${page}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -293,6 +375,7 @@ const fetchData = async (page: number = 1): Promise<void> => {
       }
     );
     data.value = response.data;
+    // console.log("token", token);
   } catch (err: any) {
     error.value = err.response?.data?.massage || "Failed to fetch data";
     if (err.response.status === 401) router.push("/login");
@@ -315,10 +398,8 @@ const submitSize = async () => {
     sizeLength: sizeLength.value,
     sizeWidth: sizeWidth.value,
     sizeCode: sizeCode.value,
-    // sizeHeight: sizeHeight.value,
     color: sizeColor.value,
     sizeDescription: sizeCom.value,
-    // sizeName: sizeName.value,
   };
   try {
     const response = await axios.post(`/size/create`, payload, {
@@ -331,6 +412,67 @@ const submitSize = async () => {
   } catch (err: any) {
     console.log("Error");
     console.log(typeof payload.sizeWidth);
+  }
+};
+
+const deleteBtn = async (e: any) => {
+  const token = localStorage.getItem("token");
+  const payload = {
+    sizeLength: sizeLength.value,
+    sizeWidth: sizeWidth.value,
+    sizeCode: sizeCode.value,
+    color: sizeColor.value,
+    sizeDescription: sizeCom.value,
+  };
+  try {
+    const response = await axios.patch<DataItem[]>(
+      `/size/delete/${e?.target?.id}`,
+      payload,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    data.value = response.data;
+    console.log(data.value);
+
+    window.location.reload();
+  } catch (err: any) {
+    error.value = err.response?.data?.massage || "Failed to fetch data";
+  }
+};
+
+const newSizeWidth = ref<number | null>(null);
+const newSizeLength = ref<any>();
+const newSizeCode = ref("");
+const newSizeColor = ref("");
+const newSizeCom = ref("");
+const editSizes = async (e: any) => {
+  const token = localStorage.getItem("token");
+  console.log(e.target.id);
+  const payload = {
+    sizeLength: newSizeLength.value,
+    sizeWidth: newSizeWidth.value,
+    sizeCode: newSizeCode.value,
+    color: newSizeColor.value,
+    sizeDescription: newSizeCom.value,
+  };
+  try {
+    const response = await axios.patch<DataItem[]>(
+      `/size/edit/${e?.target?.id}`,
+      payload,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    data.value = response.data;
+    console.log(e.target.id);
+    window.location.reload();
+  } catch (err: any) {
+    error.value = err.response?.data?.massage || "Failed to fetch data";
   }
 };
 </script>
