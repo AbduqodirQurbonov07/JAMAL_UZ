@@ -142,13 +142,14 @@
               <p class="text-[#98A2B3]">{{ inf?.color }}</p>
             </div>
           </PopoverTrigger>
-          <PopoverContent v-if="!exit" class="w-[450px] h-auto">
+          <PopoverContent class="w-[450px] h-auto">
             <div class="flex flex-col">
               <div class="flex items-center justify-between pb-5 mb-8">
                 <p class="text-gray-900 font-semibold text-lg">
                   Standart o'lchov
                 </p>
-                <button @click="exit = true">
+
+                <button>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -333,6 +334,7 @@ import {
 import axios from "axios";
 import { ref } from "vue";
 import router from "@/router";
+
 const formattedCurreny = (rawValue: number) => {
   return Number(rawValue)
     .toFixed(0)
@@ -353,7 +355,7 @@ interface DataItem {
   name: string;
   [key: string]: any;
 }
-const exit = ref<boolean>(false);
+
 
 const data = ref<DataItem[] | null | any>(null);
 const loading = ref<boolean>(false);
@@ -444,11 +446,7 @@ const deleteBtn = async (e: any) => {
   }
 };
 
-const newSizeWidth = ref<number | null>(null);
-const newSizeLength = ref<any>();
-const newSizeCode = ref("");
-const newSizeColor = ref("");
-const newSizeCom = ref("");
+
 const editSizes = async (e: any) => {
   const token = localStorage.getItem("token");
   console.log(e.target.id);

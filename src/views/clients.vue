@@ -168,8 +168,7 @@
             </TableCell>
             <TableCell
               class="border"
-              :name="inf?.clientName"
-              :Lname="inf?.clientLasName"
+            
             >
               {{ `${inf?.clientName} ${inf?.clientLastName}` }}
             </TableCell>

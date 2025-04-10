@@ -849,11 +849,6 @@ const newStandartSize = ref<string | undefined>(undefined);
 const newCurrency = ref<string | undefined>(undefined);
 const newWarehouse = ref<string | undefined>(undefined);
 const newCategory = ref<string | undefined>(undefined);
-const newCarpetHeight = ref("");
-const newCarpetQuantity = ref("");
-const newCarpetCost = ref<string | null>(null);
-const newCarpetPrice = ref<number | null>(null);
-const newCarpetCom = ref("");
 
 const editCarpet = async (e: any) => {
   const token = localStorage.getItem("token");

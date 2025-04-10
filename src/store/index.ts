@@ -14,6 +14,7 @@ export const useItemStore = defineStore("item", () => {
   const category = ref<DataItem[] | []>([]);
   const sizes = ref<DataItem[] | []>([]);
   const currency = ref<DataItem[] | []>([]);
+  const carpet = ref<DataItem[] | []>([]);
   const loadingStore = ref(false);
   const selected = ref(null);
   const fetchItems = async () => {
@@ -29,6 +30,7 @@ export const useItemStore = defineStore("item", () => {
         categoryResponse,
         sizesResponse,
         currencyResponse,
+        carpetResponse,
       ] = await Promise.all([
         axios.get("/warehouse/getall", {
           headers: {
@@ -65,6 +67,11 @@ export const useItemStore = defineStore("item", () => {
             Authorization: `Bearer ${token}`,
           },
         }),
+        axios.get("/carpet/getall", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }),
       ]);
 
       warehouses.value = warehousesResponse.data["data"];
@@ -74,6 +81,7 @@ export const useItemStore = defineStore("item", () => {
       category.value = categoryResponse.data["data"];
       sizes.value = sizesResponse.data["data"];
       currency.value = currencyResponse.data["data"];
+      carpet.value = carpetResponse.data["data"];
       console.log(warehouses.value);
       console.log(contributors.value);
       console.log(users.value);
@@ -81,15 +89,13 @@ export const useItemStore = defineStore("item", () => {
       console.log(category.value);
       console.log(sizes.value);
       console.log(currency.value);
+      console.log(carpet.value);
     } catch (error) {
       console.error("Error fetching items:", error);
     } finally {
       loadingStore.value = false;
     }
   };
-  function setSelected(cat: any): void {
-    selected.value = cat;
-  }
 
   return {
     selected,
@@ -98,10 +104,10 @@ export const useItemStore = defineStore("item", () => {
     users,
     clients,
     loadingStore,
-    setSelected,
     fetchItems,
     category,
     sizes,
     currency,
+    carpet,
   };
 });

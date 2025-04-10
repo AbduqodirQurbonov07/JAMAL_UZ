@@ -304,23 +304,18 @@
                     <Label for="size"
                       >Ombor<span class="text-orange-500"> *</span></Label
                     >
-                    <Select>
+                    <Select v-model="warehouse">
                       <SelectTrigger class="border-slate-300">
-                        <SelectValue placeholder="Omborxona" />
+                        <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectGroup>
-                          <SelectItem value="Omborxona ">
-                            Omborxona
-                          </SelectItem>
-                          <SelectItem value="Omborxona 1">
-                            Omborxona 1
-                          </SelectItem>
-                          <SelectItem value="Omborxona 2">
-                            Omborxona 2
-                          </SelectItem>
-                          <SelectItem value="Omborxona 3">
-                            Omborxona 3
+                          <SelectItem
+                            v-for="itm in itemStore.warehouses"
+                            :key="itm?.warehouseId"
+                            :value="itm?.warehouseId"
+                          >
+                            {{ itm?.warehouseName }}
                           </SelectItem>
                         </SelectGroup>
                       </SelectContent>
@@ -328,25 +323,25 @@
                   </li>
                   <li class="flex flex-col gap-1.5 mb-5">
                     <label for="size"
-                      >Kategoriya<span class="text-orange-500"> *</span></label
+                      >Gilam<span class="text-orange-500"> *</span></label
                     >
-                    <Select>
+                    <Select v-model="carpet">
                       <SelectTrigger class="border-slate-300">
-                        <SelectValue placeholder="Kateroriya" />
+                        <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectGroup>
-                          <SelectItem value="Omborxona ">
-                            REFLEX GREY Gilamlari
-                          </SelectItem>
-                          <SelectItem value="Omborxona 1">
-                            Omborxona 1
-                          </SelectItem>
-                          <SelectItem value="Omborxona 2">
-                            Omborxona 2
-                          </SelectItem>
-                          <SelectItem value="Omborxona 3">
-                            Omborxona 3
+                          <SelectItem
+                            :id="itm?.carpet_carpetId"
+                            v-for="itm in data"
+                            :key="itm?.carpetId"
+                            :value="itm?.carpetId"
+                          >
+                            {{
+                              `${itm?.warehouse.warehouseName} -${
+                                itm?.standartSize.sizeWidth
+                              }-${itm?.height}`
+                            }}
                           </SelectItem>
                         </SelectGroup>
                       </SelectContent>
@@ -358,6 +353,7 @@
                         >Narx<span class="text-orange-500"> *</span></Label
                       >
                       <input
+                        v-model="Price"
                         type="number"
                         class="border border-slate-300 px-3 py-2 rounded-lg"
                       />
@@ -366,15 +362,19 @@
                       <Label for="size"
                         >Valyuta<span class="text-orange-500"> *</span></Label
                       >
-                      <Select>
+                      <Select v-model="currency">
                         <SelectTrigger class="border-slate-300">
-                          <SelectValue placeholder="" />
+                          <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
                           <SelectGroup>
-                            <SelectItem value="Omborxona 1">UZS </SelectItem>
-                            <SelectItem value="Omborxona 2">USD </SelectItem>
-                            <SelectItem value="Omborxona 3">RUB</SelectItem>
+                            <SelectItem
+                              v-for="itm in itemStore.currency"
+                              :key="itm?.currencyId"
+                              :value="itm?.currencyId"
+                            >
+                              {{ itm?.currencySymbol }}
+                            </SelectItem>
                           </SelectGroup>
                         </SelectContent>
                       </Select>
@@ -387,7 +387,9 @@
                     <Tabs default-value="account" class="w-[400px]">
                       <TabsList>
                         <TabsTrigger value="account"> Tayyor </TabsTrigger>
-                        <TabsTrigger value="password"> Ochanuvchi </TabsTrigger>
+                        <TabsTrigger @click="cutCarpet = true" value="password">
+                          Olchanuvchi
+                        </TabsTrigger>
                       </TabsList>
                     </Tabs>
                   </li>
@@ -397,6 +399,7 @@
                         >Miqdor<span class="text-orange-500"> </span
                       ></Label>
                       <input
+                        v-model="Quantity"
                         type="number"
                         class="border border-slate-300 px-3 py-2 rounded-lg"
                       />
@@ -406,32 +409,38 @@
                         >Olcham<span class="text-orange-500"> </span
                       ></Label>
                       <input
+                        v-model="height"
                         type="number"
                         class="border border-slate-300 px-3 py-2 rounded-lg"
                       />
                     </div>
                   </li>
+                  <li class="flex flex-col gap-1.5 mb-5">
+                    <Label for="size"
+                      >Sotilgan olcham<span class="text-orange-500"> </span
+                    ></Label>
+                    <input
+                      v-model="accepted_height"
+                      type="number"
+                      class="border border-slate-300 px-3 py-2 rounded-lg"
+                    />
+                  </li>
                   <li class="flex flex-col gap-1.5 mt-2.5 mb-5">
                     <Label for="size"
                       >Mijoz<span class="text-orange-500"> *</span></Label
                     >
-                    <Select>
+                    <Select v-model="client">
                       <SelectTrigger class="border-slate-300">
-                        <SelectValue placeholder="Mijoz" />
+                        <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectGroup>
-                          <SelectItem value="Mijoz ">
-                            Shamsidinov Alisher</SelectItem
+                          <SelectItem
+                            v-for="itm in itemStore.clients"
+                            :key="itm?.clientId"
+                            :value="itm?.clientId"
                           >
-                          <SelectItem value="Mijoz_1"
-                            >Shamsidinov Alisher
-                          </SelectItem>
-                          <SelectItem value="Mijoz_2">
-                            Shamsidinov Alisher
-                          </SelectItem>
-                          <SelectItem value="Mijoz_3">
-                            Shamsidinov Alisher
+                            {{ `${itm?.clientName} ${itm?.clientLastName}` }}
                           </SelectItem>
                         </SelectGroup>
                       </SelectContent>
@@ -444,15 +453,15 @@
                     <Tabs default-value="account" class="w-[400px]">
                       <TabsList>
                         <TabsTrigger value="account"> Oddiy mijoz </TabsTrigger>
-                        <TabsTrigger value="password">
+                        <TabsTrigger @click="WholeSale = true" value="password">
                           Doimiy mijoz
                         </TabsTrigger>
                       </TabsList>
                     </Tabs>
                   </li>
                 </ul>
-                <div class="bg-white mt-4 p-4 rounded-lg">
-                  <li class="flex flex-col gap-1.5">
+                <!-- <div class="bg-white mt-4 p-4 rounded-lg"> -->
+                <!-- <li class="flex flex-col gap-1.5">
                     <Label for="size">
                       To'lov turi
                       <span class="text-orange-500"> </span
@@ -463,8 +472,8 @@
                         <TabsTrigger value="password"> Nasiya </TabsTrigger>
                       </TabsList>
                     </Tabs>
-                  </li>
-                </div>
+                  </li> -->
+                <!-- </div> -->
                 <div class="bg-white mt-4 p-4 rounded-lg">
                   <li class="flex flex-col gap-1.5">
                     <Label for="size">
@@ -472,6 +481,7 @@
                       <span class="text-orange-500"> </span
                     ></Label>
                     <input
+                      v-model="date"
                       type="date"
                       class="border border-slate-300 px-3 py-2 rounded-lg"
                     />
@@ -491,6 +501,7 @@
                 </button>
               </DialogClose>
               <button
+                @click="Sale"
                 class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
               >
                 Saqlash
@@ -532,8 +543,21 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import router from "./router";
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 import { useRoute } from "vue-router";
+import { useItemStore } from "@/store";
+import axios from "axios";
+const { fetchItems } = useItemStore();
+const itemStore = useItemStore();
+const loadItems = async () => {
+  await fetchItems();
+};
+loadItems();
+interface DataItem {
+  id: string;
+  name: string;
+  [key: string]: any;
+}
 const route = useRoute();
 //http://147.182.234.78:5000/
 const islogin = computed(() =>
@@ -543,6 +567,91 @@ function logOut() {
   localStorage.removeItem("token");
   router.push("login");
 }
+
+const client = ref<string | undefined>(undefined);
+const currency = ref<string | undefined>(undefined);
+const warehouse = ref<string | undefined>(undefined);
+const carpet = ref<string | undefined>(undefined);
+const height = ref("");
+const date = ref("");
+const Quantity = ref("");
+const accepted_height = ref("");
+const Price = ref<number | null>(null);
+let WholeSale = ref(false);
+let cutCarpet = ref(false);
+// const cutValueOn = () => {
+//   cutCarpet.value = true;
+//   console.log((cutCarpet.value = true));
+// };
+const Sale = async () => {
+  const token = localStorage.getItem("token");
+  const payload = [
+    {
+      currency: currency.value,
+      client: client.value,
+      warehouse: warehouse.value,
+      carpet: carpet.value,
+      left_height: Number(height.value) - Number(accepted_height.value),
+      quantity: Quantity.value,
+      payment_date: date.value,
+      price: Price.value,
+      accepted_height: accepted_height.value,
+      wholeSale: WholeSale.value,
+      cut: cutCarpet.value,
+      height: height.value,
+    },
+  ];
+  try {
+    const response = await axios.post(`/action/sale`, payload, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    // window.location.reload();
+    console.log(response);
+  } catch (err: any) {
+    console.log("Error");
+    if (err.response.status === 400) alert(err?.response?.data?.message);
+    console.log("Xato ", err);
+  }
+};
+
+const fetchDataById = async (event: any): Promise<void> => {
+  const token = localStorage.getItem("token");
+  console.log(event, "salom");
+
+  try {
+    const response = await axios.get(
+      `/carpet/getbywarehouse/${event.target.id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    // dataById.value = response.data;
+  } catch (err: any) {
+    err.value = err.response?.data?.massage || "Failed to fetch data";
+    if (err.response.status === 401) router.push("/login");
+  }
+};
+const data = ref<DataItem[] | null | any>(null);
+watch(warehouse, async (event: any) => {
+  const token = localStorage.getItem("token");
+  console.log(event, "salom");
+  try {
+    const response = await axios.get(`/carpet/getbywarehouse/${event}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    data.value = response.data;
+    console.log(data.value, "malumot");
+  } catch (err: any) {
+    err.value = err.response?.data?.massage || "Failed to fetch data";
+    if (err.response.status === 401) router.push("/login");
+  }
+});
 </script>
 
 <style scoped></style>
