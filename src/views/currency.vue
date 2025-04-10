@@ -201,6 +201,8 @@
             <Dialog class="w-[800px]">
               <DialogTrigger>
                 <div
+                  :id="inf?.currencyId"
+                  @click="fetchDataById"
                   class="flex items-center gap-3 py-2.5 pr-16 hover:bg-slate-100 px-2 rounded-lg"
                 >
                   <svg
@@ -227,7 +229,7 @@
                       >Nomi<span class="text-orange-500">*</span></Label
                     >
                     <input
-                      v-model="newCurrencyname"
+                      v-model="dataById.currencyName"
                       type="text"
                       class="border border-slate-300 px-3 py-2 rounded-lg"
                     />
@@ -238,7 +240,7 @@
                         >CCY<span class="text-orange-500">*</span></Label
                       >
                       <input
-                        v-model="newCurrencyCCY"
+                        v-model="dataById.currencySymbol"
                         type="text"
                         class="border border-slate-300 px-3 py-2 rounded-lg"
                       />
@@ -248,7 +250,9 @@
                         >Qiymati<span class="text-orange-500">*</span></Label
                       >
                       <input
-                        v-model="newCurrencyAmount"
+                        @input="onInput
+                        "
+                        v-model="dataById.currencyAmount"
                         type="number"
                         class="border border-slate-300 px-3 py-2 rounded-lg"
                       />
@@ -257,7 +261,7 @@
                   <li class="flex items-start flex-col">
                     <label for="izoh">Izoh</label>
                     <textarea
-                      v-model="newCurrencyCom"
+                      v-model="dataById.currencyDescription"
                       class="border border-slate-300 p-3 rounded-xl w-[650px] h-32"
                       name=""
                       id="izoh"
@@ -335,6 +339,10 @@ import {
 import axios from "axios";
 import { ref } from "vue";
 import router from "@/router";
+const onInput = (event: Event) => {
+  const input = (event.target as HTMLInputElement).value;
+  dataById.value.currencyAmount = input.replace(/\D/g, "");
+};
 const formattedCurreny = (rawValue: number) => {
   return Number(rawValue)
     .toFixed(0)
@@ -406,7 +414,7 @@ const submitCurrency = async () => {
     console.log(response.data);
   } catch (err: any) {
     console.log("Error");
-    console.log(typeof payload.currencyName);
+    if (err.response.status === 400) alert("Bunday valyuta mavjud");
   }
 };
 const deleteBtn = async (e: any) => {
@@ -435,18 +443,15 @@ const deleteBtn = async (e: any) => {
     error.value = err.response?.data?.massage || "Failed to fetch data";
   }
 };
-const newCurrencyname = ref<string>("");
-const newCurrencyCCY = ref("");
-const newCurrencyAmount = ref("");
-const newCurrencyCom = ref("");
+
 const editCurrency = async (e: any) => {
   const token = localStorage.getItem("token");
   console.log(e.target.id);
   const payload = {
-    currencyName: newCurrencyname.value,
-    currencyAmount: Number(newCurrencyAmount.value),
-    currencyDescription: newCurrencyCom.value,
-    currencySymbol: newCurrencyCCY.value,
+    currencyName: dataById.value.currencyName,
+    currencyAmount: Number(dataById.value.currencyAmount),
+    currencyDescription: dataById.value.currencyDescription,
+    currencySymbol: dataById.value.currencySymbol,
   };
   try {
     const response = await axios.patch<DataItem[]>(
@@ -463,6 +468,29 @@ const editCurrency = async (e: any) => {
     window.location.reload();
   } catch (err: any) {
     error.value = err.response?.data?.massage || "Failed to fetch data";
+  }
+};
+let dataById = ref({
+  currencyName: "",
+  currencyAmount: "",
+  currencyDescription: "",
+  currencyFlag: null,
+  currencySymbol: "",
+  deletedAt: null,
+});
+const fetchDataById = async (event: any): Promise<void> => {
+  const token = localStorage.getItem("token");
+
+  try {
+    const response = await axios.get(`/currency/getone/${event.target.id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    dataById.value = response.data;
+  } catch (err: any) {
+    error.value = err.response?.data?.massage || "Failed to fetch data";
+    if (err.response.status === 401) router.push("/login");
   }
 };
 </script>

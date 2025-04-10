@@ -15,7 +15,7 @@ export const useItemStore = defineStore("item", () => {
   const sizes = ref<DataItem[] | []>([]);
   const currency = ref<DataItem[] | []>([]);
   const loadingStore = ref(false);
-
+  const selected = ref(null);
   const fetchItems = async () => {
     const token = localStorage.getItem("token");
     loadingStore.value = true;
@@ -87,13 +87,18 @@ export const useItemStore = defineStore("item", () => {
       loadingStore.value = false;
     }
   };
+  function setSelected(cat: any): void {
+    selected.value = cat;
+  }
 
   return {
+    selected,
     warehouses,
     contributors,
     users,
     clients,
     loadingStore,
+    setSelected,
     fetchItems,
     category,
     sizes,

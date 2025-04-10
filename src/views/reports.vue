@@ -251,7 +251,7 @@
                 <PopoverContent
                   class="cursor-pointer flex flex-col rounded-xl w-52"
                 >
-                  <div
+                  <!-- <div
                     class="flex items-center gap-3 py-2.5 hover:bg-slate-100 px-2 rounded-lg"
                   >
                     <span>
@@ -268,7 +268,7 @@
                       </svg>
                     </span>
                     <span>Tahrirlash</span>
-                  </div>
+                  </div> -->
                   <button
                     :id="inf?.report_reportId"
                     @click="deleteBtn"

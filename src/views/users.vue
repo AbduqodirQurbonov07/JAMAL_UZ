@@ -204,24 +204,131 @@
                 <PopoverContent
                   class="cursor-pointer flex flex-col rounded-xl w-52"
                 >
-                  <div
-                    class="flex items-center gap-3 py-2.5 hover:bg-slate-100 px-2 rounded-lg"
-                  >
-                    <span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
+                  <Dialog class="w-[800px]">
+                    <DialogTrigger>
+                      <div
+                        :id="inf?.userId"
+                        @click="fetchDataById"
+                        class="flex items-center gap-3 py-2.5 hover:bg-slate-100 px-2 rounded-lg"
                       >
-                        <path
-                          fill="currentColor"
-                          d="M4.21 20.52a.73.73 0 0 1-.52-.21a.75.75 0 0 1-.22-.6l.31-3.84A.73.73 0 0 1 4 15.4L15.06 4.34a3.2 3.2 0 0 1 2.28-.86a3.3 3.3 0 0 1 2.25.91a3.31 3.31 0 0 1 .11 4.5L8.63 20a.77.77 0 0 1-.46.22l-3.89.35Zm1-4.26L5 19l2.74-.25l10.9-10.92A1.72 1.72 0 0 0 17.31 5a1.6 1.6 0 0 0-1.19.42ZM15.59 4.87"
-                        />
-                      </svg>
-                    </span>
-                    <span>Tahrirlash</span>
-                  </div>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="20"
+                          height="20"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            fill="currentColor"
+                            d="M4.21 20.52a.73.73 0 0 1-.52-.21a.75.75 0 0 1-.22-.6l.31-3.84A.73.73 0 0 1 4 15.4L15.06 4.34a3.2 3.2 0 0 1 2.28-.86a3.3 3.3 0 0 1 2.25.91a3.31 3.31 0 0 1 .11 4.5L8.63 20a.77.77 0 0 1-.46.22l-3.89.35Zm1-4.26L5 19l2.74-.25l10.9-10.92A1.72 1.72 0 0 0 17.31 5a1.6 1.6 0 0 0-1.19.42ZM15.59 4.87"
+                          />
+                        </svg>
+                        Tahrirlash
+                      </div>
+                    </DialogTrigger>
+                    <DialogContent class="max-w-[700px]">
+                      <DialogHeader class="border-b pb-4">
+                        <DialogTitle> Foydalanuvchi tahrirlash </DialogTitle>
+                      </DialogHeader>
+                      <ul class="grid grid-cols-2 gap-3">
+                        <li class="flex flex-col gap-1.5 mt-2.5 mb-5">
+                          <Label for="size"
+                            >Isim<span class="text-orange-500"> *</span></Label
+                          >
+                          <input
+                            v-model="dataById.user.userFirstName"
+                            type="text"
+                            class="border border-slate-300 px-3 py-2 rounded-lg"
+                          />
+                        </li>
+                        <li class="flex flex-col gap-1.5 mb-5">
+                          <label for="size"
+                            >Familiya<span class="text-orange-500">
+                              *</span
+                            ></label
+                          >
+                          <input
+                            v-model="dataById.user.userLastName"
+                            type="text"
+                            class="border border-slate-300 px-3 py-2 rounded-lg"
+                          />
+                        </li>
+                        <li class="flex flex-col gap-1.5 mb-5">
+                          <Label for="size"
+                            >Telefon raqam 1<span class="text-orange-500">
+                              *</span
+                            ></Label
+                          >
+                          <input
+                            v-model="dataById.user.userNomer"
+                            type="text"
+                            class="border border-slate-300 px-3 py-2 rounded-lg"
+                          />
+                        </li>
+                        <li class="flex flex-col gap-1.5">
+                          <Label for="size"
+                            >Email<span class="text-orange-500"> *</span></Label
+                          >
+                          <input
+                            v-model="dataById.user.userEmail"
+                            type="email"
+                            class="border border-slate-300 px-3 py-2 rounded-lg"
+                          />
+                        </li>
+                        <li class="flex flex-col gap-1.5 mt-2.5 mb-5">
+                          <Label for="size"
+                            >Login<span class="text-orange-500"> *</span></Label
+                          >
+                          <input
+                            v-model="dataById.user.userLogin"
+                            type="text"
+                            class="border border-slate-300 px-3 py-2 rounded-lg"
+                          />
+                        </li>
+                        <li class="flex flex-col gap-1.5 mt-2.5 mb-5">
+                          <Label for="size"
+                            >Parol<span class="text-orange-500"> *</span></Label
+                          >
+                          <input
+                            v-model="dataById.user.userPassword"
+                            type="password"
+                            class="border border-slate-300 px-3 py-2 rounded-lg"
+                          />
+                        </li>
+                        <li class="flex items-start flex-col">
+                          <label for="izoh">Izoh</label>
+                          <textarea
+                            v-model="dataById.user.userDescription"
+                            class="border border-slate-300 p-3 rounded-xl w-[650px] h-32"
+                            name=""
+                            id="izoh"
+                          ></textarea>
+                        </li>
+                      </ul>
+                      <DialogFooter class="flex justify-end">
+                        <div class="flex flex-col p-6">
+                          <div class="flex flex-col gap-8">
+                            <div class="flex items-center justify-end gap-3">
+                              <DialogClose as-child>
+                                <button
+                                  class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300"
+                                >
+                                  Yopish
+                                </button>
+                              </DialogClose>
+                              <button
+                                :id="inf?.userId"
+                                @click="editUser"
+                                class="border border-slate-200 px-6 py-2.5 text-sm rounded-xl transition-all duration-300 bg-indigo-600 text-slate-50 hover:bg-indigo-700"
+                              >
+                                Saqlash
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </DialogFooter>
+                    </DialogContent>
+                  </Dialog>
+
                   <button
                     :id="inf?.userId"
                     @click="deleteBtn"
@@ -391,7 +498,7 @@ const submitUser = async () => {
     userEmail: userEmail.value,
   };
   try {
-    const response = await axios.post(`/auth/register`, payload, {
+    const response = await axios.post(`/user/create`, payload, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -433,6 +540,42 @@ const deleteBtn = async (e: any) => {
     error.value = err.response?.data?.massage || "Failed to fetch data";
   }
 };
+const newLogin = ref("");
+const newPassword = ref("");
+const newUserlastName = ref("");
+const newUserfirstName = ref("");
+const newUserTel = ref("");
+const newUserEmail = ref("");
+const newUserCom = ref("");
+const editUser = async (e: any) => {
+  const token = localStorage.getItem("token");
+  console.log(e.target.id);
+  const payload = {
+    userFirstName: dataById.value.user.userFirstName,
+    userNomer: Number(dataById.value.user.userNomer),
+    userPassword: dataById.value.user.userPassword,
+    userLogin: dataById.value.user.userLogin,
+    userLastName: dataById.value.user.userLastName,
+    userDescription: dataById.value.user.userDescription,
+    userEmail: dataById.value.user.userEmail,
+  };
+  try {
+    const response = await axios.patch<DataItem[]>(
+      `/user/edit/${e?.target?.id}`,
+      payload,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    data.value = response.data;
+    console.log(e.target.id);
+    // window.location.reload();
+  } catch (err: any) {
+    error.value = err.response?.data?.massage || "Failed to fetch data";
+  }
+};
 
 const formattedPhone1 = computed(() => {
   if (userTel.value.startsWith("998")) {
@@ -446,6 +589,35 @@ const formattedPhone1 = computed(() => {
     return userTel.value;
   }
 });
+
+let dataById = ref({
+  user: {
+    userFirstName: "",
+    userLastName: null,
+    userNomer: "",
+    userPassword: "",
+    userLogin: "",
+    userEmail: null,
+    userDescription: null,
+    deletedAt: null,
+  },
+  permissions: [],
+});
+const fetchDataById = async (event: any): Promise<void> => {
+  const token = localStorage.getItem("token");
+
+  try {
+    const response = await axios.get(`/user/getone/${event.target.id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    dataById.value = response.data;
+  } catch (err: any) {
+    error.value = err.response?.data?.massage || "Failed to fetch data";
+    if (err.response.status === 401) router.push("/login");
+  }
+};
 </script>
 
 <style scoped></style>

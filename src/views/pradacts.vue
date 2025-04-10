@@ -419,6 +419,8 @@
                   <Dialog class="w-[800px]">
                     <DialogTrigger as-child>
                       <div
+                        :id="inf?.carpet_carpetId"
+                        @click="fetchDataById"
                         class="flex items-center gap-3 py-2.5 pr-16 hover:bg-slate-100 px-2 rounded-lg"
                       >
                         <svg
@@ -471,7 +473,7 @@
                             >Boyi<span class="text-orange-500"> *</span></label
                           >
                           <input
-                            v-model="newCarpetHeight"
+                            v-model="dataById.height"
                             type="number"
                             class="border border-slate-300 px-3 py-2 rounded-lg"
                           />
@@ -550,7 +552,7 @@
                             ></Label
                           >
                           <input
-                            v-model="newCarpetQuantity"
+                            v-model="dataById.stockQuantity"
                             type="number"
                             class="border border-slate-300 px-3 py-2 rounded-lg"
                           />
@@ -558,7 +560,7 @@
                         <li class="flex flex-col gap-1.5">
                           <Label for="size">Tan narxi </Label>
                           <input
-                            v-model="newCarpetCost"
+                            v-model="dataById.cost"
                             type="number"
                             class="border border-slate-300 px-3 py-2 rounded-lg"
                           />
@@ -566,7 +568,7 @@
                         <li class="flex flex-col gap-1.5">
                           <Label for="size">Sotuv narxi </Label>
                           <input
-                            v-model="newCarpetPrice"
+                            v-model="dataById.price"
                             type="number"
                             class="border border-slate-300 px-3 py-2 rounded-lg"
                           />
@@ -574,7 +576,7 @@
                         <li class="flex items-start gap-1.5 flex-col">
                           <label for="izoh">Izoh</label>
                           <textarea
-                            v-model="newCarpetCom"
+                            v-model="dataById.carpetDescription"
                             class="border p-3 border-slate-300 rounded-xl w-[650px] h-32"
                             id="izoh"
                           ></textarea>
@@ -839,17 +841,19 @@ const deleteBtn = async (e: any) => {
     window.location.reload();
   } catch (err: any) {
     error.value = err.response?.data?.massage || "Failed to fetch data";
+    if (err.response.status === 400)
+      alert("Bu gilam omborda mavjud yoki o`chirib bo`lmaydigan gilam!");
   }
 };
-  const newStandartSize = ref<string | undefined>(undefined);
-  const newCurrency = ref<string | undefined>(undefined);
-  const newWarehouse = ref<string | undefined>(undefined);
-  const newCategory = ref<string | undefined>(undefined);
-  const newCarpetHeight = ref("");
-  const newCarpetQuantity = ref("");
-  const newCarpetCost = ref<string | null>(null);
-  const newCarpetPrice = ref<number | null>(null);
-  const newCarpetCom = ref("");
+const newStandartSize = ref<string | undefined>(undefined);
+const newCurrency = ref<string | undefined>(undefined);
+const newWarehouse = ref<string | undefined>(undefined);
+const newCategory = ref<string | undefined>(undefined);
+const newCarpetHeight = ref("");
+const newCarpetQuantity = ref("");
+const newCarpetCost = ref<string | null>(null);
+const newCarpetPrice = ref<number | null>(null);
+const newCarpetCom = ref("");
 
 const editCarpet = async (e: any) => {
   const token = localStorage.getItem("token");
@@ -859,11 +863,11 @@ const editCarpet = async (e: any) => {
     currency: newCurrency.value,
     warehouse: newWarehouse.value,
     category: newCategory.value,
-    height: newCarpetHeight.value,
-    stockQuantity: newCarpetQuantity.value,
-    cost: newCarpetCost.value,
-    price: newCarpetPrice.value,
-    carpetDescription: newCarpetCom.value,
+    height: dataById.value.height,
+    stockQuantity: dataById.value.stockQuantity,
+    cost: dataById.value.cost,
+    price: dataById.value.price,
+    carpetDescription: dataById.value.carpetDescription,
   };
   try {
     const response = await axios.patch<DataItem[]>(
@@ -880,6 +884,37 @@ const editCarpet = async (e: any) => {
     window.location.reload();
   } catch (err: any) {
     error.value = err.response?.data?.massage || "Failed to fetch data";
+  }
+};
+let dataById = ref({
+  stockQuantity: "",
+  cost: "",
+  price: "",
+  height: "",
+  length: "",
+  carpetDescription: "",
+  carpetName: null,
+  cutable: true,
+  createdat: "",
+  deletedat: null,
+  category: newCategory,
+  currency: newCurrency,
+  standartSize: newStandartSize,
+  warehouse: newWarehouse,
+});
+const fetchDataById = async (event: any): Promise<void> => {
+  const token = localStorage.getItem("token");
+
+  try {
+    const response = await axios.get(`/carpet/getone/${event.target.id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    dataById.value = response.data;
+  } catch (err: any) {
+    error.value = err.response?.data?.massage || "Failed to fetch data";
+    if (err.response.status === 401) router.push("/login");
   }
 };
 </script>

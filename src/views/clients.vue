@@ -195,6 +195,8 @@
                   <Dialog class="w-820px">
                     <DialogTrigger>
                       <div
+                        :id="inf?.clientId"
+                        @click="fetchDataById"
                         class="flex items-center gap-3 py-2.5 hover:bg-slate-100 px-2 rounded-lg"
                       >
                         <svg
@@ -222,7 +224,7 @@
                             >Isim<span class="text-orange-500"> *</span></Label
                           >
                           <input
-                            v-model="newClientName"
+                            v-model="dataById.clientName"
                             type="text"
                             class="border border-slate-300 px-3 py-2 rounded-lg"
                           />
@@ -234,7 +236,7 @@
                             ></label
                           >
                           <input
-                            v-model="newClientLasName"
+                            v-model="dataById.clientLastName"
                             type="text"
                             class="border border-slate-300 px-3 py-2 rounded-lg"
                           />
@@ -246,7 +248,7 @@
                             ></Label
                           >
                           <input
-                            v-model="newClientTel1"
+                            v-model="dataById.clientNomer1"
                             type="tel"
                             class="border border-slate-300 px-3 py-2 rounded-lg"
                           />
@@ -258,7 +260,7 @@
                             ></Label
                           >
                           <input
-                            v-model="newClientTel2"
+                            v-model="dataById.clientNomer2"
                             type="tel"
                             class="border border-slate-300 px-3 py-2 rounded-lg"
                           />
@@ -266,7 +268,7 @@
                         <li class="flex items-start flex-col">
                           <label for="izoh">Izoh</label>
                           <textarea
-                            v-model="newClientCom"
+                            v-model="dataById.clientDescription"
                             class="border border-slate-300 p-3 rounded-xl w-[674px] h-32"
                             name=""
                             id="izoh"
@@ -512,11 +514,11 @@ const editClient = async (e: any) => {
   const token = localStorage.getItem("token");
   console.log(e.target.id);
   const payload = {
-    clientName: newClientName.value,
-    clientLastName: newClientLasName.value,
-    clientNomer1: Number(newClientTel1.value),
-    clientNomer2: Number(newClientTel2.value),
-    clientDescription: newClientCom.value,
+    clientName: dataById.value.clientName,
+    clientLastName: dataById.value.clientLastName,
+    clientNomer1: Number(dataById.value.clientNomer1),
+    clientNomer2: Number(dataById.value.clientNomer2),
+    clientDescription: dataById.value.clientDescription,
   };
   try {
     const response = await axios.patch<DataItem[]>(
@@ -533,6 +535,29 @@ const editClient = async (e: any) => {
     window.location.reload();
   } catch (err: any) {
     error.value = err.response?.data?.massage || "Failed to fetch data";
+  }
+};
+let dataById = ref({
+  clientName: "",
+  clientLastName: "",
+  clientNomer1: "",
+  clientNomer2: "",
+  clientDescription: "",
+  deletedAt: null,
+});
+const fetchDataById = async (event: any): Promise<void> => {
+  const token = localStorage.getItem("token");
+
+  try {
+    const response = await axios.get(`/client/getone/${event.target.id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    dataById.value = response.data;
+  } catch (err: any) {
+    error.value = err.response?.data?.massage || "Failed to fetch data";
+    if (err.response.status === 401) router.push("/login");
   }
 };
 </script>

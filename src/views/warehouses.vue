@@ -168,6 +168,8 @@
             <Dialog class="w-[800px]">
               <DialogTrigger>
                 <div
+                  :id="inf?.warehouseId"
+                  @click="fetchDataById"
                   class="flex items-center gap-3 py-2.5 pr-16 hover:bg-slate-100 px-2 rounded-lg"
                 >
                   <svg
@@ -195,7 +197,7 @@
                       >Nomi<span class="text-orange-500">*</span></Label
                     >
                     <input
-                      v-model="newWarehouseName"
+                      v-model="dataById.warehouseName"
                       type="text"
                       class="border border-slate-300 px-3 py-2 rounded-lg"
                     />
@@ -203,7 +205,7 @@
                   <li class="flex items-start flex-col">
                     <label for="izoh">Izoh</label>
                     <textarea
-                      v-model="newWarehouseCom"
+                      v-model="dataById.warehouseDescription"
                       class="border border-slate-300 p-3 rounded-xl w-[650px] h-32"
                       name=""
                       id="izoh"
@@ -379,8 +381,8 @@ const editWarehouse = async (e: any) => {
   const token = localStorage.getItem("token");
   console.log(e.target.id);
   const payload = {
-    warehouseName: newWarehouseName.value,
-    warehouseDescription: newWarehouseCom.value,
+    warehouseName: dataById.value.warehouseName,
+    warehouseDescription: dataById.value.warehouseDescription,
   };
   try {
     const response = await axios.patch<DataItem[]>(
@@ -399,6 +401,27 @@ const editWarehouse = async (e: any) => {
     error.value = err.response?.data?.massage || "Failed to fetch data";
   }
 };
+let dataById = ref({
+  warehouseName: "",
+  warehouseDescription: "",
+  deletedAt: null,
+});
+const fetchDataById = async (event: any): Promise<void> => {
+  const token = localStorage.getItem("token");
+
+  try {
+    const response = await axios.get(`/warehouse/getone/${event.target.id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    dataById.value = response.data;
+  } catch (err: any) {
+    error.value = err.response?.data?.massage || "Failed to fetch data";
+    if (err.response.status === 401) router.push("/login");
+  }
+};
+
 </script>
 
 <style scoped></style>

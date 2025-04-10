@@ -122,12 +122,12 @@
       </div>
     </div>
     <div
-      class="grid grid-cols-4 gap-3 p-5 content-start bg-[#F3F3F3] h-[82vh] w-[85vw]"
+      class="grid grid-cols-4 gap-8 p-5 content-start bg-[#F3F3F3] h-[82vh] w-[85vw]"
     >
       <div
         v-for="inf in data?.data"
         :key="inf?.sizeId"
-        class="flex items-start bg-white p-4 w-80 justify-between rounded-xl border"
+        class="flex items-start cursor-pointer bg-white p-4 w-80 justify-between rounded-xl border"
       >
         <Popover>
           <PopoverTrigger>
@@ -135,9 +135,9 @@
               <p class="flex items-center gap-3">
                 <span :nameS="inf?.sizeName" class="text-xl font-semibold"
                   >{{ formattedCurreny(inf?.sizeWidth) }} metr</span
-                ><span class="bg-[#F3F3F3] text-gray-700 px-1 rounded-xl">#{{
-                  inf?.sizeCode
-                }}</span>
+                ><span class="bg-[#F3F3F3] text-gray-700 px-1 rounded-xl"
+                  >#{{ inf?.sizeCode }}</span
+                >
               </p>
               <p class="text-[#98A2B3]">{{ inf?.color }}</p>
             </div>
@@ -148,7 +148,7 @@
                 <p class="text-gray-900 font-semibold text-lg">
                   Standart o'lchov
                 </p>
-                <button @click="ExitBtn">
+                <button @click="exit = true">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="24"
@@ -197,6 +197,8 @@
             <Dialog class="w-[800px]">
               <DialogTrigger>
                 <div
+                  :id="inf?.sizeId"
+                  @click="fetchDataById"
                   class="flex items-center gap-3 py-2.5 pr-16 hover:bg-slate-100 px-2 rounded-lg"
                 >
                   <svg
@@ -223,7 +225,7 @@
                       >Eni<span class="text-orange-500">*</span></Label
                     >
                     <input
-                      v-model="newSizeWidth"
+                      v-model="dataById.sizeWidth"
                       type="number"
                       class="border border-slate-300 px-3 py-2 rounded-lg"
                     />
@@ -234,7 +236,7 @@
                         >Code<span class="text-orange-500">*</span></Label
                       >
                       <input
-                        v-model="newSizeCode"
+                        v-model="dataById.sizeCode"
                         type="text"
                         class="border border-slate-300 px-3 py-2 rounded-lg"
                       />
@@ -244,7 +246,7 @@
                         >Rangi<span class="text-orange-500"></span
                       ></Label>
                       <input
-                        v-model="newSizeColor"
+                        v-model="dataById.color"
                         type="text"
                         class="border border-slate-300 px-3 py-2 rounded-lg"
                       />
@@ -253,7 +255,7 @@
                   <li class="flex items-start flex-col">
                     <label for="izoh">Izoh</label>
                     <textarea
-                      v-model="newSizeCom"
+                      v-model="dataById.sizeDescription"
                       class="border border-slate-300 p-3 rounded-xl w-[650px] h-32"
                       name=""
                       id="izoh"
@@ -352,9 +354,6 @@ interface DataItem {
   [key: string]: any;
 }
 const exit = ref<boolean>(false);
-const ExitBtn = () => {
-  exit.value = true;
-};
 
 const data = ref<DataItem[] | null | any>(null);
 const loading = ref<boolean>(false);
@@ -440,6 +439,8 @@ const deleteBtn = async (e: any) => {
     window.location.reload();
   } catch (err: any) {
     error.value = err.response?.data?.massage || "Failed to fetch data";
+    if (err.response.status === 400) alert("Bu o`lchov bilan mahsulot mavjud!");
+    console.log("Xatolik 400 ochirib bolmaydi ", err);
   }
 };
 
@@ -452,11 +453,11 @@ const editSizes = async (e: any) => {
   const token = localStorage.getItem("token");
   console.log(e.target.id);
   const payload = {
-    sizeLength: newSizeLength.value,
-    sizeWidth: newSizeWidth.value,
-    sizeCode: newSizeCode.value,
-    color: newSizeColor.value,
-    sizeDescription: newSizeCom.value,
+    // sizeLength: dataById.value.sizeLength,
+    sizeWidth: Number(dataById.value.sizeWidth),
+    sizeCode: dataById.value.sizeCode,
+    color: dataById.value.color,
+    sizeDescription: dataById.value.sizeDescription,
   };
   try {
     const response = await axios.patch<DataItem[]>(
@@ -473,6 +474,31 @@ const editSizes = async (e: any) => {
     window.location.reload();
   } catch (err: any) {
     error.value = err.response?.data?.massage || "Failed to fetch data";
+  }
+};
+let dataById = ref({
+  sizeName: null,
+  sizeHeight: null,
+  sizeWidth: Number(""),
+  sizeCode: "",
+  color: "",
+  sizeDescription: "",
+  createdAt: "",
+  deletedAt: null,
+});
+const fetchDataById = async (event: any): Promise<void> => {
+  const token = localStorage.getItem("token");
+
+  try {
+    const response = await axios.get(`/size/getone/${event.target.id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    dataById.value = response.data;
+  } catch (err: any) {
+    error.value = err.response?.data?.massage || "Failed to fetch data";
+    if (err.response.status === 401) router.push("/login");
   }
 };
 </script>

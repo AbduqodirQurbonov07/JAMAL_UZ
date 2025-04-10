@@ -136,7 +136,9 @@
           <PopoverTrigger>
             <div class="flex flex-col gap-1">
               <p class="flex items-center">
-                <span class="trxt-grey-700">{{ inf?.categoryName }}</span
+                <span class="text-grey-700 text-xl">{{
+                  inf?.categoryName
+                }}</span
                 ><span class="bg-[#F3F3F3] text-gray-700 rounded-xl"></span>
               </p>
               <div
@@ -206,6 +208,8 @@
             <Dialog class="800px">
               <DialogTrigger>
                 <button
+                  :id="inf?.categoryId"
+                  @click="fetchDataById"
                   class="flex items-center gap-3 py-2.5 hover:bg-slate-100 px-2 pr-16 rounded-lg"
                 >
                   <svg
@@ -233,7 +237,7 @@
                         >Nomi<span class="text-orange-500">*</span></Label
                       >
                       <input
-                        v-model="newCateName"
+                        v-model="dataById.categoryName"
                         type="text"
                         class="border border-slate-300 px-3 py-2 rounded-lg"
                       />
@@ -263,7 +267,7 @@
                   <li class="flex items-start flex-col">
                     <label for="izoh">Izoh</label>
                     <textarea
-                      v-model="newCateCom"
+                      v-model="dataById.categoryDescription"
                       class="border border-slate-300 p-3 rounded-xl w-[650px] h-32"
                       name=""
                       id="izoh"
@@ -451,16 +455,17 @@ const deleteBtn = async (e: any) => {
   }
 };
 const newContributor = ref<string | undefined>(undefined);
-const newCateName = ref("");
-const newCateCom = ref("");
+const categoryName = ref("");
+const categoryDescription = ref("");
 const editCategory = async (e: any) => {
   const token = localStorage.getItem("token");
   console.log(e.target.id);
   const payload = {
-    categoryName: newCateName.value,
-    categoryDescription: newCateCom.value,
+    categoryName: dataById.value.categoryName,
+    categoryDescription: dataById.value.categoryDescription,
     contributor: newContributor.value,
   };
+
   try {
     const response = await axios.patch<DataItem[]>(
       `/category/edit/${e?.target?.id}`,
@@ -472,10 +477,34 @@ const editCategory = async (e: any) => {
       }
     );
     data.value = response.data;
-    console.log(e.target.id);
     window.location.reload();
   } catch (err: any) {
     error.value = err.response?.data?.massage || "Failed to fetch data";
+  }
+};
+let dataById = ref({
+  categoryName: "",
+  categoryDescription: "",
+  deletedAt: null,
+  contributor: {
+    contributorName: newContributor,
+  },
+});
+const fetchDataById = async (event: any): Promise<void> => {
+  // console.log("clciked");
+
+  const token = localStorage.getItem("token");
+
+  try {
+    const response = await axios.get(`/category/getone/${event.target.id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    dataById.value = response.data;
+  } catch (err: any) {
+    error.value = err.response?.data?.massage || "Failed to fetch data";
+    if (err.response.status === 401) router.push("/login");
   }
 };
 </script>

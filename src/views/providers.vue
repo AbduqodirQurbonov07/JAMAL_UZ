@@ -228,7 +228,9 @@
           <PopoverContent class="cursor-pointer flex flex-col rounded-xl w-52">
             <Dialog class="w-[800px]">
               <DialogTrigger>
-                <button
+                <Button
+                  :id="inf?.contributorId"
+                  @click="fetchDataById"
                   class="flex items-center gap-3 py-2.5 pr-16 hover:bg-slate-100 px-2 rounded-lg"
                 >
                   <svg
@@ -244,7 +246,7 @@
                   </svg>
 
                   Tahrirlash
-                </button>
+                </Button>
               </DialogTrigger>
               <DialogContent class="max-w-[700px]">
                 <DialogHeader>
@@ -256,7 +258,7 @@
                       >Nomi<span class="text-orange-500">*</span></Label
                     >
                     <input
-                      v-model="newContributorName"
+                      v-model="dataById.contributorName"
                       type="text"
                       class="border border-slate-300 px-3 py-2 rounded-lg"
                     />
@@ -267,7 +269,7 @@
                         >Diler<span class="text-orange-500">*</span></Label
                       >
                       <input
-                        v-model="newContributordiller"
+                        v-model="dataById.contributorConnector"
                         type="text"
                         class="border border-slate-300 px-3 py-2 rounded-lg"
                       />
@@ -277,7 +279,7 @@
                         >Telefon <span class="text-orange-500">*</span></Label
                       >
                       <input
-                        v-model="newContributorNomer"
+                        v-model="dataById.contributorNomer"
                         type="tel"
                         class="border border-slate-300 px-3 py-2 rounded-lg"
                       />
@@ -286,7 +288,7 @@
                   <li class="flex items-start flex-col">
                     <label for="izoh">Izoh</label>
                     <textarea
-                      v-model="newContributorDescription"
+                      v-model="dataById.contributorDescription"
                       class="border border-slate-300 p-3 rounded-xl w-[650px] h-32"
                       name=""
                       id="izoh"
@@ -461,18 +463,15 @@ const deleteBtn = async (e: any) => {
     error.value = err.response?.data?.massage || "Failed to fetch data";
   }
 };
-const newContributorName = ref("");
-const newContributorDescription = ref("");
-const newContributorNomer = ref("");
-const newContributordiller = ref("");
+
 const editContributor = async (e: any) => {
   const token = localStorage.getItem("token");
   console.log(e.target.id);
   const payload = {
-    contributorName: newContributorName.value,
-    contributorDescription: newContributorDescription.value,
-    contributorNomer: newContributorNomer.value,
-    contributorConnector: newContributordiller.value,
+    contributorName: dataById.value.contributorName,
+    contributorDescription: dataById.value.contributorDescription,
+    contributorNomer: dataById.value.contributorNomer,
+    contributorConnector: dataById.value.contributorConnector,
   };
   try {
     const response = await axios.patch<DataItem[]>(
@@ -489,6 +488,29 @@ const editContributor = async (e: any) => {
     window.location.reload();
   } catch (err: any) {
     error.value = err.response?.data?.massage || "Failed to fetch data";
+  }
+};
+let dataById = ref({
+  contributorName: "",
+  contributorConnector: "",
+  contributorNomer: "",
+  contributorAddress: null,
+  contributorDescription: "",
+  deletedAt: null,
+});
+const fetchDataById = async (event: any): Promise<void> => {
+  const token = localStorage.getItem("token");
+
+  try {
+    const response = await axios.get(`/contributor/getone/${event.target.id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    dataById.value = response.data;
+  } catch (err: any) {
+    error.value = err.response?.data?.massage || "Failed to fetch data";
+    if (err.response.status === 401) router.push("/login");
   }
 };
 </script>
